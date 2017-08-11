@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Sserpdrow</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags unless you know what you are doing -->
@@ -12,14 +12,50 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body class="container-fluid">
-      <h1>Example</h1>
+      <h1>Sserpdrow</h1>
+
+      <form id="sign-up">
+    <h3>Sign up:</h3>
+    <fieldset>
+      <legend>Sign up!</legend>
+      <input type='text' placeholder='email' id="sign-up-email" name='credentials[email]'>
+      <input type='password' placeholder='password' id="sign-up-password" name='credentials[password]'>
+      <input type='password' placeholder='password again' id="sign-up-password-confirmation" name='credentials[password_confirmation]'>
+      <input type="submit" name="submit" value="Sign up!">
+    </fieldset>
+  </form>
+
+  <form id="sign-in">
+    <h3>Sign in:</h3>
+    <fieldset>
+      <legend>Sign in!</legend>
+      <input type='text' placeholder='email' id="sign-in-email" name='credentials[email]'>
+      <input type='password' placeholder='password' id="sign-in-password" name='credentials[password]'>
+      <input type="submit" name="submit" value="Sign in!">
+    </fieldset>
+  </form>
+
+  <form id="change-password">
+    <h3>Change password:</h3>
+    <fieldset>
+      <legend>Change Password!</legend>
+      <input type='password' placeholder='current password' id="current-password" name='passwords[old]'>
+      <input type='password' placeholder='new password' id="new-password" name='passwords[new]'>
+      <input type="submit" name="submit" value="Password change!">
+    </fieldset>
+  </form>
+
+  <form id="sign-out">
+    <fieldset>
+      <h3>Sign out:</h3>
+      <legend>Sign Out!</legend>
+      <input type="submit" name="submit" value="Sign Out!">
+    </fieldset>
+  </form>
 
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
       eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
       minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+      ea commodo</p>
     </body>
 </html>
