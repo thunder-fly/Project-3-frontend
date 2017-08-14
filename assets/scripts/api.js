@@ -46,9 +46,31 @@ const signOut = function (data) {
   })
 }
 
+const viewAllPages = function (data) {
+  console.log('viewAllPages in api running')
+  return $.ajax({
+    url: app.host + '/pages',
+    method: 'GET'
+  })
+}
+
+const createPage = function (data) {
+  console.log('createPage in api running')
+  return $.ajax({
+    url: app.host + '/pages',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   changePassword,
-  signOut
+  signOut,
+  viewAllPages,
+  createPage
 }
