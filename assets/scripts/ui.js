@@ -41,6 +41,28 @@ const signOutFailure = (error) => {
   return error
 }
 
+const viewAllPagesSuccess = (data) => {
+  console.log('viewAllPagesSuccess in ui running')
+  console.log(data)
+  return data
+}
+
+const viewAllPagesFailure = (error) => {
+  console.log('viewAllPagesFailure in ui')
+  return error
+}
+
+const createPageSuccess = (data) => {
+  console.log('createPageSuccess in ui')
+  console.log(data)
+  return data
+}
+
+const createPageFailure = (error) => {
+  console.log('createPageFailure in ui')
+  return error
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -49,5 +71,9 @@ module.exports = {
   changePasswordSuccess,
   changePasswordFailure,
   signOutSuccess,
-  signOutFailure
+  signOutFailure,
+  viewAllPagesSuccess,
+  viewAllPagesFailure,
+  createPageSuccess,
+  createPageFailure
 }
