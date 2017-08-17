@@ -1,6 +1,8 @@
 'use strict'
 
 const store = require('./store')
+const showPagesTemplate = require('./templates/pages-listing.handlebars')
+const api = require('./api')
 
 const signUpSuccess = (data) => {
   console.log('signUpSuccess in UI working')
@@ -44,7 +46,21 @@ const signOutFailure = (error) => {
 const viewAllPagesSuccess = (data) => {
   console.log('viewAllPagesSuccess in ui running')
   console.log(data)
+  $('p').show()
+  $('p').html('')
+
+  const showPagesHtml = showPagesTemplate({ pages: data.pages })
+  $('p').append(showPagesHtml)
+  $('.remove-button').on('click', onDeletePage)
   return data
+}
+
+const onDeletePage = function (event) {
+  const data = ($(this).parent().attr('data-id'))
+// event.preventDefault()
+  api.deletePage(data)
+  .then(deletePageSuccess, $(this).parent().hide(400))
+  .catch(deletePageFailure)
 }
 
 const viewAllPagesFailure = (error) => {
@@ -63,6 +79,37 @@ const createPageFailure = (error) => {
   return error
 }
 
+const deletePageSuccess = (data) => {
+  console.log('deletePageSuccess in ui')
+}
+
+const deletePageFailure = (error) => {
+  console.log('deletePageFailure in ui')
+  return error
+}
+
+const createBlogSuccess = (data) => {
+  console.log('createBlogSuccess in ui')
+  console.log(data)
+  return data
+}
+
+const createBlogFailure = (error) => {
+  console.log('createBlogFailure in ui')
+  return error
+}
+
+const viewAllBlogsSuccess = (data) => {
+  console.log('viewAllBlogsSuccess in ui running')
+  console.log(data)
+  return data
+}
+
+const viewAllBlogsFailure = (error) => {
+  console.log('viewAllBlogsFailure in ui')
+  return error
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -75,5 +122,12 @@ module.exports = {
   viewAllPagesSuccess,
   viewAllPagesFailure,
   createPageSuccess,
-  createPageFailure
+  createPageFailure,
+  createBlogSuccess,
+  createBlogFailure,
+  viewAllBlogsSuccess,
+  viewAllBlogsFailure,
+  deletePageSuccess,
+  deletePageFailure,
+  onDeletePage
 }

@@ -61,6 +61,12 @@
     </fieldset>
   </form>
 
+  <div class="container">
+    <div class="row">
+      <p> </p>
+    </div>
+  </div>
+
   <form id="create-new-page">
   <fieldset>
     <h3>Click to create a new page:</h3>
@@ -76,9 +82,37 @@
       <ul>Content: <input id='page-body-create' type='text' class='page-body' placeholder='write content here' name='page[content]' size='34'></ul>
     </fieldset>
     <h3 id='create-page-success'> </h3>
-    <input id='submit-create' type="submit" name="submit" value="Create page!">
+    <input id='submit-create-page' type="submit" name="submit" value="Create page!">
     </form>
     <button type="button" id='close-create-page-modal'>Cancel</button>
+  </div>
+
+  <form id="view-all-blogs">
+    <fieldset>
+      <h3>View All Blogs</h3>
+      <legend>View Blogs</legend>
+      <input type="submit" name="submit" value="View All Blogs">
+    </fieldset>
+  </form>
+
+<form id="create-new-blog">
+<fieldset>
+  <h3>Click to create a new blog:</h3>
+  <legend>Create Blog</legend>
+  <input type="submit" name="submit" value="Create New Blog!">
+</fieldset>
+</form>
+
+
+  <div id='create-blog-modal'>
+    <form style="background-color:pink; color:black;" id="createBlogForm">
+      <fieldset id='create-blog-modal-form'>
+      <ul>Title: <input id='blog-title-create' type='text' class='blog-title' placeholder='title' name='blog[title]' maxlength='60' size='30' ></ul>
+    </fieldset>
+    <h3 id='create-blog-success'> </h3>
+    <input id='submit-create-blog' type="submit" name="submit" value="Create blog!">
+    </form>
+    <button type="button" id='close-create-blog-modal'>Cancel</button>
   </div>
 
     </body>
