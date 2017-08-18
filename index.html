@@ -61,9 +61,9 @@
     </fieldset>
   </form>
 
-  <div class="container">
+  <div id="all-pages-container" class="container">
     <div class="row">
-      <p> </p>
+      <p id="all-pages-container"> </p>
     </div>
   </div>
 
@@ -87,6 +87,17 @@
     <button type="button" id='close-create-page-modal'>Cancel</button>
   </div>
 
+  <div id='edit-page-modal'>
+    <form style="background-color:pink; color:black;" id="updatePageForm">
+      <fieldset>
+      <ul>Page title: <input id='page-title-update' data-field='title' type='text' placeholder='title' name='page[title]' maxlength='60' size='30'></ul>
+      <ul>Page content: <input id='page-body-update' type='text' class='page-body' placeholder='content' name='page[content]' maxlength='60' size='34'></ul>
+    </fieldset>
+    <input id='submit-page-edit' type="submit" name="submit" value="Update page!">
+    </form>
+    <button type="button" id='close-modal'>Cancel</button>
+  </div>
+
   <form id="view-all-blogs">
     <fieldset>
       <h3>View All Blogs</h3>
@@ -94,6 +105,12 @@
       <input type="submit" name="submit" value="View All Blogs">
     </fieldset>
   </form>
+
+  <div id='all-blogs-container' class="container">
+    <div class="row">
+      <p id='all-blogs-container'> </p>
+    </div>
+  </div>
 
 <form id="create-new-blog">
 <fieldset>

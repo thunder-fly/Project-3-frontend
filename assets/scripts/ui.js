@@ -2,6 +2,7 @@
 
 const store = require('./store')
 const showPagesTemplate = require('./templates/pages-listing.handlebars')
+const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
 const api = require('./api')
 
 const signUpSuccess = (data) => {
@@ -46,13 +47,59 @@ const signOutFailure = (error) => {
 const viewAllPagesSuccess = (data) => {
   console.log('viewAllPagesSuccess in ui running')
   console.log(data)
-  $('p').show()
-  $('p').html('')
+  $('#all-pages-container').show()
+  $('#all-pages-container').html('')
 
   const showPagesHtml = showPagesTemplate({ pages: data.pages })
-  $('p').append(showPagesHtml)
+  $('#all-pages-container').append(showPagesHtml)
   $('.remove-button').on('click', onDeletePage)
+  $('.edit-button').on('click', function (event) {
+    const pageId = $(event.target).parent().attr('data-id')
+    const pageTitle = $(event.target).parent().find('#page-title').text()
+    const pageContent = $(event.target).parent().find('#page-content').text()
+
+    openUpdatePageModal(event)
+    onUpdatePage(pageId, pageTitle, pageContent)
+  })
+}
+
+const openUpdatePageModal = function (event) {
+  $('#edit-page-modal').show()
+}
+
+const onUpdatePage = function (pageId, pageTitle, pageContent) {
+  event.preventDefault()
+  $('#edit-page-modal').show()
+  $('#page-title-update').val(pageTitle)
+  $('#page-body-update').val(pageContent)
+
+  $('#submit-edit').click(function (event) {
+    let values = {}
+    event.preventDefault()
+    $.each($('#updatePageForm').serializeArray(), function (i, field) {
+      values[field.name] = field.value
+    })
+    $('#submit-page-edit').off()
+    api.updatePage(values, pageId)
+    .then(updatePageSuccess)
+    // .then(rerunPagesHandlebars)
+    .catch(updatePageFailure)
+  })
+  $('#close-modal').click(function () {
+    $('#submit-page-edit').off()
+    $('#edit-page-modal').hide(400)
+    $('#edit-page-modal').off()
+  })
+}
+
+const updatePageSuccess = function (data) {
+  console.log('updatePageSuccess in ui')
   return data
+}
+
+const updatePageFailure = function (error) {
+  console.log('updatePageFailure in ui')
+  return error
 }
 
 const onDeletePage = function (event) {
@@ -102,6 +149,12 @@ const createBlogFailure = (error) => {
 const viewAllBlogsSuccess = (data) => {
   console.log('viewAllBlogsSuccess in ui running')
   console.log(data)
+  $('#all-blogs-container').show()
+  $('#all-blogs-container').html('')
+
+  const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
+  $('#all-blogs-container').append(showBlogsHtml)
+  // $('.remove-button').on('click', onDeleteBlog)
   return data
 }
 
@@ -129,5 +182,10 @@ module.exports = {
   viewAllBlogsFailure,
   deletePageSuccess,
   deletePageFailure,
-  onDeletePage
+  onDeletePage,
+  openUpdatePageModal,
+  onUpdatePage,
+  updatePageSuccess,
+  updatePageFailure
+
 }
