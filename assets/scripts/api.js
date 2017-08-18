@@ -98,9 +98,10 @@ const viewAllBlogs = function (data) {
 }
 
 const createPost = function (data) {
-  console.log('createPost in api running')
+  console.log('this is data ', data)
+  console.log('this is data.blog[ID] ', data.blogID)
   return $.ajax({
-    url: app.host + '/blogs/' + data + '/posts',
+    url: app.host + '/blogs/' + data.blogID + '/posts',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token

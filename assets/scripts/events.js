@@ -103,6 +103,10 @@ const onCreateBlog = function (event) {
     })
     $('#submit-create-blog').off()
     api.createBlog(values)
+      .then(values => {
+        console.log('this is values ', values)
+        return values
+      })
       .then(ui.createBlogSuccess)
       .catch(ui.createBlogFailure)
   })
@@ -126,7 +130,7 @@ const onCreatePost = function (event) {
   event.preventDefault()
   openCreatePostModal(event)
   $('#submit-create-post').click(function (event) {
-    let values = {}
+    let values = []
     event.preventDefault()
     $.each($('#createPostForm').serializeArray(), function (i, field) {
       values[field.name] = field.value
