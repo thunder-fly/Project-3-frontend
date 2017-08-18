@@ -1,0 +1,20 @@
+{{#each pages as |page|}}
+
+<div id="all-pages-container" class="col-xs-4 box">
+    <div id="all-pages-container" data-id="{{page.id}}">
+      <ul name='page-name' class='handlebars-fields'>Title: <span class='handlebars' id='page-title'>{{page.title}}</span></ul>
+      <ul class='handlebars-fields'>Content: <span id='page-content' class='handlebars'>{{page.content}}</span></ul>
+
+
+    {{#checkUser page._owner}}
+
+      <button type="submit" class="remove-button" name="remove-button">Remove</button>
+      <button type="submit" class="edit-button" name="edit-button">Edit</button>
+
+    {{/checkUser}}
+  </div>
+</div>
+
+
+
+{{/each}}

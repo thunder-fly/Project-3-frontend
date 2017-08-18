@@ -66,11 +66,58 @@ const createPage = function (data) {
   })
 }
 
+const deletePage = function (data) {
+  console.log('deletePage in api running')
+  return $.ajax({
+    url: app.host + '/pages/' + data,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const createBlog = function (data) {
+  console.log('createBlog in api running')
+  return $.ajax({
+    url: app.host + '/blogs',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
+const viewAllBlogs = function (data) {
+  console.log('viewAllBlogs in api running')
+  return $.ajax({
+    url: app.host + '/blogs',
+    method: 'GET'
+  })
+}
+
+const createPost = function (data) {
+  console.log('createPost in api running')
+  return $.ajax({
+    url: app.host + '/blogs/' + data + '/posts',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
   changePassword,
   signOut,
   viewAllPages,
-  createPage
+  createPage,
+  createBlog,
+  viewAllBlogs,
+  deletePage,
+  createPost
 }
