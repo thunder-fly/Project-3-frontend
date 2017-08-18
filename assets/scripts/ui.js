@@ -2,6 +2,7 @@
 
 const store = require('./store')
 const showPagesTemplate = require('./templates/pages-listing.handlebars')
+const showMyPagesTemplate = require('./templates/my-pages-listing.handlebars')
 const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
 const api = require('./api')
 
@@ -65,6 +66,30 @@ const viewAllPagesSuccess = (data) => {
 
 const openUpdatePageModal = function (event) {
   $('#edit-page-modal').show()
+}
+
+const viewMyPagesSuccess = (data) => {
+  console.log('viewMyPagesSuccess in ui running')
+  console.log(data)
+  $('#my-pages-container').show()
+  $('#my-pages-container').html('')
+
+  const showMyPagesHtml = showMyPagesTemplate({ pages: data.pages })
+  $('#my-pages-container').append(showMyPagesHtml)
+  $('.remove-button').on('click', onDeletePage)
+  $('.edit-button').on('click', function (event) {
+    const pageId = $(event.target).parent().attr('data-id')
+    const pageTitle = $(event.target).parent().find('#page-title').text()
+    const pageContent = $(event.target).parent().find('#page-content').text()
+
+    openUpdatePageModal(event)
+    onUpdatePage(pageId, pageTitle, pageContent)
+  })
+}
+
+const viewMyPagesFailure = (error) => {
+  console.log('viewMyPagesFailure in ui')
+  return error
 }
 
 const onUpdatePage = function (pageId, pageTitle, pageContent) {
@@ -186,6 +211,8 @@ module.exports = {
   openUpdatePageModal,
   onUpdatePage,
   updatePageSuccess,
-  updatePageFailure
+  updatePageFailure,
+  viewMyPagesSuccess,
+  viewMyPagesFailure
 
 }

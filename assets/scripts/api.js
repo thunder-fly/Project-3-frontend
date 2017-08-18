@@ -97,6 +97,18 @@ const viewAllBlogs = function (data) {
   })
 }
 
+const createPost = function (data) {
+  console.log('createPost in api running')
+  return $.ajax({
+    url: app.host + '/blogs/' + data + '/posts',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -106,5 +118,6 @@ module.exports = {
   createPage,
   createBlog,
   viewAllBlogs,
-  deletePage
+  deletePage,
+  createPost
 }
