@@ -19,6 +19,13 @@ const signUpFailure = (error) => {
 const signInSuccess = (data) => {
   console.log('signUpSuccess in UI working')
   store.user = data.user
+  $('#sign-in').hide()
+  $('#change-password').show()
+  $('#sign-up').hide()
+  $('#create-new-page').show()
+  $('#create-new-blog').show()
+  $('#create-new-post').show()
+  $('#view-my-pages').show()
   return data
 }
 
@@ -38,6 +45,9 @@ const changePasswordFailure = (error) => {
 
 const signOutSuccess = () => {
   console.log('signOutSuccess in UI working')
+  $('#change-password').hide()
+  $('#sign-in').show()
+  $('#sign-up').show()
 }
 
 const signOutFailure = (error) => {
@@ -98,16 +108,17 @@ const onUpdatePage = function (pageId, pageTitle, pageContent) {
   $('#page-title-update').val(pageTitle)
   $('#page-body-update').val(pageContent)
 
-  $('#submit-edit').click(function (event) {
+  $('#submit-page-edit').click(function (event) {
     let values = {}
     event.preventDefault()
     $.each($('#updatePageForm').serializeArray(), function (i, field) {
       values[field.name] = field.value
     })
     $('#submit-page-edit').off()
+    console.log(values)
     api.updatePage(values, pageId)
     .then(updatePageSuccess)
-    // .then(rerunPagesHandlebars)
+    .then(rerunMyPagesHandlebars)
     .catch(updatePageFailure)
   })
   $('#close-modal').click(function () {
@@ -119,12 +130,19 @@ const onUpdatePage = function (pageId, pageTitle, pageContent) {
 
 const updatePageSuccess = function (data) {
   console.log('updatePageSuccess in ui')
+  $('#edit-page-modal').hide()
   return data
 }
 
 const updatePageFailure = function (error) {
   console.log('updatePageFailure in ui')
   return error
+}
+const rerunMyPagesHandlebars = (data) => {
+  $('#my-pages-container').show()
+  api.viewAllPages()
+    .then(viewMyPagesSuccess)
+    .catch(viewMyPagesFailure)
 }
 
 const onDeletePage = function (event) {
@@ -213,6 +231,7 @@ module.exports = {
   updatePageSuccess,
   updatePageFailure,
   viewMyPagesSuccess,
-  viewMyPagesFailure
+  viewMyPagesFailure,
+  rerunMyPagesHandlebars
 
 }
