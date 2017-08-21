@@ -54,6 +54,15 @@ const viewAllPages = function (data) {
   })
 }
 
+const viewPage = function (data) {
+  console.log('viewPage in api running')
+  console.log('this is data: ', data.pageId)
+  return $.ajax({
+    url: app.host + '/pages/' + data.pageId,
+    method: 'GET'
+  })
+}
+
 const createPage = function (data) {
   console.log('createPage in api running')
   return $.ajax({
@@ -133,5 +142,6 @@ module.exports = {
   viewAllBlogs,
   deletePage,
   createPost,
-  updatePage
+  updatePage,
+  viewPage
 }
