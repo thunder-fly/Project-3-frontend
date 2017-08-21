@@ -224,6 +224,17 @@ const viewBlogFailure = (error) => {
   console.log('viewBlogFailure in ui')
   return error
 }
+
+const updateBlogSuccess = (data) => {
+  console.log('updateBlogSuccess in ui')
+  console.log(data)
+  return data
+}
+
+const updateBlogFailure = (error) => {
+  console.log('updateBlogFailure in ui')
+  return error
+}
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -254,6 +265,8 @@ module.exports = {
   viewPageSuccess,
   viewPageFailure,
   viewBlogSuccess,
-  viewBlogFailure
+  viewBlogFailure,
+  updateBlogSuccess,
+  updateBlogFailure
 
 }

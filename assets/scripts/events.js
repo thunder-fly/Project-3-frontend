@@ -183,6 +183,14 @@ const onViewPage = function (event) {
     .catch(ui.viewPageFailure)
 }
 
+const onUpdateBlog = function (event) {
+  console.log('onUpdateBlog in events working')
+  event.preventDefault()
+  const data = getFormFields(this)
+  api.updateBlog(data)
+    .then(ui.updateBlogSuccess)
+    .catch(ui.updateBlogFailure)
+}
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -207,6 +215,7 @@ const addHandlers = () => {
   $('#view-my-pages').hide()
   $('#view-page').on('submit', onViewPage)
   $('#view-blog').on('submit', onViewBlog)
+  $('#update-blog').on('submit', onUpdateBlog)
 }
 
 module.exports = {
