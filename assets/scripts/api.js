@@ -125,6 +125,18 @@ const viewBlog = function (data) {
     method: 'GET'
   })
 }
+const updateBlog = function (data) {
+  console.log('this is data ', data)
+  console.log('this is data.blogId: ', data.blogId)
+  return $.ajax({
+    url: app.host + '/blogs/' + data.blogId,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
 
 const createPost = function (data) {
   console.log('this is data ', data)
@@ -152,5 +164,6 @@ module.exports = {
   createPost,
   updatePage,
   viewPage,
-  viewBlog
+  viewBlog,
+  updateBlog
 }
