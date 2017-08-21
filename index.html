@@ -81,6 +81,19 @@
     </div>
   </div>
 
+  <div id='edit-page-modal'>
+    <form style="background-color:pink; color:black;" id="updatePageForm">
+      <fieldset>
+      <ul>Page title: <input id='page-title-update' data-field='title' type='text' placeholder='title' name='page[title]' maxlength='60' size='30'></ul>
+      <ul>Page content: <input id='page-body-update' type='text' class='page-content' placeholder='page content' name='page[content]' maxlength='50' size='30' ></ul>
+    </fieldset>
+    <input id='submit-page-edit' type="submit" name="submit" value="Update page!">
+    </form>
+    <button type="button" id='close-modal'>Cancel</button>
+  </div>
+
+  <!-- <textarea id ='page-body-update' class='page-content' placeholder='page content' name='page[content]' rows = "3" cols = "80"></textarea> -->
+
   <form id="create-new-page">
   <fieldset>
     <h3>Click to create a new page:</h3>
@@ -99,17 +112,6 @@
     <input id='submit-create-page' type="submit" name="submit" value="Create page!">
     </form>
     <button type="button" id='close-create-page-modal'>Cancel</button>
-  </div>
-
-  <div id='edit-page-modal'>
-    <form style="background-color:pink; color:black;" id="updatePageForm">
-      <fieldset>
-      <ul>Page title: <input id='page-title-update' data-field='title' type='text' placeholder='title' name='page[title]' maxlength='60' size='30'></ul>
-      <ul>Page content: <input id='page-body-update' type='text' class='page-body' placeholder='content' name='page[content]' maxlength='60' size='34'></ul>
-    </fieldset>
-    <input id='submit-page-edit' type="submit" name="submit" value="Update page!">
-    </form>
-    <button type="button" id='close-modal'>Cancel</button>
   </div>
 
   <form id="view-all-blogs">
@@ -158,8 +160,9 @@
     <form style="background-color:pink; color:black;" id="createPostForm">
       <fieldset id='create-post-modal-form'>
         <ul>Blog ID: <input id='blog-id' type='text' class='blog-id' placeholder='ID' name='blogID' maxlength='60' size='30' ></ul>
-      <ul>Title: <input id='post-title-create' type='text' class='post-title' placeholder='title' name='post[title]' maxlength='60' size='30' ></ul>
-      <ul>Content: <input id='post-body-create' type='text' class='post-body' placeholder='write content here' name='post[body]' size='34'></ul>
+      <ul>Title: <input id='post-title-create' type='text' class='post-title' placeholder='title' name='post[title]' maxlength='50' size='30' ></ul>
+      <ul>Content: <textarea id ='post-content-create' class='post-content' placeholder='post content' name='post[content]' rows = "3" cols = "80"></textarea>
+        </ul>
     </fieldset>
     <h3 id='create-post-success'> </h3>
     <input id='submit-create-post' type="submit" name="submit" value="Create post!">

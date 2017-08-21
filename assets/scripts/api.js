@@ -66,6 +66,18 @@ const createPage = function (data) {
   })
 }
 
+const updatePage = function (data, id) {
+  console.log('updatePage in api running')
+  return $.ajax({
+    url: app.host + '/pages/' + id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 const deletePage = function (data) {
   console.log('deletePage in api running')
   return $.ajax({
@@ -120,5 +132,6 @@ module.exports = {
   createBlog,
   viewAllBlogs,
   deletePage,
-  createPost
+  createPost,
+  updatePage
 }
