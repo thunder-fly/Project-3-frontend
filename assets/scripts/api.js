@@ -117,6 +117,14 @@ const viewAllBlogs = function (data) {
     method: 'GET'
   })
 }
+const viewBlog = function (data) {
+  console.log('viewBlog in api running')
+  console.log('this is data: ', data.blogId)
+  return $.ajax({
+    url: app.host + '/blogs/' + data.blogId,
+    method: 'GET'
+  })
+}
 
 const createPost = function (data) {
   console.log('this is data ', data)
@@ -143,5 +151,6 @@ module.exports = {
   deletePage,
   createPost,
   updatePage,
-  viewPage
+  viewPage,
+  viewBlog
 }
