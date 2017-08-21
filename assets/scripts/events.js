@@ -116,7 +116,15 @@ const onCreateBlog = function (event) {
     $('#create-blog-modal').off()
   })
 }
-
+const onViewBlog = function (event) {
+  console.log('onViewBlog in events working')
+  event.preventDefault()
+  // const data = ($(this).parent().attr('data-id'))
+  const data = getFormFields(this)
+  api.viewBlog(data)
+    .then(ui.viewBlogSuccess)
+    .catch(ui.viewBlogFailure)
+}
 const onViewAllBlogs = function (event) {
   console.log('onViewAllBlogs in events working')
   event.preventDefault()
@@ -198,6 +206,7 @@ const addHandlers = () => {
   $('#create-post-modal').hide()
   $('#view-my-pages').hide()
   $('#view-page').on('submit', onViewPage)
+  $('#view-blog').on('submit', onViewBlog)
 }
 
 module.exports = {
