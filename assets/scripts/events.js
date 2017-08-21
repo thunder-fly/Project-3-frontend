@@ -63,7 +63,7 @@ const openCreatePageModal = function (event) {
 const onCreatePage = function (event) {
   event.preventDefault()
   openCreatePageModal(event)
-  $('#submit-create').click(function (event) {
+  $('#submit-create-page').click(function (event) {
     let values = {}
     event.preventDefault()
     $.each($('#createPageForm').serializeArray(), function (i, field) {
@@ -177,6 +177,15 @@ const addHandlers = () => {
   $('#view-all-blogs').on('submit', onViewAllBlogs)
   $('#create-new-post').on('submit', onCreatePost)
   $('#view-my-pages').on('submit', onViewMyPages)
+  $('#change-password').hide()
+  $('#sign-out').hide()
+  $('#create-new-page').hide()
+  $('#create-page-modal').hide()
+  $('#edit-page-modal').hide()
+  $('#create-new-blog').hide()
+  $('#create-new-post').hide()
+  $('#create-post-modal').hide()
+  $('#view-my-pages').hide()
 }
 
 module.exports = {
