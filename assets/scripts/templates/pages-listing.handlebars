@@ -4,6 +4,7 @@
     <div id="all-pages-container" data-id="{{page.id}}">
       <ul name='page-name' class='handlebars-fields'>Title: <span class='handlebars' id='page-title'>{{page.title}}</span></ul>
       <ul class='handlebars-fields'>Content: <span id='page-content' class='handlebars'>{{page.content}}</span></ul>
+      <button type="submit" class="view-page" name="view-page">View</button>
 
 
     {{#checkUser page._owner}}

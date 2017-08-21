@@ -164,6 +164,17 @@ const onViewMyPages = function (event) {
     .then(ui.viewMyPagesSuccess)
     .catch(ui.viewMyPagesFailure)
 }
+
+const onViewPage = function (event) {
+  console.log('onViewPage in events working')
+  event.preventDefault()
+  // const data = ($(this).parent().attr('data-id'))
+  const data = getFormFields(this)
+  api.viewPage(data)
+    .then(ui.viewPageSuccess)
+    .catch(ui.viewPageFailure)
+}
+
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -186,6 +197,7 @@ const addHandlers = () => {
   $('#create-new-post').hide()
   $('#create-post-modal').hide()
   $('#view-my-pages').hide()
+  $('#view-page').on('submit', onViewPage)
 }
 
 module.exports = {

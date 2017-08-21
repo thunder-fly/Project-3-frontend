@@ -157,7 +157,15 @@ const viewAllPagesFailure = (error) => {
   console.log('viewAllPagesFailure in ui')
   return error
 }
-
+const viewPageSuccess = (data) => {
+  console.log('viewPageSuccess in ui')
+  console.log(data)
+  return data
+}
+const viewPageFailure = (error) => {
+  console.log('viewPageFailure in ui')
+  return error
+}
 const createPageSuccess = (data) => {
   console.log('createPageSuccess in ui')
   console.log(data)
@@ -232,6 +240,8 @@ module.exports = {
   updatePageFailure,
   viewMyPagesSuccess,
   viewMyPagesFailure,
-  rerunMyPagesHandlebars
+  rerunMyPagesHandlebars,
+  viewPageSuccess,
+  viewPageFailure
 
 }
