@@ -126,10 +126,10 @@ const viewBlog = function (data) {
   })
 }
 const updateBlog = function (data) {
-  console.log('this is data ', data)
-  console.log('this is data.blogId: ', data.blogId)
+  console.log('this is data.blog ', data.blog)
+  console.log('this is store: ', store)
   return $.ajax({
-    url: app.host + '/blogs/' + data.blogId,
+    url: app.host + '/blogs/' + data.blog.id,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token

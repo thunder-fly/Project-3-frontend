@@ -187,7 +187,8 @@ const deletePageFailure = (error) => {
 }
 
 const createBlogSuccess = (data) => {
-  console.log('createBlogSuccess in ui')
+  store.blog = data.blog
+  console.log('this is data.blog ', data.blog)
   console.log(data)
   return data
 }
@@ -228,7 +229,6 @@ const viewBlogFailure = (error) => {
 const updateBlogSuccess = (data) => {
   console.log('updateBlogSuccess in ui')
   console.log(data)
-  return data
 }
 
 const updateBlogFailure = (error) => {
