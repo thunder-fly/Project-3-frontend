@@ -206,6 +206,10 @@ const viewAllBlogsFailure = (error) => {
   return error
 }
 
+const createPostSuccess = () => console.log('post successful')
+
+const failure = () => console.log('that didnt work')
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -232,6 +236,8 @@ module.exports = {
   updatePageFailure,
   viewMyPagesSuccess,
   viewMyPagesFailure,
-  rerunMyPagesHandlebars
+  rerunMyPagesHandlebars,
+  createPostSuccess,
+  failure
 
 }
