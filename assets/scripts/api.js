@@ -151,6 +151,19 @@ const createPost = function (data) {
   })
 }
 
+const updatePost = function (data) {
+  console.log('this is data.posts ', data.posts)
+  console.log('this is data.blog.id', data.blog.id)
+  return $.ajax({
+    url: app.host + '/blogs/' + data.blog.id + '/posts/' + data.posts.id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
+  })
+}
+
 module.exports = {
   signUp,
   signIn,
@@ -165,5 +178,6 @@ module.exports = {
   updatePage,
   viewPage,
   viewBlog,
-  updateBlog
+  updateBlog,
+  updatePost
 }
