@@ -216,6 +216,15 @@ const onViewPost = function (event) {
     .then(ui.viewPostSuccess)
     .catch(ui.viewPostFailure)
 }
+const onDeletePost = function (event) {
+  console.log('onDeletePost in events working')
+  event.preventDefault()
+  // const data = ($(this).parent().attr('data-id'))
+  const data = getFormFields(this)
+  api.deletePost(data)
+    .then(ui.deletePostSuccess)
+    .catch(ui.deletePostFailure)
+}
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -243,6 +252,7 @@ const addHandlers = () => {
   $('#update-blog').on('submit', onUpdateBlog)
   $('#update-post').on('submit', onUpdatePost)
   $('#view-post').on('submit', onViewPost)
+  $('#delete-post').on('submit', onDeletePost)
 }
 
 module.exports = {

@@ -172,7 +172,17 @@ const updatePost = function (data) {
     data
   })
 }
-
+const deletePost = function (data) {
+  console.log('deletePost in api running')
+  console.log('this is data.posts: ', data.posts)
+  return $.ajax({
+    url: app.host + '/blogs/' + data.blog.id + '/posts/' + data.posts.id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
 module.exports = {
   signUp,
   signIn,
@@ -189,5 +199,6 @@ module.exports = {
   viewBlog,
   updateBlog,
   updatePost,
-  viewPost
+  viewPost,
+  deletePost
 }
