@@ -138,7 +138,7 @@ const onCreatePost = function (event) {
   event.preventDefault()
   // openCreatePostModal(event)
   // $('#submit-create-post').click(function (event) {
-  //   let values = []
+  //   let values = {}
   //   event.preventDefault()
   //   $.each($('#createPostForm').serializeArray(), function (i, field) {
   //     values[field.name] = field.value
@@ -169,6 +169,15 @@ const onCreatePost = function (event) {
   api.createPost(data)
     .then(ui.createPostSuccess)
     .then(ui.createPostFailure)
+}
+
+const onUpdatePost = function (event) {
+  console.log('onUpdatePost in events working')
+  event.preventDefault()
+  const data = getFormFields(this)
+  api.updatePost(data)
+    .then(ui.updatePostSuccess)
+    .catch(ui.updatePostFailure)
 }
 
 const onViewMyPages = function (event) {
@@ -222,6 +231,7 @@ const addHandlers = () => {
   $('#view-page').on('submit', onViewPage)
   $('#view-blog').on('submit', onViewBlog)
   $('#update-blog').on('submit', onUpdateBlog)
+  $('#update-post').on('submit', onUpdatePost)
 }
 
 module.exports = {

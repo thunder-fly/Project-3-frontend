@@ -240,6 +240,11 @@ const updateBlogFailure = (error) => {
   console.log('updateBlogFailure in ui')
   return error
 }
+
+const updatePostSuccess = () => console.log('update post works')
+
+const updatePostFailure = (error) => console.log(error)
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -274,6 +279,8 @@ module.exports = {
   updateBlogSuccess,
   updateBlogFailure,
   createPostSuccess,
-  failure
+  failure,
+  updatePostSuccess,
+  updatePostFailure
 
 }
