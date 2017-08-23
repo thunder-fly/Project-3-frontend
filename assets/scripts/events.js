@@ -136,33 +136,39 @@ const onViewAllBlogs = function (event) {
 const onCreatePost = function (event) {
   console.log('onCreatePost in events running')
   event.preventDefault()
-  openCreatePostModal(event)
-  $('#submit-create-post').click(function (event) {
-    let values = []
-    event.preventDefault()
-    $.each($('#createPostForm').serializeArray(), function (i, field) {
-      values[field.name] = field.value
-    })
-    $('#submit-create-post').off()
-    api.createPost(values)
-      .then(ui.createPostSuccess)
-      .catch(ui.createPostFailure)
-  })
-  $('#close-create-post-modal').click(function () {
-    $('#submit-create-post').off()
-    $('#create-post-modal').hide(400)
-    $('#create-post-modal').off()
-  })
-}
+  // openCreatePostModal(event)
+  // $('#submit-create-post').click(function (event) {
+  //   let values = []
+  //   event.preventDefault()
+  //   $.each($('#createPostForm').serializeArray(), function (i, field) {
+  //     values[field.name] = field.value
+  //   })
+  //   $('#submit-create-post').off()
+  //   api.createPost(values)
+  //     .then(ui.createPostSuccess)
+  //     .catch(ui.createPostFailure)
+  // })
+  // $('#close-create-post-modal').click(function () {
+  //   $('#submit-create-post').off()
+  //   $('#create-post-modal').hide(400)
+  //   $('#create-post-modal').off()
+  // })
+// }
 
-const openCreatePostModal = function (event) {
-  $('#create-post-modal').on()
-  $('#create-post-modal').show()
-  $('#create-post-modal-form').show()
-  $('#submit-create-post').on()
-  $('#submit-create-post').show()
-  $('#create-post-success').text('')
-  $('#close-create-post-modal').text('Cancel')
+// const openCreatePostModal = function (event) {
+//   $('#create-post-modal').on()
+//   $('#create-post-modal').show()
+//   $('#create-post-modal-form').show()
+//   $('#submit-create-post').on()
+//   $('#submit-create-post').show()
+//   $('#create-post-success').text('')
+//   $('#close-create-post-modal').text('Cancel')
+// }
+
+  const data = getFormFields(this)
+  api.createPost(data)
+    .then(ui.createPostSuccess)
+    .then(ui.createPostFailure)
 }
 
 const onViewMyPages = function (event) {

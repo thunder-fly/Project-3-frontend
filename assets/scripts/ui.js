@@ -26,6 +26,7 @@ const signInSuccess = (data) => {
   $('#create-new-blog').show()
   $('#create-new-post').show()
   $('#view-my-pages').show()
+  $('#sign-out').show()
   return data
 }
 
@@ -215,6 +216,10 @@ const viewAllBlogsFailure = (error) => {
   return error
 }
 
+const createPostSuccess = () => console.log('post successful')
+
+const failure = () => console.log('that didnt work')
+
 const viewBlogSuccess = (data) => {
   console.log('viewBlogSuccess in ui')
   console.log(data)
@@ -267,6 +272,8 @@ module.exports = {
   viewBlogSuccess,
   viewBlogFailure,
   updateBlogSuccess,
-  updateBlogFailure
+  updateBlogFailure,
+  createPostSuccess,
+  failure
 
 }
