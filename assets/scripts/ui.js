@@ -256,6 +256,15 @@ const updatePostSuccess = () => console.log('update post works')
 
 const updatePostFailure = (error) => console.log(error)
 
+const deletePostSuccess = (data) => {
+  console.log('deletePostSuccess in ui')
+}
+
+const deletePostFailure = (error) => {
+  console.log('deletePostFailure in ui')
+  return error
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -294,6 +303,8 @@ module.exports = {
   updatePostSuccess,
   updatePostFailure,
   viewPostSuccess,
-  viewPostFailure
+  viewPostFailure,
+  deletePostSuccess,
+  deletePostFailure
 
 }
