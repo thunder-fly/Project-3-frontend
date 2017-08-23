@@ -206,6 +206,16 @@ const onUpdateBlog = function (event) {
     .then(ui.updateBlogSuccess)
     .catch(ui.updateBlogFailure)
 }
+
+const onViewPost = function (event) {
+  console.log('onViewPost in events working')
+  event.preventDefault()
+  // const data = ($(this).parent().attr('data-id'))
+  const data = getFormFields(this)
+  api.viewPost(data)
+    .then(ui.viewPostSuccess)
+    .catch(ui.viewPostFailure)
+}
 const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
@@ -232,6 +242,7 @@ const addHandlers = () => {
   $('#view-blog').on('submit', onViewBlog)
   $('#update-blog').on('submit', onUpdateBlog)
   $('#update-post').on('submit', onUpdatePost)
+  $('#view-post').on('submit', onViewPost)
 }
 
 module.exports = {
