@@ -179,10 +179,13 @@
     <h3>Click to create a new blog post:</h3>
     <legend>Create blog post</legend>
     <input type="submit" name="submit" value="Create post!">
+    <input type='text' placeholder='title' id="post-title" name='posts[title]'>
+    <input type='text' placeholder='body' id="post-body" name='posts[body]'>
+    <input type='text' placeholder='blog id' id="post[_owner]" name='posts[_owner]'>
   </fieldset>
   </form>
 
-  <div id='create-post-modal'>
+  <!-- <div id='create-post-modal'>
     <form style="background-color:pink; color:black;" id="createPostForm">
       <fieldset id='create-post-modal-form'>
         <ul>Blog ID: <input id='blog-id' type='text' class='blog-id' placeholder='ID' name='blogID' maxlength='60' size='30' ></ul>
@@ -194,7 +197,7 @@
     <input id='submit-create-post' type="submit" name="submit" value="Create post!">
     </form>
     <button type="button" id='close-create-post-modal'>Cancel</button>
-  </div>
+  </div> -->
 
     </body>
 </html>

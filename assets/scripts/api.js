@@ -140,9 +140,9 @@ const updateBlog = function (data) {
 
 const createPost = function (data) {
   console.log('this is data ', data)
-  console.log('this is data.blog[ID] ', data.blogID)
+  console.log('this is data.posts ', data.posts)
   return $.ajax({
-    url: app.host + '/blogs/' + data.blogID + '/posts',
+    url: app.host + '/blogs/' + data.posts._owner + '/posts',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token
