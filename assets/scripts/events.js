@@ -21,7 +21,7 @@ const onSignIn = function (event) {
   event.preventDefault()
   api.signIn(data)
     .then(ui.signInSuccess)
-    .then(ui.checkForUserEntries)
+    .then(ui.checkForUserBlog)
     .catch(ui.signInFailure)
 }
 
