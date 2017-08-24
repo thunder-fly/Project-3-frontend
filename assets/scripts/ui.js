@@ -35,12 +35,13 @@ const checkForUserBlog = function (event) {
 }
 
 const checkForUserBlogSuccess = function (data) {
-  console.log('this is data.blogs._owner', data.blogs._owner)
-  for
-  if (data.blogs._owner === store.user.id) {
-    $('#create-new-blog').hide()
-  } else {
-    $('#create-new-blog').show()
+  console.log('this is data.blogs', data.blogs)
+  for (let i = 0; i < data.blogs.length; i++) {
+    if (data.blogs[i]._owner === store.user.id) {
+      $('#create-new-blog').hide()
+    } else {
+      $('#create-new-blog').show()
+    }
   }
 }
 
