@@ -29,6 +29,21 @@ const signInSuccess = (data) => {
   $('#sign-out').show()
   return data
 }
+const checkForUserBlog = function (event) {
+  api.viewAllBlogs()
+    .then(checkForUserBlogSuccess)
+}
+
+const checkForUserBlogSuccess = function (data) {
+  console.log('this is data.blogs', data.blogs)
+  for (let i = 0; i < data.blogs.length; i++) {
+    if (data.blogs[i]._owner === store.user.id) {
+      $('#create-new-blog').hide()
+    } else {
+      $('#create-new-blog').show()
+    }
+  }
+}
 
 const signInFailure = (error) => {
   console.log('signUpfailure in UI working')
@@ -305,6 +320,8 @@ module.exports = {
   viewPostSuccess,
   viewPostFailure,
   deletePostSuccess,
-  deletePostFailure
+  deletePostFailure,
+  checkForUserBlog,
+  checkForUserBlogSuccess
 
 }
