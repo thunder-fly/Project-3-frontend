@@ -8,7 +8,8 @@
       {{#posts}}
       <ul name='blog-posts' class='handlebars-fields'>Posts: <span class='handlebars' id='blog-posts'>{{title}}</span></ul>
       {{/posts}}
-      <input type='text' id="blog-id" name='blog-id' value= "{{blog.id}}">
+      <input type='hidden' id="blog-id" name='blog-id' value= "{{blog.id}}">
+      <button type="submit" class="view-blog" name="view-blog">View Blog</button>
 <!--
     {{#checkUser blog._owner}}
       <button type="submit" class="remove-button" name="remove-button">Remove</button>
