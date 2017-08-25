@@ -14,11 +14,49 @@
     <body class="container-fluid">
       <h1>Sserpdrow</h1>
       <h2>Welcome to Sserpdrow blah blah</h2>
+      <form id="sign-up">
 
+    <h3>Sign up:</h3>
+    <fieldset>
+      <!-- <legend>Sign up!</legend> -->
+      <input type='text' placeholder='email' id="sign-up-email" name='credentials[email]'>
+      <input type='password' placeholder='password' id="sign-up-password" name='credentials[password]'>
+      <input type='password' placeholder='password again' id="sign-up-password-confirmation" name='credentials[password_confirmation]'>
+      <input type="submit" name="submit" value="Sign up!">
+    </fieldset>
+  </form>
+
+  <form id="sign-in">
+    <h3>Sign in:</h3>
+    <fieldset>
+      <!-- <legend>Sign in!</legend> -->
+      <input type='text' placeholder='email' id="sign-in-email" name='credentials[email]'>
+      <input type='password' placeholder='password' id="sign-in-password" name='credentials[password]'>
+      <input type="submit" name="submit" value="Sign in!">
+    </fieldset>
+  </form>
+
+  <form id="change-password">
+    <h3>Change password:</h3>
+    <fieldset>
+      <!-- <legend>Change Password!</legend> -->
+      <input type='password' placeholder='current password' id="current-password" name='passwords[old]'>
+      <input type='password' placeholder='new password' id="new-password" name='passwords[new]'>
+      <input type="submit" name="submit" value="Password change!">
+    </fieldset>
+  </form>
+
+  <form id="sign-out">
+    <fieldset>
+      <h3>Sign out:</h3>
+      <!-- <legend>Sign Out!</legend> -->
+      <input type="submit" name="submit" value="Sign Out!">
+    </fieldset>
+  </form>
       <form id="all-users-sites">
         <fieldset>
           <h3>all users sites</h3>
-          <legend>all users sites !</legend>
+          <!-- <legend>all users sites !</legend> -->
           <input type="submit" name="submit" value="all users!">
         </fieldset>
       </form>
@@ -31,54 +69,17 @@
       <form id="one-user">
         <fieldset>
           <h3>one user</h3>
-          <legend>one user!</legend>
+          <!-- <legend>one user!</legend> -->
           <input type="submit" name="submit" value="one user!">
         </fieldset>
       </form>
 
-      <form id="sign-up">
-    <h3>Sign up:</h3>
-    <fieldset>
-      <legend>Sign up!</legend>
-      <input type='text' placeholder='email' id="sign-up-email" name='credentials[email]'>
-      <input type='password' placeholder='password' id="sign-up-password" name='credentials[password]'>
-      <input type='password' placeholder='password again' id="sign-up-password-confirmation" name='credentials[password_confirmation]'>
-      <input type="submit" name="submit" value="Sign up!">
-    </fieldset>
-  </form>
 
-  <form id="sign-in">
-    <h3>Sign in:</h3>
-    <fieldset>
-      <legend>Sign in!</legend>
-      <input type='text' placeholder='email' id="sign-in-email" name='credentials[email]'>
-      <input type='password' placeholder='password' id="sign-in-password" name='credentials[password]'>
-      <input type="submit" name="submit" value="Sign in!">
-    </fieldset>
-  </form>
-
-  <form id="change-password">
-    <h3>Change password:</h3>
-    <fieldset>
-      <legend>Change Password!</legend>
-      <input type='password' placeholder='current password' id="current-password" name='passwords[old]'>
-      <input type='password' placeholder='new password' id="new-password" name='passwords[new]'>
-      <input type="submit" name="submit" value="Password change!">
-    </fieldset>
-  </form>
-
-  <form id="sign-out">
-    <fieldset>
-      <h3>Sign out:</h3>
-      <legend>Sign Out!</legend>
-      <input type="submit" name="submit" value="Sign Out!">
-    </fieldset>
-  </form>
 
   <form id="view-all-pages">
     <fieldset>
       <h3>View All Pages</h3>
-      <legend>View Pages</legend>
+      <!-- <legend>View Pages</legend> -->
       <input type="submit" name="submit" value="View All Pages">
     </fieldset>
   </form>
@@ -92,7 +93,7 @@
   <form id="view-my-pages">
     <fieldset>
       <h3>View My Pages</h3>
-      <legend>View My Pages</legend>
+      <!-- <legend>View My Pages</legend> -->
       <input type="submit" name="submit" value="View My Pages">
     </fieldset>
   </form>
@@ -106,7 +107,7 @@
   <form id="view-page">
     <fieldset>
       <h3>View Page</h3>
-      <legend>View Page</legend>
+      <!-- <legend>View Page</legend> -->
       <input type="submit" name="submit" value="View Page">
       <input type='text' placeholder='page id' id="pageId" name='pageId'>
     </fieldset>
@@ -114,7 +115,7 @@
   <form id="view-blog">
     <fieldset>
       <h3>View Blog</h3>
-      <legend>View Blog</legend>
+      <!-- <legend>View Blog</legend> -->
       <input type="submit" name="submit" value="View Blog">
       <input type='text' placeholder='blog id' id="blogId" name='blogId'>
     </fieldset>
@@ -122,7 +123,7 @@
   <form id="update-blog">
     <fieldset>
       <h3>Update Blog</h3>
-      <legend>Update Blog</legend>
+      <!-- <legend>Update Blog</legend> -->
       <input type="submit" name="submit" value="Update Blog">
       <input type='text' placeholder='blog id' id="blogId" name='blog[id]'>
       <input type='text' placeholder='blog title' id="blogTitle" name='blog[title]'>
@@ -145,7 +146,7 @@
   <form id="create-new-page">
   <fieldset>
     <h3>Click to create a new page:</h3>
-    <legend>Create Page</legend>
+    <!-- <legend>Create Page</legend> -->
     <input type="submit" name="submit" value="Create New Page!">
   </fieldset>
 </form>
@@ -165,7 +166,7 @@
   <form id="view-all-blogs">
     <fieldset>
       <h3>View All Blogs</h3>
-      <legend>View Blogs</legend>
+      <!-- <legend>View Blogs</legend> -->
       <input type="submit" name="submit" value="View All Blogs">
     </fieldset>
   </form>
@@ -173,7 +174,7 @@
   <form id="view-my-blog">
     <fieldset>
       <h3>View My Blog</h3>
-      <legend>View My Blog</legend>
+      <!-- <legend>View My Blog</legend> -->
       <input type="submit" name="submit" value="View My Blog">
     </fieldset>
   </form>
@@ -193,7 +194,7 @@
 <form id="create-new-blog">
 <fieldset>
   <h3>Click to create a new blog:</h3>
-  <legend>Create Blog</legend>
+  <!-- <legend>Create Blog</legend> -->
   <input type="submit" name="submit" value="Create New Blog!">
 </fieldset>
 </form>
@@ -213,7 +214,7 @@
   <form id="view-post">
     <fieldset>
       <h3>View One Post</h3>
-      <legend>View Post</legend>
+      <!-- <legend>View Post</legend> -->
       <input type='text' placeholder='post id' id="postId" name='posts[id]'>
       <input type='text' placeholder='blog id' id="blogId" name='blog[id]'>
       <input type="submit" name="submit" value="View One Post">
@@ -223,7 +224,6 @@
   <form id="create-new-post">
   <fieldset>
     <h3>Click to create a new blog post:</h3>
-    <legend>Create blog post</legend>
     <input type="submit" name="submit" value="Create post!">
     <input type='text' placeholder='title' id="post-title" name='posts[title]'>
     <input type='text' placeholder='body' id="post-body" name='posts[body]'>
@@ -234,7 +234,6 @@
   <form id="update-post">
   <fieldset>
     <h3>Update Post</h3>
-    <legend>Update a post</legend>
     <input type="submit" name="submit" value="Update post!">
     <input type='text' placeholder='title' id="update-post-title" name='posts[title]'>
     <input type='text' placeholder='body' id="update-post-body" name='posts[body]'>
@@ -246,7 +245,6 @@
   <form id="delete-post">
     <fieldset>
       <h3>Delete One Post</h3>
-      <legend>Delete Post</legend>
       <input type='text' placeholder='post id' id="postId" name='posts[id]'>
       <input type='text' placeholder='blog id' id="blogId" name='blog[id]'>
       <input type="submit" name="submit" value="Delete One Post">
