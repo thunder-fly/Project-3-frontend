@@ -5,6 +5,7 @@ const showPagesTemplate = require('./templates/pages-listing.handlebars')
 const showMyPagesTemplate = require('./templates/my-pages-listing.handlebars')
 const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
 const showMyBlogTemplate = require('./templates/my-blog.handlebars')
+const showAllUsersTemplate = require('./templates/all-users.handlebars')
 const api = require('./api')
 
 const signUpSuccess = (data) => {
@@ -73,6 +74,39 @@ const signOutSuccess = () => {
 
 const signOutFailure = (error) => {
   console.log('signOut Failure in UI')
+  return error
+}
+
+const viewAllUsersSuccess = (data) => {
+  console.log('viewAllUsersSuccess in ui')
+  console.log(data)
+  $('#all-users-container').show()
+  $('#all-users-container').html('')
+  const showUsersHtml = showAllUsersTemplate({ users: data.users })
+  $('#all-users-container').append(showUsersHtml)
+
+  $('.user-button').on('click', onViewUserAssets)
+}
+
+const onViewUserAssets = function (event) {
+  console.log('onViewUserAssets in events working')
+  event.preventDefault()
+  const data = $('.user-button').attr('data-id')
+  api.viewUserPages(data)
+    .then(viewUserAssetsSuccess)
+    .catch(viewUserAssetsFailure)
+}
+
+const viewUserAssetsSuccess = (data) => {
+  console.log('data is', data)
+}
+
+const viewUserAssetsFailure = (error) => {
+  return error
+}
+
+const viewAllUsersFailure = (error) => {
+  console.log('viewAllUsersFailure in UI')
   return error
 }
 
@@ -344,6 +378,9 @@ module.exports = {
   checkForUserBlog,
   checkForUserBlogSuccess,
   viewMyBlogSuccess,
-  viewMyBlogFailure
+  viewMyBlogFailure,
+  viewAllUsersSuccess,
+  viewAllUsersFailure,
+  onViewUserAssets
 
 }
