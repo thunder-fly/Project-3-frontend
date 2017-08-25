@@ -5,7 +5,7 @@ const showPagesTemplate = require('./templates/pages-listing.handlebars')
 const showMyPagesTemplate = require('./templates/my-pages-listing.handlebars')
 const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
 const showMyBlogTemplate = require('./templates/my-blog.handlebars')
-const showAllUsersTemplate = require('./templates/all-users.handlebars')
+const showAllUsersTemplate = require('./templates/all-users-sites.handlebars')
 const api = require('./api')
 
 const signUpSuccess = (data) => {
@@ -71,10 +71,10 @@ const signOutFailure = (error) => {
 
 const viewAllUsersSuccess = (data) => {
   console.log(data)
-  $('#all-users-container').show()
-  $('#all-users-container').html('')
+  $('.content').show()
+  $('.content').html('')
   const showUsersHtml = showAllUsersTemplate({ users: data.users })
-  $('#all-users-container').append(showUsersHtml)
+  $('.content').append(showUsersHtml)
 
   $('.user-button').on('click', onViewUserAssets)
 }
@@ -85,14 +85,29 @@ const onViewUserAssets = function (event) {
   console.log('event.target is', event.target)
   const data = $(event.target).attr('data-id')
   api.viewUserPages(data)
-    .then(viewUserAssetsSuccess)
-    .catch(viewUserAssetsFailure)
+  // this one replaces div
+    .then(viewUserPagesSuccess)
+    .then(() => api.viewUserBlogs(data))
+    // this one expects that "pages" are already there and appends to that div
+    .then(viewUserBlogSuccess)
+    .catch(viewUserPagesFailure)
 }
 
-const viewUserAssetsSuccess = (data) => {
+const viewUserBlogSuccess = (data) => {
   console.log('data is', data)
+  $('.content').show()
+
+  const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
+  $('.content').append(showBlogsHtml)
 }
 
+const viewUserPagesSuccess = (data) => {
+  console.log('data is', data)
+  $('.content').show()
+  $('.content').html('')
+  const showPagesHtml = showPagesTemplate({ pages: data.pages })
+  $('.content').append(showPagesHtml)
+}
 const viewUserAssetsFailure = (error) => {
   return error
 }
@@ -231,11 +246,11 @@ const createBlogFailure = (error) => {
 }
 
 const viewAllBlogsSuccess = (data) => {
-  $('#all-blogs-container').show()
-  $('#all-blogs-container').html('')
+  $('.content').show()
+  $('.content').html('')
 
   const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
-  $('#all-blogs-container').append(showBlogsHtml)
+  $('.content').append(showBlogsHtml)
   // $('.remove-button').on('click', onDeleteBlog)
   return data
 }

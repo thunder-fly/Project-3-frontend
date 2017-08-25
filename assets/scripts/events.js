@@ -6,17 +6,6 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 
-const onHomepage = function (event) {
-  console.log('onHomepage in events working')
-  event.preventDefault()
-  api.viewAllBlogs()
-    .then(ui.viewBlogSuccess)
-    .catch(ui.viewBlogFailure)
-  api.viewAllPages()
-    .then(ui.viewAllPagesSuccess)
-    .catch(ui.viewAllPagesFailure)
-}
-
 const onViewAllUsers = function (event) {
   console.log('onViewAllUsers in events working')
   event.preventDefault()
@@ -288,15 +277,13 @@ const addHandlers = () => {
   $('#update-post').on('submit', onUpdatePost)
   $('#view-post').on('submit', onViewPost)
   $('#delete-post').on('submit', onDeletePost)
-  $('#homepage').on('submit', onHomepage)
   $('#update-blog').hide()
   $('#update-post').hide()
   $('#delete-post').hide()
   $('#view-my-blog').hide()
   $('#view-my-blog').on('submit', onViewMyBlog)
-  $('#all-users').on('submit', onViewAllUsers)
+  $('#all-users-sites').on('submit', onViewAllUsers)
   $('#one-user').on('submit', onViewOneUser)
-
 }
 
 module.exports = {

@@ -71,6 +71,15 @@ const viewUserPages = function (userId) {
     method: 'GET'
   })
 }
+const viewUserBlogs = function (userId) {
+  console.log('viewUserBlogs in api running')
+  console.log('userId is ', userId)
+  return $.ajax({
+    // url: app.host + '/pages/' + data,
+    url: `${app.host}/blogs?_owner=${userId}`,
+    method: 'GET'
+  })
+}
 
 // const viewUser = function (data) {
 //   console.log('viewUser in api running')
@@ -237,5 +246,6 @@ module.exports = {
   viewPost,
   deletePost,
   viewAllUsers,
-  viewUserPages
+  viewUserPages,
+  viewUserBlogs
 }
