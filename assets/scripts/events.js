@@ -6,6 +6,17 @@ const api = require('./api')
 const ui = require('./ui')
 const store = require('./store')
 
+const onHomepage = function (event) {
+  console.log('onHomepage in events working')
+  event.preventDefault()
+  api.viewAllBlogs()
+    .then(ui.viewBlogSuccess)
+    .catch(ui.viewBlogFailure)
+  api.viewAllPages()
+    .then(ui.viewAllPagesSuccess)
+    .catch(ui.viewAllPagesFailure)
+}
+
 const onSignUp = function (event) {
   console.log('onSignUp in events working')
   const data = getFormFields(this)
@@ -133,6 +144,14 @@ const onViewAllBlogs = function (event) {
     .catch(ui.viewAllBlogsFailure)
 }
 
+const onViewMyBlog = function (event) {
+  console.log('onViewMyBlog in events working')
+  event.preventDefault()
+  api.viewAllBlogs()
+    .then(ui.viewMyBlogSuccess)
+    .catch(ui.viewMyBlogFailure)
+}
+
 const onCreatePost = function (event) {
   console.log('onCreatePost in events running')
   event.preventDefault()
@@ -253,6 +272,12 @@ const addHandlers = () => {
   $('#update-post').on('submit', onUpdatePost)
   $('#view-post').on('submit', onViewPost)
   $('#delete-post').on('submit', onDeletePost)
+  $('#homepage').on('submit', onHomepage)
+  $('#update-blog').hide()
+  $('#update-post').hide()
+  $('#delete-post').hide()
+  $('#view-my-blog').hide()
+  $('#view-my-blog').on('submit', onViewMyBlog)
 }
 
 module.exports = {
