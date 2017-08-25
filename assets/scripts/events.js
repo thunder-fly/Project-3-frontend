@@ -17,6 +17,22 @@ const onHomepage = function (event) {
     .catch(ui.viewAllPagesFailure)
 }
 
+const onViewAllUsers = function (event) {
+  console.log('onViewAllUsers in events working')
+  event.preventDefault()
+  api.viewAllUsers()
+    .then(ui.viewAllUsersSuccess)
+    .catch(ui.viewAllUsersFailure)
+}
+
+const onViewOneUser = function (event) {
+  console.log('onViewOneUser in events working')
+  event.preventDefault()
+  api.viewUser()
+    .then(ui.viewUserSuccess)
+    .catch(ui.viewUserFailure)
+}
+
 const onSignUp = function (event) {
   console.log('onSignUp in events working')
   const data = getFormFields(this)
@@ -278,6 +294,9 @@ const addHandlers = () => {
   $('#delete-post').hide()
   $('#view-my-blog').hide()
   $('#view-my-blog').on('submit', onViewMyBlog)
+  $('#all-users').on('submit', onViewAllUsers)
+  $('#one-user').on('submit', onViewOneUser)
+
 }
 
 module.exports = {

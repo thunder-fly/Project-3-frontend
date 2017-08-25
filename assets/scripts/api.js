@@ -46,6 +46,41 @@ const signOut = function (data) {
   })
 }
 
+const viewAllUsers = function (data) {
+  console.log('viewAllUsers in api running')
+  return $.ajax({
+    url: app.host + '/users',
+    method: 'GET'
+  })
+}
+
+const viewUserBlog = function (data) {
+  console.log('viewUserAssets in api running')
+  return $.ajax({
+    url: app.host + '/blogs/' + data,
+    method: 'GET'
+  })
+}
+
+const viewUserPages = function (userId) {
+  console.log('viewUserPages in api running')
+  console.log('userId is ', userId)
+  return $.ajax({
+    // url: app.host + '/pages/' + data,
+    url: `${app.host}/pages?user_id=${userId}`,
+    method: 'GET'
+  })
+}
+
+// const viewUser = function (data) {
+//   console.log('viewUser in api running')
+//   console.log('this is data: ', data)
+//   return $.ajax({
+//     url: app.host + '/users/' + data,
+//     method: 'GET'
+//   })
+// }
+
 const viewAllPages = function (data) {
   console.log('viewAllPages in api running')
   return $.ajax({
@@ -200,5 +235,7 @@ module.exports = {
   updateBlog,
   updatePost,
   viewPost,
-  deletePost
+  deletePost,
+  viewAllUsers,
+  viewUserPages
 }
