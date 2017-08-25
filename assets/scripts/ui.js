@@ -4,6 +4,7 @@ const store = require('./store')
 const showPagesTemplate = require('./templates/pages-listing.handlebars')
 const showMyPagesTemplate = require('./templates/my-pages-listing.handlebars')
 const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
+const showMyBlogTemplate = require('./templates/my-blog.handlebars')
 const api = require('./api')
 
 const signUpSuccess = (data) => {
@@ -27,6 +28,10 @@ const signInSuccess = (data) => {
   $('#create-new-post').show()
   $('#view-my-pages').show()
   $('#sign-out').show()
+  $('#update-blog').show()
+  $('#update-post').show()
+  $('#delete-post').show()
+  $('#view-my-blog').show()
   return data
 }
 const checkForUserBlog = function (event) {
@@ -235,6 +240,21 @@ const createPostSuccess = () => console.log('post successful')
 
 const failure = () => console.log('that didnt work')
 
+const viewMyBlogSuccess = (data) => {
+  console.log('viewMyBlogSuccess in ui')
+  console.log(data)
+  $('#my-blog-container').show()
+  $('#my-blog-container').html('')
+
+  const showMyBlogHtml = showMyBlogTemplate({ blogs: data.blogs })
+  $('#my-blog-container').append(showMyBlogHtml)
+  return data
+}
+
+const viewMyBlogFailure = (error) => {
+  console.log('viewMyBlogFailure in ui')
+  return error
+}
 const viewBlogSuccess = (data) => {
   console.log('viewBlogSuccess in ui')
   console.log(data)
@@ -322,6 +342,8 @@ module.exports = {
   deletePostSuccess,
   deletePostFailure,
   checkForUserBlog,
-  checkForUserBlogSuccess
+  checkForUserBlogSuccess,
+  viewMyBlogSuccess,
+  viewMyBlogFailure
 
 }
