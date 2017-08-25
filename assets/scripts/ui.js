@@ -91,7 +91,8 @@ const viewAllUsersSuccess = (data) => {
 const onViewUserAssets = function (event) {
   console.log('onViewUserAssets in events working')
   event.preventDefault()
-  const data = $('.user-button').attr('data-id')
+  console.log('event.target is', event.target)
+  const data = $(event.target).attr('data-id')
   api.viewUserPages(data)
     .then(viewUserAssetsSuccess)
     .catch(viewUserAssetsFailure)
