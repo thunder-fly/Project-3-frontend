@@ -67,7 +67,7 @@ const viewUserPages = function (userId) {
   console.log('userId is ', userId)
   return $.ajax({
     // url: app.host + '/pages/' + data,
-    url: `${app.host}/pages?user_id=${userId}`,
+    url: `${app.host}/pages?_owner=${userId}`,
     method: 'GET'
   })
 }
