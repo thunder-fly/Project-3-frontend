@@ -5,21 +5,18 @@ const showPagesTemplate = require('./templates/pages-listing.handlebars')
 const showMyPagesTemplate = require('./templates/my-pages-listing.handlebars')
 const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
 const showMyBlogTemplate = require('./templates/my-blog.handlebars')
-const showAllUsersTemplate = require('./templates/all-users.handlebars')
+const showAllUsersTemplate = require('./templates/all-users-sites.handlebars')
 const api = require('./api')
 
 const signUpSuccess = (data) => {
-  console.log('signUpSuccess in UI working')
   return data
 }
 
 const signUpFailure = (error) => {
-  console.log('signUpfailure in UI working')
   return error
 }
 
 const signInSuccess = (data) => {
-  console.log('signUpSuccess in UI working')
   store.user = data.user
   $('#sign-in').hide()
   $('#change-password').show()
@@ -41,7 +38,6 @@ const checkForUserBlog = function (event) {
 }
 
 const checkForUserBlogSuccess = function (data) {
-  console.log('this is data.blogs', data.blogs)
   for (let i = 0; i < data.blogs.length; i++) {
     if (data.blogs[i]._owner === store.user.id) {
       $('#create-new-blog').hide()
@@ -52,7 +48,6 @@ const checkForUserBlogSuccess = function (data) {
 }
 
 const signInFailure = (error) => {
-  console.log('signUpfailure in UI working')
   return error
 }
 
@@ -61,29 +56,25 @@ const changePasswordSuccess = () => {
 }
 
 const changePasswordFailure = (error) => {
-  console.log('change password failure in UI')
   return error
 }
 
 const signOutSuccess = () => {
-  console.log('signOutSuccess in UI working')
   $('#change-password').hide()
   $('#sign-in').show()
   $('#sign-up').show()
 }
 
 const signOutFailure = (error) => {
-  console.log('signOut Failure in UI')
   return error
 }
 
 const viewAllUsersSuccess = (data) => {
-  console.log('viewAllUsersSuccess in ui')
   console.log(data)
-  $('#all-users-container').show()
-  $('#all-users-container').html('')
+  $('.content').show()
+  $('.content').html('')
   const showUsersHtml = showAllUsersTemplate({ users: data.users })
-  $('#all-users-container').append(showUsersHtml)
+  $('.content').append(showUsersHtml)
 
   $('.user-button').on('click', onViewUserAssets)
 }
@@ -91,28 +82,41 @@ const viewAllUsersSuccess = (data) => {
 const onViewUserAssets = function (event) {
   console.log('onViewUserAssets in events working')
   event.preventDefault()
-  const data = $('.user-button').attr('data-id')
+  console.log('event.target is', event.target)
+  const data = $(event.target).attr('data-id')
   api.viewUserPages(data)
-    .then(viewUserAssetsSuccess)
-    .catch(viewUserAssetsFailure)
+  // this one replaces div
+    .then(viewUserPagesSuccess)
+    .then(() => api.viewUserBlogs(data))
+    // this one expects that "pages" are already there and appends to that div
+    .then(viewUserBlogSuccess)
+    .catch(viewUserPagesFailure)
 }
 
-const viewUserAssetsSuccess = (data) => {
+const viewUserBlogSuccess = (data) => {
   console.log('data is', data)
+  $('.content').show()
+
+  const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
+  $('.content').append(showBlogsHtml)
 }
 
+const viewUserPagesSuccess = (data) => {
+  console.log('data is', data)
+  $('.content').show()
+  $('.content').html('')
+  const showPagesHtml = showPagesTemplate({ pages: data.pages })
+  $('.content').append(showPagesHtml)
+}
 const viewUserAssetsFailure = (error) => {
   return error
 }
 
 const viewAllUsersFailure = (error) => {
-  console.log('viewAllUsersFailure in UI')
   return error
 }
 
 const viewAllPagesSuccess = (data) => {
-  console.log('viewAllPagesSuccess in ui running')
-  console.log(data)
   $('#all-pages-container').show()
   $('#all-pages-container').html('')
 
@@ -184,13 +188,11 @@ const onUpdatePage = function (pageId, pageTitle, pageContent) {
 }
 
 const updatePageSuccess = function (data) {
-  console.log('updatePageSuccess in ui')
   $('#edit-page-modal').hide()
   return data
 }
 
 const updatePageFailure = function (error) {
-  console.log('updatePageFailure in ui')
   return error
 }
 const rerunMyPagesHandlebars = (data) => {
@@ -209,31 +211,24 @@ const onDeletePage = function (event) {
 }
 
 const viewAllPagesFailure = (error) => {
-  console.log('viewAllPagesFailure in ui')
   return error
 }
 const viewPageSuccess = (data) => {
-  console.log('viewPageSuccess in ui')
   console.log(data)
   return data
 }
 const viewPageFailure = (error) => {
-  console.log('viewPageFailure in ui')
   return error
 }
 const createPageSuccess = (data) => {
-  console.log('createPageSuccess in ui')
-  console.log(data)
   return data
 }
 
 const createPageFailure = (error) => {
-  console.log('createPageFailure in ui')
   return error
 }
 
 const deletePageSuccess = (data) => {
-  console.log('deletePageSuccess in ui')
 }
 
 const deletePageFailure = (error) => {
@@ -243,30 +238,24 @@ const deletePageFailure = (error) => {
 
 const createBlogSuccess = (data) => {
   store.blog = data.blog
-  console.log('this is data.blog ', data.blog)
-  console.log(data)
   return data
 }
 
 const createBlogFailure = (error) => {
-  console.log('createBlogFailure in ui')
   return error
 }
 
 const viewAllBlogsSuccess = (data) => {
-  console.log('viewAllBlogsSuccess in ui running')
-  console.log(data)
-  $('#all-blogs-container').show()
-  $('#all-blogs-container').html('')
+  $('.content').show()
+  $('.content').html('')
 
   const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
-  $('#all-blogs-container').append(showBlogsHtml)
+  $('.content').append(showBlogsHtml)
   // $('.remove-button').on('click', onDeleteBlog)
   return data
 }
 
 const viewAllBlogsFailure = (error) => {
-  console.log('viewAllBlogsFailure in ui')
   return error
 }
 
@@ -275,8 +264,6 @@ const createPostSuccess = () => console.log('post successful')
 const failure = () => console.log('that didnt work')
 
 const viewMyBlogSuccess = (data) => {
-  console.log('viewMyBlogSuccess in ui')
-  console.log(data)
   $('#my-blog-container').show()
   $('#my-blog-container').html('')
 
@@ -286,51 +273,39 @@ const viewMyBlogSuccess = (data) => {
 }
 
 const viewMyBlogFailure = (error) => {
-  console.log('viewMyBlogFailure in ui')
   return error
 }
 const viewBlogSuccess = (data) => {
-  console.log('viewBlogSuccess in ui')
-  console.log(data)
   return data
 }
 
 const viewBlogFailure = (error) => {
-  console.log('viewBlogFailure in ui')
   return error
 }
 
 const viewPostSuccess = (data) => {
-  console.log('viewPostSuccess in ui')
-  console.log(data)
   return data
 }
 
 const viewPostFailure = (error) => {
-  console.log('viewPostFailure in ui')
   return error
 }
 
 const updateBlogSuccess = (data) => {
-  console.log('updateBlogSuccess in ui')
-  console.log(data)
 }
 
 const updateBlogFailure = (error) => {
-  console.log('updateBlogFailure in ui')
   return error
 }
 
-const updatePostSuccess = () => console.log('update post works')
+const updatePostSuccess = () => {}
 
-const updatePostFailure = (error) => console.log(error)
+const updatePostFailure = (error) => error
 
 const deletePostSuccess = (data) => {
-  console.log('deletePostSuccess in ui')
 }
 
 const deletePostFailure = (error) => {
-  console.log('deletePostFailure in ui')
   return error
 }
 

@@ -1,0 +1,12 @@
+{{#each users as |user|}}
+
+<div class="col-xs-4 box">
+    <div class='user-button'>
+      <ul name='user-email' type="submit" class='handlebars-fields'>Email:
+        <button data-id="{{user.id}}" type='submit' class='handlebars'>
+          {{user.email}}
+        </button>
+      </ul>
+    </div>
+  </div>
+{{/each}}
