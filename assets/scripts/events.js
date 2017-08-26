@@ -14,13 +14,13 @@ const onViewAllUsers = function (event) {
     .catch(ui.viewAllUsersFailure)
 }
 
-const onViewOneUser = function (event) {
-  console.log('onViewOneUser in events working')
-  event.preventDefault()
-  api.viewUser()
-    .then(ui.viewUserSuccess)
-    .catch(ui.viewUserFailure)
-}
+// const onViewOneUser = function (event) {
+//   console.log('onViewOneUser in events working')
+//   event.preventDefault()
+//   api.viewUser()
+//     .then(ui.viewUserSuccess)
+//     .catch(ui.viewUserFailure)
+// }
 
 const onSignUp = function (event) {
   console.log('onSignUp in events working')
@@ -132,15 +132,7 @@ const onCreateBlog = function (event) {
     $('#create-blog-modal').off()
   })
 }
-const onViewBlog = function (event) {
-  console.log('onViewBlog in events working')
-  event.preventDefault()
-  // const data = ($(this).parent().attr('data-id'))
-  const data = getFormFields(this)
-  api.viewBlog(data)
-    .then(ui.viewBlogSuccess)
-    .catch(ui.viewBlogFailure)
-}
+
 const onViewAllBlogs = function (event) {
   console.log('onViewAllBlogs in events working')
   event.preventDefault()
@@ -212,16 +204,6 @@ const onViewMyPages = function (event) {
     .catch(ui.viewMyPagesFailure)
 }
 
-const onViewPage = function (event) {
-  console.log('onViewPage in events working')
-  event.preventDefault()
-  // const data = ($(this).parent().attr('data-id'))
-  const data = getFormFields(this)
-  api.viewPage(data)
-    .then(ui.viewPageSuccess)
-    .catch(ui.viewPageFailure)
-}
-
 const onUpdateBlog = function (event) {
   console.log('onUpdateBlog in events working')
   event.preventDefault()
@@ -271,8 +253,8 @@ const addHandlers = () => {
   $('#create-new-post').hide()
   $('#create-post-modal').hide()
   $('#view-my-pages').hide()
-  $('#view-page').on('submit', onViewPage)
-  $('#view-blog').on('submit', onViewBlog)
+  // $('#view-page').on('submit', onViewPage)
+  // $('#view-blog').on('submit', onViewBlog)
   $('#update-blog').on('submit', onUpdateBlog)
   $('#update-post').on('submit', onUpdatePost)
   $('#view-post').on('submit', onViewPost)
@@ -283,7 +265,7 @@ const addHandlers = () => {
   $('#view-my-blog').hide()
   $('#view-my-blog').on('submit', onViewMyBlog)
   $('#all-users-sites').on('submit', onViewAllUsers)
-  $('#one-user').on('submit', onViewOneUser)
+  // $('#one-user').on('submit', onViewOneUser)
 }
 
 module.exports = {

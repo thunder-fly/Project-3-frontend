@@ -100,9 +100,9 @@ const viewAllPages = function (data) {
 
 const viewPage = function (data) {
   console.log('viewPage in api running')
-  console.log('this is data: ', data.pageId)
+  console.log('this is data: ', data)
   return $.ajax({
-    url: app.host + '/pages/' + data.pageId,
+    url: app.host + '/pages/' + data,
     method: 'GET'
   })
 }
@@ -163,9 +163,9 @@ const viewAllBlogs = function (data) {
 }
 const viewBlog = function (data) {
   console.log('viewBlog in api running')
-  console.log('this is data: ', data.blogId)
+  console.log('this is data: ', data)
   return $.ajax({
-    url: app.host + '/blogs/' + data.blogId,
+    url: app.host + '/blogs/' + data,
     method: 'GET'
   })
 }

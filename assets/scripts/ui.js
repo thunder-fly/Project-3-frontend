@@ -6,7 +6,10 @@ const showMyPagesTemplate = require('./templates/my-pages-listing.handlebars')
 const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
 const showMyBlogTemplate = require('./templates/my-blog.handlebars')
 const showAllUsersTemplate = require('./templates/all-users-sites.handlebars')
+const showOnePageTemplate = require('./templates/one-page.handlebars')
+const showOneBlogTemplate = require('./templates/one-blog.handlebars')
 const api = require('./api')
+const getFormFields = require(`../../lib/get-form-fields`)
 
 const signUpSuccess = (data) => {
   return data
@@ -96,9 +99,10 @@ const onViewUserAssets = function (event) {
 const viewUserBlogSuccess = (data) => {
   console.log('data is', data)
   $('.content').show()
-
   const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
   $('.content').append(showBlogsHtml)
+  // once user clicks on View Blog
+  $('.view-blog').on('click', onViewBlog)
 }
 
 const viewUserPagesSuccess = (data) => {
@@ -107,6 +111,30 @@ const viewUserPagesSuccess = (data) => {
   $('.content').html('')
   const showPagesHtml = showPagesTemplate({ pages: data.pages })
   $('.content').append(showPagesHtml)
+  // once user clicks on View Page
+  $('.view-page').on('click', onViewPage)
+}
+
+const viewUserPagesFailure = (error) => {
+  return error
+}
+const onViewPage = function (event) {
+  console.log('onViewPage in events working')
+  event.preventDefault()
+  const data = ($(this).parent().attr('data-id'))
+  api.viewPage(data)
+    .then(viewPageSuccess)
+    .catch(viewPageFailure)
+}
+
+const onViewBlog = function (event) {
+  console.log('onViewBlog in ui working')
+  event.preventDefault()
+  console.log('this is data-id ', ($(this).parent().attr('data-id')))
+  const data = ($(this).parent().attr('data-id'))
+  api.viewBlog(data)
+    .then(viewBlogSuccess)
+    .catch(viewBlogFailure)
 }
 const viewUserAssetsFailure = (error) => {
   return error
@@ -204,7 +232,6 @@ const rerunMyPagesHandlebars = (data) => {
 
 const onDeletePage = function (event) {
   const data = ($(this).parent().attr('data-id'))
-// event.preventDefault()
   api.deletePage(data)
   .then(deletePageSuccess, $(this).parent().hide(400))
   .catch(deletePageFailure)
@@ -214,8 +241,26 @@ const viewAllPagesFailure = (error) => {
   return error
 }
 const viewPageSuccess = (data) => {
-  console.log(data)
-  return data
+  console.log('data is', data)
+  $('.content').show()
+  $('.content').html('')
+  const showPageHtml = showOnePageTemplate({ pages: data })
+  $('.content').append(showPageHtml)
+  // this button returns visiter back to user home site
+  $('.back-to-user-site').on('click', onReturnUserAssets)
+}
+
+const onReturnUserAssets = function (event) {
+  event.preventDefault()
+  console.log('event.target is', event.target)
+  // this grabs the page._owner value, which is user ID
+  const data = $(this).parent().attr('data-id')
+  // the rest of the function is spitting out user assets
+  api.viewUserPages(data)
+    .then(viewUserPagesSuccess)
+    .then(() => api.viewUserBlogs(data))
+    .then(viewUserBlogSuccess)
+    .catch(viewUserPagesFailure)
 }
 const viewPageFailure = (error) => {
   return error
@@ -276,7 +321,12 @@ const viewMyBlogFailure = (error) => {
   return error
 }
 const viewBlogSuccess = (data) => {
-  return data
+  $('.content').show()
+  $('.content').html('')
+  const showBlogHtml = showOneBlogTemplate({ blogs: data })
+  $('.content').append(showBlogHtml)
+  // this button returns visiter back to user home site
+  $('.back-to-user-site').on('click', onReturnUserAssets)
 }
 
 const viewBlogFailure = (error) => {
@@ -356,6 +406,7 @@ module.exports = {
   viewMyBlogFailure,
   viewAllUsersSuccess,
   viewAllUsersFailure,
-  onViewUserAssets
+  onViewUserAssets,
+  viewUserAssetsFailure
 
 }
