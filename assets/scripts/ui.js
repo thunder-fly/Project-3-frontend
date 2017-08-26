@@ -276,9 +276,10 @@ const updatePageFailure = function (error) {
 // }
 
 const onDeletePage = function (event) {
-  const data = ($(this).parent().attr('data-id'))
+  const data = ($('.content').find('input').val())
   api.deletePage(data)
   .then(deletePageSuccess, $(this).parent().hide(400))
+  .then(rerunAssetsHandlebars)
   .catch(deletePageFailure)
 }
 
@@ -320,7 +321,14 @@ const createPageFailure = (error) => {
 
 const deletePageSuccess = (data) => {
 }
-
+const rerunAssetsHandlebars = function (rerun) {
+  const data = store.user.id
+  api.viewUserPages(data)
+    .then(viewMyPagesSuccess)
+    .then(() => api.viewUserBlogs(data))
+    .then(viewMyBlogSuccess)
+    .catch(viewMyPagesFailure)
+}
 const deletePageFailure = (error) => {
   console.log('deletePageFailure in ui')
   return error
