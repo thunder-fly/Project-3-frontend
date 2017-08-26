@@ -2,12 +2,12 @@
 
 const store = require('./store')
 const showPagesTemplate = require('./templates/pages-listing.handlebars')
-const showMyPagesTemplate = require('./templates/my-pages-listing.handlebars')
 const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
 const showMyBlogTemplate = require('./templates/my-blog.handlebars')
 const showAllUsersTemplate = require('./templates/all-users-sites.handlebars')
 const showOnePageTemplate = require('./templates/one-page.handlebars')
 const showOneBlogTemplate = require('./templates/one-blog.handlebars')
+const showMyPagesTemplate = require('./templates/owned-pages.handlebars')
 const api = require('./api')
 const getFormFields = require(`../../lib/get-form-fields`)
 
@@ -45,12 +45,10 @@ const onViewMyAssets = function (event) {
   const data = store.user.id
   // const data = $(event.target).attr('data-id')
   api.viewUserPages(data)
-  // this one replaces div
-    .then(viewUserPagesSuccess)
+    .then(viewMyPagesSuccess)
     .then(() => api.viewUserBlogs(data))
-    // this one expects that "pages" are already there and appends to that div
-    .then(viewUserBlogSuccess)
-    .catch(viewUserPagesFailure)
+    .then(viewMyBlogSuccess)
+    .catch(viewMyPagesFailure)
 }
 
 const checkForUserBlog = function (event) {
@@ -61,25 +59,13 @@ const checkForUserBlog = function (event) {
 }
 
 const checkForUserBlogSuccess = function (data) {
-  console.log('this is data in checkForUserBlogSuccess', data)
-  console.log('this is store.user.id ', store.user.id)
-  console.log('data.length is ', data.blogs.length)
+  // checks to see if the length of the api data returned is greater than 0.
+  // greater than 0 means they already created a blog.
   if (data.blogs.length > 0) {
     $('#create-new-blog').hide()
-    console.log('hiding dat button')
   } else {
     $('#create-new-blog').show()
-    console.log('showing dat button')
   }
-  // for (let i = 0; i < data.blogs.length; i++) {
-  // data.blogs.forEach(function (blog) {
-  //   if (blog._owner === store.user.id) {
-  //     $('#create-new-blog').hide()
-  //     console.log('hiding that create button')
-  //   } else {
-  //     // $('#create-new-blog').show()
-  //   }
-  // })
 }
 
 const signInFailure = (error) => {
@@ -151,7 +137,6 @@ const viewUserPagesFailure = (error) => {
   return error
 }
 const onViewPage = function (event) {
-  console.log('onViewPage in events working')
   event.preventDefault()
   const data = ($(this).parent().attr('data-id'))
   api.viewPage(data)
@@ -200,14 +185,31 @@ const openUpdatePageModal = function (event) {
 const viewMyPagesSuccess = (data) => {
   console.log('viewMyPagesSuccess in ui running')
   console.log(data)
-  $('#my-pages-container').show()
-  $('#my-pages-container').html('')
+  $('.content').show()
+  $('.content').html('')
 
-  const showMyPagesHtml = showMyPagesTemplate({ pages: data.pages })
-  $('#my-pages-container').append(showMyPagesHtml)
+  const showPagesHtml = showPagesTemplate({ pages: data.pages })
+  $('.content').append(showPagesHtml)
+  $('.view-page').on('click', onViewMyPage)
+}
+
+const onViewMyPage = function (event) {
+  event.preventDefault()
+  const data = ($(this).parent().attr('data-id'))
+  api.viewPage(data)
+    .then(viewMyPageSuccess)
+    .catch(viewMyPageFailure)
+}
+
+const viewMyPageSuccess = (data) => {
+  $('.content').show()
+  $('.content').html('')
+  const showMyPagesHtml = showMyPagesTemplate({ pages: data })
+  $('.content').append(showMyPagesHtml)
+
   $('.remove-button').on('click', onDeletePage)
   $('.edit-button').on('click', function (event) {
-    const pageId = $(event.target).parent().attr('data-id')
+    const pageId = $(event.target).parent().find('#page-id').val()
     const pageTitle = $(event.target).parent().find('#page-title').text()
     const pageContent = $(event.target).parent().find('#page-content').text()
 
@@ -216,6 +218,9 @@ const viewMyPagesSuccess = (data) => {
   })
 }
 
+const viewMyPageFailure = (error) => {
+  return error
+}
 const viewMyPagesFailure = (error) => {
   console.log('viewMyPagesFailure in ui')
   return error
@@ -225,7 +230,7 @@ const onUpdatePage = function (pageId, pageTitle, pageContent) {
   event.preventDefault()
   $('#edit-page-modal').show()
   $('#page-title-update').val(pageTitle)
-  $('#page-body-update').val(pageContent)
+  $('#page-content-update').val(pageContent)
 
   $('#submit-page-edit').click(function (event) {
     let values = {}
@@ -237,7 +242,7 @@ const onUpdatePage = function (pageId, pageTitle, pageContent) {
     console.log(values)
     api.updatePage(values, pageId)
     .then(updatePageSuccess)
-    .then(rerunMyPagesHandlebars)
+    .then(rerunMyPageHandlebars)
     .catch(updatePageFailure)
   })
   $('#close-modal').click(function () {
@@ -252,15 +257,23 @@ const updatePageSuccess = function (data) {
   return data
 }
 
+const rerunMyPageHandlebars = (redisplay) => {
+  $('.content').show()
+  const data = ($('.content').find('input').val())
+  api.viewPage(data)
+    .then(viewMyPageSuccess)
+    .catch(viewMyPageFailure)
+}
+
 const updatePageFailure = function (error) {
   return error
 }
-const rerunMyPagesHandlebars = (data) => {
-  $('#my-pages-container').show()
-  api.viewAllPages()
-    .then(viewMyPagesSuccess)
-    .catch(viewMyPagesFailure)
-}
+// const rerunMyPagesHandlebars = (data) => {
+//   $('.content').show()
+//   api.viewAllPages()
+//     .then(viewMyPagesSuccess)
+//     .catch(viewMyPagesFailure)
+// }
 
 const onDeletePage = function (event) {
   const data = ($(this).parent().attr('data-id'))
@@ -341,11 +354,10 @@ const createPostSuccess = () => console.log('post successful')
 const failure = () => console.log('that didnt work')
 
 const viewMyBlogSuccess = (data) => {
-  $('#my-blog-container').show()
-  $('#my-blog-container').html('')
+  $('.content').show()
 
   const showMyBlogHtml = showMyBlogTemplate({ blogs: data.blogs })
-  $('#my-blog-container').append(showMyBlogHtml)
+  $('.content').append(showMyBlogHtml)
   return data
 }
 
@@ -417,7 +429,7 @@ module.exports = {
   updatePageFailure,
   viewMyPagesSuccess,
   viewMyPagesFailure,
-  rerunMyPagesHandlebars,
+  // rerunMyPagesHandlebars,
   viewPageSuccess,
   viewPageFailure,
   viewBlogSuccess,

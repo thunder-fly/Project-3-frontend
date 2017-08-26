@@ -1,0 +1,23 @@
+{{#each blogs as |blog|}}
+
+<div class="col-xs-4 box">
+    <div data-id="{{blog._owner}}">
+      <ul name='blog-name' class='handlebars-fields'>Blog: <span class='handlebars' id='blog-title'>{{blog.title}}</span></ul>
+      <button type="submit" class="edit-blog-title" name="edit-blog-title">Edit Blog Name</button>
+      <ul name='blog-content' class='handlebars-fields'>Posts: </ul>
+      {{#each posts as |post|}}
+        <ul name='post-title' class='handlebars-fields'>Title:<span class='handlebars' id='post-title'>{{post.title}}</span></ul>
+        <ul name='post-body' class='handlebars-fields'>Content:<span class='handlebars' id='post-body'>{{post.body}}</span></ul>
+        <button type="submit" class="remove-button" name="remove-button">Remove</button>
+        <button type="submit" class="edit-button" name="edit-button">Edit</button>
+      {{/each}}
+      <button type="submit" class="return-to-dashboard" name="return-to-dashboard">Return to dashboard</button>
+    <!-- {{#checkUser blog._owner}}
+
+      <button type="submit" class="remove-button" name="remove-button">Remove</button>
+      <button type="submit" class="edit-button" name="edit-button">Edit</button>
+
+    {{/checkUser}} -->
+  </div>
+</div>
+{{/each}}

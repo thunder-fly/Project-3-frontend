@@ -1,8 +1,8 @@
 const store = require('../../store')
 
-module.exports = function (userId) {
+module.exports = function (userId, options) {
   if (store.user && (store.user.id === userId)) {
-    return '<button type="submit" class="remove-button" name="remove-button">Remove</button>  <button type="submit" class="edit-button" name="edit-button">Edit</button>'
+    return options.fn(this)
   } else {
   }
 }
