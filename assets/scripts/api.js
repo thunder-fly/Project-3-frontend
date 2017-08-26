@@ -163,9 +163,9 @@ const viewAllBlogs = function (data) {
 }
 const viewBlog = function (data) {
   console.log('viewBlog in api running')
-  console.log('this is data: ', data.blogId)
+  console.log('this is data: ', data)
   return $.ajax({
-    url: app.host + '/blogs/' + data.blogId,
+    url: app.host + '/blogs/' + data,
     method: 'GET'
   })
 }

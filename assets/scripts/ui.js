@@ -7,6 +7,7 @@ const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
 const showMyBlogTemplate = require('./templates/my-blog.handlebars')
 const showAllUsersTemplate = require('./templates/all-users-sites.handlebars')
 const showOnePageTemplate = require('./templates/one-page.handlebars')
+const showOneBlogTemplate = require('./templates/one-blog.handlebars')
 const api = require('./api')
 const getFormFields = require(`../../lib/get-form-fields`)
 
@@ -98,9 +99,10 @@ const onViewUserAssets = function (event) {
 const viewUserBlogSuccess = (data) => {
   console.log('data is', data)
   $('.content').show()
-
   const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
   $('.content').append(showBlogsHtml)
+  // once user clicks on View Blog
+  $('.view-blog').on('click', onViewBlog)
 }
 
 const viewUserPagesSuccess = (data) => {
@@ -123,6 +125,16 @@ const onViewPage = function (event) {
   api.viewPage(data)
     .then(viewPageSuccess)
     .catch(viewPageFailure)
+}
+
+const onViewBlog = function (event) {
+  console.log('onViewBlog in ui working')
+  event.preventDefault()
+  console.log('this is data-id ', ($(this).parent().attr('data-id')))
+  const data = ($(this).parent().attr('data-id'))
+  api.viewBlog(data)
+    .then(viewBlogSuccess)
+    .catch(viewBlogFailure)
 }
 const viewUserAssetsFailure = (error) => {
   return error
@@ -243,11 +255,10 @@ const onReturnUserAssets = function (event) {
   console.log('event.target is', event.target)
   // this grabs the page._owner value, which is user ID
   const data = $(this).parent().attr('data-id')
+  // the rest of the function is spitting out user assets
   api.viewUserPages(data)
-  // this one replaces div
     .then(viewUserPagesSuccess)
     .then(() => api.viewUserBlogs(data))
-    // this one expects that "pages" are already there and appends to that div
     .then(viewUserBlogSuccess)
     .catch(viewUserPagesFailure)
 }
@@ -310,7 +321,12 @@ const viewMyBlogFailure = (error) => {
   return error
 }
 const viewBlogSuccess = (data) => {
-  return data
+  $('.content').show()
+  $('.content').html('')
+  const showBlogHtml = showOneBlogTemplate({ blogs: data })
+  $('.content').append(showBlogHtml)
+  // this button returns visiter back to user home site
+  $('.back-to-user-site').on('click', onReturnUserAssets)
 }
 
 const viewBlogFailure = (error) => {
