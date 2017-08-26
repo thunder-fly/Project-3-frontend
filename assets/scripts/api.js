@@ -162,18 +162,14 @@ const viewAllBlogs = function (data) {
   })
 }
 const viewBlog = function (data) {
-  console.log('viewBlog in api running')
-  console.log('this is data: ', data)
   return $.ajax({
     url: app.host + '/blogs/' + data,
     method: 'GET'
   })
 }
-const updateBlog = function (data) {
-  console.log('this is data.blog ', data.blog)
-  console.log('this is store: ', store)
+const updateBlog = function (data, id) {
   return $.ajax({
-    url: app.host + '/blogs/' + data.blog.id,
+    url: app.host + '/blogs/' + id,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token

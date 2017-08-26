@@ -3,7 +3,7 @@
 const store = require('./store')
 const showPagesTemplate = require('./templates/pages-listing.handlebars')
 const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
-const showMyBlogTemplate = require('./templates/my-blog.handlebars')
+const showMyBlogTemplate = require('./templates/owned-blog.handlebars')
 const showAllUsersTemplate = require('./templates/all-users-sites.handlebars')
 const showOnePageTemplate = require('./templates/one-page.handlebars')
 const showOneBlogTemplate = require('./templates/one-blog.handlebars')
@@ -269,12 +269,6 @@ const rerunMyPageHandlebars = (redisplay) => {
 const updatePageFailure = function (error) {
   return error
 }
-// const rerunMyPagesHandlebars = (data) => {
-//   $('.content').show()
-//   api.viewAllPages()
-//     .then(viewMyPagesSuccess)
-//     .catch(viewMyPagesFailure)
-// }
 
 const onDeletePage = function (event) {
   const data = ($('.content').find('input').val())
@@ -364,10 +358,84 @@ const failure = () => console.log('that didnt work')
 
 const viewMyBlogSuccess = (data) => {
   $('.content').show()
-
-  const showMyBlogHtml = showMyBlogTemplate({ blogs: data.blogs })
+  const showMyBlogHtml = showBlogsTemplate({ blogs: data.blogs })
   $('.content').append(showMyBlogHtml)
+  $('.view-blog').on('click', onViewMyBlog)
+}
+const onViewMyBlog = (event) => {
+  const data = ($(event.target).parent().attr('data-id'))
+  api.viewBlog(data)
+    .then(viewMyBlogPostsSuccess)
+    .catch(viewMyBlogPostsFailure)
+}
+
+const viewMyBlogPostsSuccess = (data) => {
+  $('.content').show()
+  $('.content').html('')
+  const showMyBlogPostsHtml = showMyBlogTemplate({ blogs: data })
+  $('.content').append(showMyBlogPostsHtml)
+  // to edit blog title
+  $('.edit-blog-title').on('click', function (event) {
+    const blogId = $(event.target).parent().find('#blog-id').val()
+    const blogTitle = $(event.target).parent().find('#blog-title').text()
+    openUpdateBlogTitleModal(event)
+    onUpdateBlogTitle(blogId, blogTitle)
+  })
+  // to edit blog posts
+    $('edit-post-button').on('click', function (event) {
+    const blogId = $(event.target).parent().find('#page-id').val()
+    const blogTitle = $(event.target).parent().find('#page-title').text()
+    const blogContent = $(event.target).parent().find('#page-content').text()
+    })
+  $('.remove-button').on('click', onDeletePost)
+  $('.return-to-dashboard').on('click', rerunAssetsHandlebars)
+}
+const openUpdateBlogTitleModal = (event) => {
+  $('#edit-blog-modal').show()
+}
+
+const onUpdateBlogTitle = function (blogId, blogTitle) {
+  console.log('onUpdateBlogTItle in ui working')
+  $('#edit-blog-modal').show()
+  $('#blog-title-update').val(blogTitle)
+  $('#submit-blog-edit').click(function (event) {
+    let values = {}
+    event.preventDefault()
+    $.each($('#updateBlogForm').serializeArray(), function (i, field) {
+      values[field.name] = field.value
+    })
+    $('#submit-blog-edit').off()
+    api.updateBlog(values, blogId)
+      .then(updateBlogTitleSuccess)
+      .then(rerunMyBlogHandlebars)
+      .catch(updateBlogTitleFailure)
+  })
+  $('#close-modal').click(function () {
+    $('#submit-page-edit').off()
+    $('#edit-page-modal').hide(400)
+    $('#edit-page-modal').off()
+  })
+}
+
+const updateBlogTitleSuccess = (data) => {
+  $('#edit-blog-modal').hide(400)
   return data
+}
+
+const updateBlogTitleFailure = (error) => {
+  return error
+}
+
+const rerunMyBlogHandlebars = (event) => {
+  $('.content').show()
+  const data = ($('.content').find('input').val())
+  api.viewBlog(data)
+    .then(viewMyBlogPostsSuccess)
+    .catch(viewMyBlogPostsFailure)
+}
+
+const viewMyBlogPostsFailure = (error) => {
+  return error
 }
 
 const viewMyBlogFailure = (error) => {

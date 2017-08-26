@@ -172,21 +172,31 @@
       <ul>Page title: <input id='page-title-update' data-field='title' type='text' placeholder='title' name='page[title]' maxlength='60' size='30'></ul>
       <ul>Page content: <input id='page-content-update' type='text' class='page-content' placeholder='page content' name='page[content]' maxlength='50' size='30' ></ul>
     </fieldset>
-
     <h3 id='edit-page-success'> </h3>
     <input id='submit-page-edit' type="submit" name="submit" value="Update page!">
     </form>
     <button type="button" id='close-modal'>Cancel</button>
+</div>
+
+    <div id='edit-blog-modal'>
+      <form style="background-color:pink; color:black;" id="updateBlogForm">
+        <fieldset id="blog-modal-form">
+        <ul>Blog title: <input id='blog-title-update' data-field='title' type='text' placeholder='title' name='blog[title]' maxlength='60' size='30'></ul>
+      </fieldset>
+    <h3 id='edit-blog-success'> </h3>
+    <input id='submit-blog-edit' type="submit" name="submit" value="Update blog!">
+    </form>
+    <button type="button" id='close-modal'>Cancel</button>
   </div>
 
-  <form id="update-blog">
+  <!-- <form id="update-blog">
     <fieldset>
       <h3>Update Blog</h3>
       <input type="submit" name="submit" value="Update Blog">
       <input type='text' placeholder='blog id' id="blogId" name='blog[id]'>
       <input type='text' placeholder='blog title' id="blogTitle" name='blog[title]'>
     </fieldset>
-  </form>
+  </form> -->
   <!-- <textarea id ='page-body-update' class='page-content' placeholder='page content' name='page[content]' rows = "3" cols = "80"></textarea> -->
 
   <form id="view-all-blogs">
