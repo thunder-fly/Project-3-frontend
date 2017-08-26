@@ -6,7 +6,9 @@ const showMyPagesTemplate = require('./templates/my-pages-listing.handlebars')
 const showBlogsTemplate = require('./templates/blogs-listing.handlebars')
 const showMyBlogTemplate = require('./templates/my-blog.handlebars')
 const showAllUsersTemplate = require('./templates/all-users-sites.handlebars')
+const showOnePageTemplate = require('./templates/one-page.handlebars')
 const api = require('./api')
+const getFormFields = require(`../../lib/get-form-fields`)
 
 const signUpSuccess = (data) => {
   return data
@@ -107,6 +109,20 @@ const viewUserPagesSuccess = (data) => {
   $('.content').html('')
   const showPagesHtml = showPagesTemplate({ pages: data.pages })
   $('.content').append(showPagesHtml)
+  // once user clicks on View Page
+  $('.view-page').on('click', onViewPage)
+}
+
+const viewUserPagesFailure = (error) => {
+  return error
+}
+const onViewPage = function (event) {
+  console.log('onViewPage in events working')
+  event.preventDefault()
+  const data = ($(this).parent().attr('data-id'))
+  api.viewPage(data)
+    .then(viewPageSuccess)
+    .catch(viewPageFailure)
 }
 const viewUserAssetsFailure = (error) => {
   return error
@@ -204,7 +220,6 @@ const rerunMyPagesHandlebars = (data) => {
 
 const onDeletePage = function (event) {
   const data = ($(this).parent().attr('data-id'))
-// event.preventDefault()
   api.deletePage(data)
   .then(deletePageSuccess, $(this).parent().hide(400))
   .catch(deletePageFailure)
@@ -214,8 +229,27 @@ const viewAllPagesFailure = (error) => {
   return error
 }
 const viewPageSuccess = (data) => {
-  console.log(data)
-  return data
+  console.log('data is', data)
+  $('.content').show()
+  $('.content').html('')
+  const showPageHtml = showOnePageTemplate({ pages: data })
+  $('.content').append(showPageHtml)
+  // this button returns visiter back to user home site
+  $('.back-to-user-site').on('click', onReturnUserAssets)
+}
+
+const onReturnUserAssets = function (event) {
+  event.preventDefault()
+  console.log('event.target is', event.target)
+  // this grabs the page._owner value, which is user ID
+  const data = $(this).parent().attr('data-id')
+  api.viewUserPages(data)
+  // this one replaces div
+    .then(viewUserPagesSuccess)
+    .then(() => api.viewUserBlogs(data))
+    // this one expects that "pages" are already there and appends to that div
+    .then(viewUserBlogSuccess)
+    .catch(viewUserPagesFailure)
 }
 const viewPageFailure = (error) => {
   return error
@@ -356,6 +390,7 @@ module.exports = {
   viewMyBlogFailure,
   viewAllUsersSuccess,
   viewAllUsersFailure,
-  onViewUserAssets
+  onViewUserAssets,
+  viewUserAssetsFailure
 
 }
