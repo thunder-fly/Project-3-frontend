@@ -208,6 +208,7 @@ const viewMyPageSuccess = (data) => {
   $('.content').append(showMyPagesHtml)
 
   $('.remove-button').on('click', onDeletePage)
+  $('.return-to-dashboard').on('click', rerunAssetsHandlebars)
   $('.edit-button').on('click', function (event) {
     const pageId = $(event.target).parent().find('#page-id').val()
     const pageTitle = $(event.target).parent().find('#page-title').text()
