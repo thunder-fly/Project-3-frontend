@@ -54,13 +54,13 @@ const viewAllUsers = function (data) {
   })
 }
 
-const viewUserBlog = function (data) {
-  console.log('viewUserAssets in api running')
-  return $.ajax({
-    url: app.host + '/blogs/' + data,
-    method: 'GET'
-  })
-}
+// const viewUserBlog = function (data) {
+//   console.log('viewUserAssets in api running')
+//   return $.ajax({
+//     url: app.host + '/blogs/' + data,
+//     method: 'GET'
+//   })
+// }
 
 const viewUserPages = function (userId) {
   console.log('viewUserPages in api running')

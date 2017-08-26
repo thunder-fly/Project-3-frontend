@@ -25,7 +25,7 @@ const signInSuccess = (data) => {
   $('#change-password').show()
   $('#sign-up').hide()
   $('#create-new-page').show()
-  $('#create-new-blog').show()
+  // $('#create-new-blog').show()
   $('#create-new-post').show()
   $('#view-my-pages').show()
   $('#sign-out').show()
@@ -33,21 +33,53 @@ const signInSuccess = (data) => {
   $('#update-post').show()
   $('#delete-post').show()
   $('#view-my-blog').show()
-  return data
+  $('#all-users-sites').hide()
+  $('#view-my-assets').show()
+  $('#view-my-assets').on('submit', onViewMyAssets)
 }
+
+const onViewMyAssets = function (event) {
+  console.log('onViewUserAssets in events working')
+  event.preventDefault()
+  console.log('this is store.user ', store.user)
+  const data = store.user.id
+  // const data = $(event.target).attr('data-id')
+  api.viewUserPages(data)
+  // this one replaces div
+    .then(viewUserPagesSuccess)
+    .then(() => api.viewUserBlogs(data))
+    // this one expects that "pages" are already there and appends to that div
+    .then(viewUserBlogSuccess)
+    .catch(viewUserPagesFailure)
+}
+
 const checkForUserBlog = function (event) {
-  api.viewAllBlogs()
+  console.log('checkForUserBlog running')
+  const data = store.user.id
+  api.viewUserBlogs(data)
     .then(checkForUserBlogSuccess)
 }
 
 const checkForUserBlogSuccess = function (data) {
-  for (let i = 0; i < data.blogs.length; i++) {
-    if (data.blogs[i]._owner === store.user.id) {
-      $('#create-new-blog').hide()
-    } else {
-      $('#create-new-blog').show()
-    }
+  console.log('this is data in checkForUserBlogSuccess', data)
+  console.log('this is store.user.id ', store.user.id)
+  console.log('data.length is ', data.blogs.length)
+  if (data.blogs.length > 0) {
+    $('#create-new-blog').hide()
+    console.log('hiding dat button')
+  } else {
+    $('#create-new-blog').show()
+    console.log('showing dat button')
   }
+  // for (let i = 0; i < data.blogs.length; i++) {
+  // data.blogs.forEach(function (blog) {
+  //   if (blog._owner === store.user.id) {
+  //     $('#create-new-blog').hide()
+  //     console.log('hiding that create button')
+  //   } else {
+  //     // $('#create-new-blog').show()
+  //   }
+  // })
 }
 
 const signInFailure = (error) => {
@@ -290,15 +322,15 @@ const createBlogFailure = (error) => {
   return error
 }
 
-const viewAllBlogsSuccess = (data) => {
-  $('.content').show()
-  $('.content').html('')
-
-  const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
-  $('.content').append(showBlogsHtml)
-  // $('.remove-button').on('click', onDeleteBlog)
-  return data
-}
+// const viewAllBlogsSuccess = (data) => {
+//   $('.content').show()
+//   $('.content').html('')
+//
+//   const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
+//   $('.content').append(showBlogsHtml)
+//   // $('.remove-button').on('click', onDeleteBlog)
+//   return data
+// }
 
 const viewAllBlogsFailure = (error) => {
   return error
@@ -374,7 +406,7 @@ module.exports = {
   createPageFailure,
   createBlogSuccess,
   createBlogFailure,
-  viewAllBlogsSuccess,
+  // viewAllBlogsSuccess,
   viewAllBlogsFailure,
   deletePageSuccess,
   deletePageFailure,

@@ -133,13 +133,13 @@ const onCreateBlog = function (event) {
   })
 }
 
-const onViewAllBlogs = function (event) {
-  console.log('onViewAllBlogs in events working')
-  event.preventDefault()
-  api.viewAllBlogs()
-    .then(ui.viewAllBlogsSuccess)
-    .catch(ui.viewAllBlogsFailure)
-}
+// const onViewAllBlogs = function (event) {
+//   console.log('onViewAllBlogs in events working')
+//   event.preventDefault()
+//   api.viewAllBlogs()
+//     .then(ui.viewAllBlogsSuccess)
+//     .catch(ui.viewAllBlogsFailure)
+// }
 
 const onViewMyBlog = function (event) {
   console.log('onViewMyBlog in events working')
@@ -180,7 +180,6 @@ const onCreatePost = function (event) {
 //   $('#create-post-success').text('')
 //   $('#close-create-post-modal').text('Cancel')
 // }
-
   const data = getFormFields(this)
   api.createPost(data)
     .then(ui.createPostSuccess)
@@ -241,7 +240,7 @@ const addHandlers = () => {
   $('#create-new-page').on('submit', onCreatePage)
   $('#create-new-blog').on('submit', onCreateBlog)
   $('#create-blog-modal').hide()
-  $('#view-all-blogs').on('submit', onViewAllBlogs)
+  // $('#view-all-blogs').on('submit', onViewAllBlogs)
   $('#create-new-post').on('submit', onCreatePost)
   $('#view-my-pages').on('submit', onViewMyPages)
   $('#change-password').hide()
@@ -265,7 +264,7 @@ const addHandlers = () => {
   $('#view-my-blog').hide()
   $('#view-my-blog').on('submit', onViewMyBlog)
   $('#all-users-sites').on('submit', onViewAllUsers)
-  // $('#one-user').on('submit', onViewOneUser)
+  $('#view-my-assets').hide()
 }
 
 module.exports = {
