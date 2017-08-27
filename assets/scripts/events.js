@@ -38,6 +38,7 @@ const onSignIn = function (event) {
   api.signIn(data)
     .then(ui.signInSuccess)
     .then(ui.checkForUserBlog)
+    .then(ui.checkForUserPages)
     .catch(ui.signInFailure)
 }
 

@@ -29,7 +29,6 @@ const signInSuccess = (data) => {
   $('#create-new-page').show()
   // $('#create-new-blog').show()
   $('#create-new-post').show()
-  // $('#view-my-pages').show()
   $('#sign-out').show()
   $('#update-blog').show()
   $('#update-post').show()
@@ -65,12 +64,28 @@ const checkForUserBlogSuccess = function (data) {
   // checks to see if the length of the api data returned is greater than 0.
   // greater than 0 means they already created a blog.
   if (data.blogs.length > 0) {
+    console.log('this is user blogs length ', data.blogs.length)
     $('#create-new-blog').hide()
+    $('#view-my-assets').show()
   } else {
     $('#create-new-blog').show()
+    $('#view-my-assets').hide()
   }
 }
+const checkForUserPages = function (event) {
+  console.log('checkForUserPages running')
+  const data = store.user.id
+  api.viewUserPages(data)
+    .then(checkForUserPagesSuccess)
+}
 
+const checkForUserPagesSuccess = function (data) {
+  if (data.pages.length > 0) {
+    console.log('this is user pages length ', data.pages.length)
+    $('#view-my-assets').show()
+  } else {
+  }
+}
 const signInFailure = (error) => {
   return error
 }
@@ -89,6 +104,13 @@ const signOutSuccess = () => {
   $('#change-password').hide()
   $('#sign-in').show()
   $('#sign-up').show()
+  $('.content').hide()
+  $('#create-page-modal').hide()
+  $('#sign-out').hide()
+  $('#view-my-assets').hide()
+  $('#create-new-page').hide()
+  $('#create-new-blog').hide()
+  $('#all-users-sites').show()
 }
 
 const signOutFailure = (error) => {
@@ -248,10 +270,10 @@ const onUpdatePage = function (pageId, pageTitle, pageContent) {
     console.log(values)
     api.updatePage(values, pageId)
     .then(updatePageSuccess)
-    .then(rerunAssetsHandlebars)
+    .then(rerunMyPageHandlebars)
     .catch(updatePageFailure)
   })
-  $('#close-modal').click(function () {
+  $('#close-edit-page-modal').click(function () {
     $('#submit-page-edit').off()
     $('#edit-page-modal').hide(400)
     $('#edit-page-modal').off()
@@ -418,6 +440,11 @@ const viewMyBlogPostsSuccess = (data) => {
   })
   $('.remove-button').on('click', onDeletePost)
   $('.return-to-dashboard').on('click', rerunAssetsHandlebars)
+  $('#close-edit-blog-modal').click(function () {
+    $('#submit-blog-edit').off()
+    $('#edit-blog-modal').hide(400)
+    $('#edit-blog-modal').off()
+  })
 }
 const openUpdateBlogTitleModal = (event) => {
   $('#edit-blog-modal').show()
@@ -626,6 +653,7 @@ module.exports = {
   viewAllUsersSuccess,
   viewAllUsersFailure,
   onViewUserAssets,
-  viewUserAssetsFailure
+  viewUserAssetsFailure,
+  checkForUserPages
 
 }
