@@ -12,6 +12,7 @@ const api = require('./api')
 const getFormFields = require(`../../lib/get-form-fields`)
 
 const signUpSuccess = (data) => {
+  $('.clear').val('')
   return data
 }
 
@@ -20,6 +21,7 @@ const signUpFailure = (error) => {
 }
 
 const signInSuccess = (data) => {
+  $('.clear').val('')
   store.user = data.user
   $('#sign-in').hide()
   $('#change-password').show()
@@ -74,6 +76,7 @@ const signInFailure = (error) => {
 }
 
 const changePasswordSuccess = () => {
+  $('.clear').val('')
   console.log('change password in UI working')
 }
 
@@ -82,6 +85,7 @@ const changePasswordFailure = (error) => {
 }
 
 const signOutSuccess = () => {
+  $('.clear').val('')
   $('#change-password').hide()
   $('#sign-in').show()
   $('#sign-up').show()
@@ -244,7 +248,7 @@ const onUpdatePage = function (pageId, pageTitle, pageContent) {
     console.log(values)
     api.updatePage(values, pageId)
     .then(updatePageSuccess)
-    .then(rerunMyPageHandlebars)
+    .then(rerunAssetsHandlebars)
     .catch(updatePageFailure)
   })
   $('#close-modal').click(function () {
@@ -255,6 +259,7 @@ const onUpdatePage = function (pageId, pageTitle, pageContent) {
 }
 
 const updatePageSuccess = function (data) {
+  $('.clear').val('')
   $('#edit-page-modal').hide()
   return data
 }
@@ -307,8 +312,9 @@ const onReturnUserAssets = function (event) {
 const viewPageFailure = (error) => {
   return error
 }
-const createPageSuccess = (data) => {
-  return data
+const createPageSuccess = () => {
+  $('#create-page-modal').hide(400)
+  $('.clear').val('')
 }
 
 const createPageFailure = (error) => {
@@ -316,6 +322,7 @@ const createPageFailure = (error) => {
 }
 
 const deletePageSuccess = (data) => {
+  $('.clear').val('')
 }
 const rerunAssetsHandlebars = function (rerun) {
   const data = store.user.id
@@ -331,6 +338,7 @@ const deletePageFailure = (error) => {
 }
 
 const createBlogSuccess = (data) => {
+  $('.clear').val('')
   store.blog = data.blog
   return data
 }
@@ -353,7 +361,10 @@ const viewAllBlogsFailure = (error) => {
   return error
 }
 
-const createPostSuccess = () => console.log('post successful')
+const createPostSuccess = () => {
+  $('#create-post-modal').hide(400)
+  $('.clear').val('')
+}
 
 const createPostFailure = (error) => console.log(error)
 
@@ -436,6 +447,7 @@ const onUpdateBlogTitle = function (blogId, blogTitle) {
 }
 
 const updateBlogTitleSuccess = (data) => {
+  $('.clear').val('')
   $('#edit-blog-modal').hide(400)
   return data
 }
@@ -538,8 +550,8 @@ const viewBlogFailure = (error) => {
   return error
 }
 
-const viewPostSuccess = (data) => {
-  return data
+const viewPostSuccess = () => {
+  console.log('post was successful')
 }
 
 const viewPostFailure = (error) => {
@@ -553,7 +565,7 @@ const updateBlogFailure = (error) => {
   return error
 }
 
-const updatePostSuccess = (data) => {
+const updatePostSuccess = () => {
   $('#edit-post-modal').hide(400)
 }
 
