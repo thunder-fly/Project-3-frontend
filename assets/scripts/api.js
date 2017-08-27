@@ -109,6 +109,7 @@ const viewPage = function (data) {
 
 const createPage = function (data) {
   console.log('createPage in api running')
+  console.log(data)
   return $.ajax({
     url: app.host + '/pages',
     method: 'POST',
@@ -187,11 +188,11 @@ const viewPost = function (data) {
   })
 }
 
-const createPost = function (data) {
+const createPost = function (data, blogId) {
   console.log('this is data ', data)
-  console.log('this is data.posts ', data.posts)
+  console.log('this is blogId ', blogId)
   return $.ajax({
-    url: app.host + '/blogs/' + data.posts._owner + '/posts',
+    url: app.host + '/blogs/' + blogId + '/posts',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -214,11 +215,10 @@ const updatePost = function (data, blogId, postId) {
     data
   })
 }
-const deletePost = function (data) {
+const deletePost = function (blogId, postId) {
   console.log('deletePost in api running')
-  console.log('this is data.posts: ', data.posts)
   return $.ajax({
-    url: app.host + '/blogs/' + data.blog.id + '/posts/' + data.posts.id,
+    url: app.host + '/blogs/' + blogId + '/posts/' + postId,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token

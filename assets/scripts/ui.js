@@ -27,7 +27,7 @@ const signInSuccess = (data) => {
   $('#create-new-page').show()
   // $('#create-new-blog').show()
   $('#create-new-post').show()
-  $('#view-my-pages').show()
+  // $('#view-my-pages').show()
   $('#sign-out').show()
   $('#update-blog').show()
   $('#update-post').show()
@@ -36,6 +36,7 @@ const signInSuccess = (data) => {
   $('#all-users-sites').hide()
   $('#view-my-assets').show()
   $('#view-my-assets').on('submit', onViewMyAssets)
+  $('.content').html('')
 }
 
 const onViewMyAssets = function (event) {
@@ -354,6 +355,8 @@ const viewAllBlogsFailure = (error) => {
 
 const createPostSuccess = () => console.log('post successful')
 
+const createPostFailure = (error) => console.log(error)
+
 const failure = () => console.log('that didnt work')
 
 const viewMyBlogSuccess = (data) => {
@@ -381,6 +384,15 @@ const viewMyBlogPostsSuccess = (data) => {
     openUpdateBlogTitleModal(event)
     onUpdateBlogTitle(blogId, blogTitle)
   })
+  // to create a blog post
+  $('.create-blog-post').on('click', function (event) {
+    const blogId = $(event.target).parent().find('input').val()
+    console.log('blogId is ', blogId)
+    // const postTitle = $(event.target).parent().find('#post-title').text()
+    // const postBody = $(event.target).parent().find('#post-body').text()
+    openCreatePostModal(event)
+    onCreatePost(blogId)
+  })
   // to edit blog posts
   $('.edit-post-button').on('click', function (event) {
     const blogId = $(event.target).parent().parent().find('#blog-id').val()
@@ -393,7 +405,7 @@ const viewMyBlogPostsSuccess = (data) => {
     openUpdatePostModal(event)
     onUpdatePost(blogId, postId, postTitle, postBody)
   })
-  // $('.remove-button').on('click', onDeletePost)
+  $('.remove-button').on('click', onDeletePost)
   $('.return-to-dashboard').on('click', rerunAssetsHandlebars)
 }
 const openUpdateBlogTitleModal = (event) => {
@@ -439,6 +451,38 @@ const rerunMyBlogHandlebars = (event) => {
     .then(viewMyBlogPostsSuccess)
     .catch(viewMyBlogPostsFailure)
 }
+const openCreatePostModal = function (event) {
+  $('#create-post-modal').on()
+  $('#create-post-modal').show()
+  $('#create-post-modal-form').show()
+  $('#submit-create-post').on()
+  $('#submit-create-post').show()
+  $('#close-create-post-modal').text('Cancel')
+}
+
+const onCreatePost = function (blogId, postTitle, postBody) {
+  $('#create-post-modal').show()
+  event.preventDefault()
+  $('#post-title-create').val(postTitle)
+  $('#post-body-create').val(postBody)
+  $('#submit-create-post').click(function (event) {
+    let values = {}
+    event.preventDefault()
+    $.each($('#createPostForm').serializeArray(), function (i, field) {
+      values[field.name] = field.value
+    })
+    $('#submit-create-post').off()
+    api.createPost(values, blogId)
+      .then(createPostSuccess)
+      .then(rerunMyBlogHandlebars)
+      .catch(createPostFailure)
+  })
+  $('#close-create-post-modal').click(function () {
+    $('#submit-create-post').off()
+    $('#create-post-modal').hide(400)
+    $('#create-post-modal').off()
+  })
+}
 
 const openUpdatePostModal = (event) => {
   $('#edit-post-modal').show()
@@ -460,13 +504,20 @@ const onUpdatePost = (blogId, postId, postTitle, postBody) => {
       .then(rerunMyBlogHandlebars)
       .catch(updatePostFailure)
   })
-  $('#close-modal').click(function () {
+  $('#close-edit-post-modal').click(function () {
     $('#submit-post-edit').off()
     $('#edit-post-modal').hide(400)
     $('#edit-post-modal').off()
   })
 }
-
+const onDeletePost = (event) => {
+  const blogId = $(event.target).parent().parent().find('#blog-id').val()
+  const postId = $(event.target).parent().find('input').val()
+  api.deletePost(blogId, postId)
+  .then(deletePostSuccess, $(this).parent().hide(400))
+  .then(rerunMyBlogHandlebars)
+  .catch(deletePostFailure)
+}
 const viewMyBlogPostsFailure = (error) => {
   return error
 }

@@ -4,6 +4,7 @@
     <div data-id="{{blog._owner}}">
       <ul name='blog-name' class='handlebars-fields'>Blog: <span class='handlebars' id='blog-title'>{{blog.title}}</span></ul>
       <button type="submit" class="edit-blog-title" name="edit-blog-title">Edit Blog Name</button>
+      <button type="submit" class="create-blog-post" name="add-blog-post">Add a Blog Post</button>
       <input type='hidden' id="blog-id" name='blog-id' value="{{blog.id}}">
       <ul name='blog-content' class='handlebars-fields'>Posts: </ul>
       {{#each posts as |post|}}
