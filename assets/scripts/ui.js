@@ -334,9 +334,10 @@ const onReturnUserAssets = function (event) {
 const viewPageFailure = (error) => {
   return error
 }
-const createPageSuccess = () => {
+const createPageSuccess = (data) => {
   $('#create-page-modal').hide(400)
   $('.clear').val('')
+  rerunAssetsHandlebars(data)
 }
 
 const createPageFailure = (error) => {
