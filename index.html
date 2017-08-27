@@ -189,6 +189,19 @@
     <button type="button" id='close-modal'>Cancel</button>
   </div>
 
+  <div id='edit-post-modal'>
+    <form style="background-color:pink; color:black;" id="updatePostForm">
+      <fieldset id="post-modal-form">
+      <ul>Post title: <input id="update-post-title" data-field='title' type='text' placeholder='title' name='posts[title]' maxlength='60' size='30'></ul>
+      <ul>Post body: <input id="update-post-body" data-field='body' type='text' placeholder='body' name='posts[body]'  size='50'></ul>
+    </fieldset>
+  <h3 id='edit-post-success'> </h3>
+  <input id='submit-post-edit' type="submit" name="submit" value="Update post!">
+  </form>
+  <button type="button" id='close-modal'>Cancel</button>
+</div>
+
+
   <!-- <form id="update-blog">
     <fieldset>
       <h3>Update Blog</h3>
@@ -247,16 +260,6 @@
   </fieldset>
   </form>
 
-  <form id="update-post">
-  <fieldset>
-    <h3>Update Post</h3>
-    <input type="submit" name="submit" value="Update post!">
-    <input type='text' placeholder='title' id="update-post-title" name='posts[title]'>
-    <input type='text' placeholder='body' id="update-post-body" name='posts[body]'>
-    <input type='text' placeholder='blog id' id="update-post[_owner]" name='blog[id]'>
-    <input type='text' placeholder='post id' id="update-post[id]" name='posts[id]'>
-  </fieldset>
-  </form>
 
   <form id="delete-post">
     <fieldset>

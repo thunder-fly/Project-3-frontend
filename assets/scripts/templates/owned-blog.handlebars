@@ -7,10 +7,13 @@
       <input type='hidden' id="blog-id" name='blog-id' value="{{blog.id}}">
       <ul name='blog-content' class='handlebars-fields'>Posts: </ul>
       {{#each posts as |post|}}
+      <div class="post-button">
         <ul name='post-title' class='handlebars-fields'>Title:<span class='handlebars' id='post-title'>{{post.title}}</span></ul>
         <ul name='post-body' class='handlebars-fields'>Content:<span class='handlebars' id='post-body'>{{post.body}}</span></ul>
+        <input type='hidden' id="post-id" name='post-id' value="{{post.id}}">
         <button type="submit" class="remove-button" name="remove-button">Remove</button>
         <button type="submit" class="edit-post-button" name="edit-post-button">Edit</button>
+      </div>
       {{/each}}
       <button type="submit" class="return-to-dashboard" name="return-to-dashboard">Return to dashboard</button>
     <!-- {{#checkUser blog._owner}}

@@ -200,11 +200,13 @@ const createPost = function (data) {
   })
 }
 
-const updatePost = function (data) {
-  console.log('this is data.posts ', data.posts)
-  console.log('this is data.blog.id', data.blog.id)
+const updatePost = function (data, blogId, postId) {
+  // console.log('this is data.posts ', data.posts)
+  console.log('this is blogId', blogId)
+  console.log('this is postId', postId)
+  console.log('this is data', data)
   return $.ajax({
-    url: app.host + '/blogs/' + data.blog.id + '/posts/' + data.posts.id,
+    url: app.host + '/blogs/' + blogId + '/posts/' + postId,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token

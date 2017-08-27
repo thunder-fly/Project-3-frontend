@@ -382,12 +382,18 @@ const viewMyBlogPostsSuccess = (data) => {
     onUpdateBlogTitle(blogId, blogTitle)
   })
   // to edit blog posts
-    $('edit-post-button').on('click', function (event) {
-    const blogId = $(event.target).parent().find('#page-id').val()
-    const blogTitle = $(event.target).parent().find('#page-title').text()
-    const blogContent = $(event.target).parent().find('#page-content').text()
-    })
-  $('.remove-button').on('click', onDeletePost)
+  $('.edit-post-button').on('click', function (event) {
+    const blogId = $(event.target).parent().parent().find('#blog-id').val()
+    console.log('this is blog-id merp', blogId)
+    const postId = $(event.target).parent().find('input').val()
+    console.log('this is post-id merp', postId)
+
+    const postTitle = $(event.target).parent().find('#post-title').text()
+    const postBody = $(event.target).parent().find('#post-body').text()
+    openUpdatePostModal(event)
+    onUpdatePost(blogId, postId, postTitle, postBody)
+  })
+  // $('.remove-button').on('click', onDeletePost)
   $('.return-to-dashboard').on('click', rerunAssetsHandlebars)
 }
 const openUpdateBlogTitleModal = (event) => {
@@ -434,6 +440,33 @@ const rerunMyBlogHandlebars = (event) => {
     .catch(viewMyBlogPostsFailure)
 }
 
+const openUpdatePostModal = (event) => {
+  $('#edit-post-modal').show()
+}
+
+const onUpdatePost = (blogId, postId, postTitle, postBody) => {
+  $('#edit-post-modal').show()
+  $('#update-post-title').val(postTitle)
+  $('#update-post-body').val(postBody)
+  $('#submit-post-edit').click(function (event) {
+    let values = {}
+    event.preventDefault()
+    $.each($('#updatePostForm').serializeArray(), function (i, field) {
+      values[field.name] = field.value
+    })
+    $('#submit-post-edit').off()
+    api.updatePost(values, blogId, postId)
+      .then(updatePostSuccess)
+      .then(rerunMyBlogHandlebars)
+      .catch(updatePostFailure)
+  })
+  $('#close-modal').click(function () {
+    $('#submit-post-edit').off()
+    $('#edit-post-modal').hide(400)
+    $('#edit-post-modal').off()
+  })
+}
+
 const viewMyBlogPostsFailure = (error) => {
   return error
 }
@@ -469,7 +502,9 @@ const updateBlogFailure = (error) => {
   return error
 }
 
-const updatePostSuccess = () => {}
+const updatePostSuccess = (data) => {
+  $('#edit-post-modal').hide(400)
+}
 
 const updatePostFailure = (error) => error
 
