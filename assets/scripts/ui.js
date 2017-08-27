@@ -334,9 +334,10 @@ const onReturnUserAssets = function (event) {
 const viewPageFailure = (error) => {
   return error
 }
-const createPageSuccess = () => {
+const createPageSuccess = (data) => {
   $('#create-page-modal').hide(400)
   $('.clear').val('')
+  rerunAssetsHandlebars(data)
 }
 
 const createPageFailure = (error) => {
@@ -362,7 +363,12 @@ const deletePageFailure = (error) => {
 const createBlogSuccess = (data) => {
   $('.clear').val('')
   store.blog = data.blog
-  return data
+  $('#submit-create-blog').off()
+  $('#create-blog-modal').hide(400)
+  $('#create-blog-modal').off()
+  $('#create-new-blog').hide()
+  $('#view-my-assets').show()
+  rerunAssetsHandlebars(data)
 }
 
 const createBlogFailure = (error) => {
