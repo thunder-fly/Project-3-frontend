@@ -133,13 +133,13 @@ const onCreateBlog = function (event) {
   })
 }
 
-const onViewAllBlogs = function (event) {
-  console.log('onViewAllBlogs in events working')
-  event.preventDefault()
-  api.viewAllBlogs()
-    .then(ui.viewAllBlogsSuccess)
-    .catch(ui.viewAllBlogsFailure)
-}
+// const onViewAllBlogs = function (event) {
+//   console.log('onViewAllBlogs in events working')
+//   event.preventDefault()
+//   api.viewAllBlogs()
+//     .then(ui.viewAllBlogsSuccess)
+//     .catch(ui.viewAllBlogsFailure)
+// }
 
 const onViewMyBlog = function (event) {
   console.log('onViewMyBlog in events working')
@@ -147,44 +147,6 @@ const onViewMyBlog = function (event) {
   api.viewAllBlogs()
     .then(ui.viewMyBlogSuccess)
     .catch(ui.viewMyBlogFailure)
-}
-
-const onCreatePost = function (event) {
-  console.log('onCreatePost in events running')
-  event.preventDefault()
-  // openCreatePostModal(event)
-  // $('#submit-create-post').click(function (event) {
-  //   let values = {}
-  //   event.preventDefault()
-  //   $.each($('#createPostForm').serializeArray(), function (i, field) {
-  //     values[field.name] = field.value
-  //   })
-  //   $('#submit-create-post').off()
-  //   api.createPost(values)
-  //     .then(ui.createPostSuccess)
-  //     .catch(ui.createPostFailure)
-  // })
-  // $('#close-create-post-modal').click(function () {
-  //   $('#submit-create-post').off()
-  //   $('#create-post-modal').hide(400)
-  //   $('#create-post-modal').off()
-  // })
-// }
-
-// const openCreatePostModal = function (event) {
-//   $('#create-post-modal').on()
-//   $('#create-post-modal').show()
-//   $('#create-post-modal-form').show()
-//   $('#submit-create-post').on()
-//   $('#submit-create-post').show()
-//   $('#create-post-success').text('')
-//   $('#close-create-post-modal').text('Cancel')
-// }
-
-  const data = getFormFields(this)
-  api.createPost(data)
-    .then(ui.createPostSuccess)
-    .then(ui.createPostFailure)
 }
 
 const onUpdatePost = function (event) {
@@ -202,15 +164,6 @@ const onViewMyPages = function (event) {
   api.viewAllPages()
     .then(ui.viewMyPagesSuccess)
     .catch(ui.viewMyPagesFailure)
-}
-
-const onUpdateBlog = function (event) {
-  console.log('onUpdateBlog in events working')
-  event.preventDefault()
-  const data = getFormFields(this)
-  api.updateBlog(data)
-    .then(ui.updateBlogSuccess)
-    .catch(ui.updateBlogFailure)
 }
 
 const onViewPost = function (event) {
@@ -241,8 +194,8 @@ const addHandlers = () => {
   $('#create-new-page').on('submit', onCreatePage)
   $('#create-new-blog').on('submit', onCreateBlog)
   $('#create-blog-modal').hide()
-  $('#view-all-blogs').on('submit', onViewAllBlogs)
-  $('#create-new-post').on('submit', onCreatePost)
+  // $('#view-all-blogs').on('submit', onViewAllBlogs)
+  // $('#create-new-post').on('submit', onCreatePost)
   $('#view-my-pages').on('submit', onViewMyPages)
   $('#change-password').hide()
   $('#sign-out').hide()
@@ -255,17 +208,19 @@ const addHandlers = () => {
   $('#view-my-pages').hide()
   // $('#view-page').on('submit', onViewPage)
   // $('#view-blog').on('submit', onViewBlog)
-  $('#update-blog').on('submit', onUpdateBlog)
+  // $('#update-blog').on('submit', onUpdateBlog)
   $('#update-post').on('submit', onUpdatePost)
   $('#view-post').on('submit', onViewPost)
   $('#delete-post').on('submit', onDeletePost)
+  $('#edit-blog-modal').hide()
   $('#update-blog').hide()
   $('#update-post').hide()
+  $('#edit-post-modal').hide()
   $('#delete-post').hide()
   $('#view-my-blog').hide()
   $('#view-my-blog').on('submit', onViewMyBlog)
   $('#all-users-sites').on('submit', onViewAllUsers)
-  // $('#one-user').on('submit', onViewOneUser)
+  $('#view-my-assets').hide()
 }
 
 module.exports = {

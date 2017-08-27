@@ -54,13 +54,13 @@ const viewAllUsers = function (data) {
   })
 }
 
-const viewUserBlog = function (data) {
-  console.log('viewUserAssets in api running')
-  return $.ajax({
-    url: app.host + '/blogs/' + data,
-    method: 'GET'
-  })
-}
+// const viewUserBlog = function (data) {
+//   console.log('viewUserAssets in api running')
+//   return $.ajax({
+//     url: app.host + '/blogs/' + data,
+//     method: 'GET'
+//   })
+// }
 
 const viewUserPages = function (userId) {
   console.log('viewUserPages in api running')
@@ -109,6 +109,7 @@ const viewPage = function (data) {
 
 const createPage = function (data) {
   console.log('createPage in api running')
+  console.log(data)
   return $.ajax({
     url: app.host + '/pages',
     method: 'POST',
@@ -162,18 +163,14 @@ const viewAllBlogs = function (data) {
   })
 }
 const viewBlog = function (data) {
-  console.log('viewBlog in api running')
-  console.log('this is data: ', data)
   return $.ajax({
     url: app.host + '/blogs/' + data,
     method: 'GET'
   })
 }
-const updateBlog = function (data) {
-  console.log('this is data.blog ', data.blog)
-  console.log('this is store: ', store)
+const updateBlog = function (data, id) {
   return $.ajax({
-    url: app.host + '/blogs/' + data.blog.id,
+    url: app.host + '/blogs/' + id,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -191,11 +188,11 @@ const viewPost = function (data) {
   })
 }
 
-const createPost = function (data) {
+const createPost = function (data, blogId) {
   console.log('this is data ', data)
-  console.log('this is data.posts ', data.posts)
+  console.log('this is blogId ', blogId)
   return $.ajax({
-    url: app.host + '/blogs/' + data.posts._owner + '/posts',
+    url: app.host + '/blogs/' + blogId + '/posts',
     method: 'POST',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -204,11 +201,13 @@ const createPost = function (data) {
   })
 }
 
-const updatePost = function (data) {
-  console.log('this is data.posts ', data.posts)
-  console.log('this is data.blog.id', data.blog.id)
+const updatePost = function (data, blogId, postId) {
+  // console.log('this is data.posts ', data.posts)
+  console.log('this is blogId', blogId)
+  console.log('this is postId', postId)
+  console.log('this is data', data)
   return $.ajax({
-    url: app.host + '/blogs/' + data.blog.id + '/posts/' + data.posts.id,
+    url: app.host + '/blogs/' + blogId + '/posts/' + postId,
     method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -216,11 +215,10 @@ const updatePost = function (data) {
     data
   })
 }
-const deletePost = function (data) {
+const deletePost = function (blogId, postId) {
   console.log('deletePost in api running')
-  console.log('this is data.posts: ', data.posts)
   return $.ajax({
-    url: app.host + '/blogs/' + data.blog.id + '/posts/' + data.posts.id,
+    url: app.host + '/blogs/' + blogId + '/posts/' + postId,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token
