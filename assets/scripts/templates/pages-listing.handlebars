@@ -1,0 +1,19 @@
+<h4>User Pages</h4>
+
+{{#each pages as |page|}}
+
+<div class="col-xs-4 box">
+    <div data-id="{{page.id}}">
+      <ul name='page-name' class='handlebars-fields'>Title: <span class='handlebars' id='page-title'>{{page.title}}</span></ul>
+      <button type="submit" class="view-page" name="view-page">View Page</button>
+
+
+    <!-- {{#checkUser page._owner}}
+
+      <button type="submit" class="remove-button" name="remove-button">Remove</button>
+      <button type="submit" class="edit-button" name="edit-button">Edit</button>
+
+    {{/checkUser}} -->
+  </div>
+</div>
+{{/each}}
