@@ -27,7 +27,10 @@ const signInSuccess = (data) => {
   $('#change-password').show()
   $('#sign-up').hide()
   $('#create-new-page').show()
-  // $('#create-new-blog').show()
+  // $('#create-new-page').on()
+  // $('#create-page-modal').on()
+  // $('#create-page-modal-form').on()
+  // $('#submit-create-page').on()
   $('#create-new-post').show()
   $('#sign-out').show()
   $('#update-blog').show()
@@ -38,6 +41,7 @@ const signInSuccess = (data) => {
   $('#view-my-assets').show()
   $('#view-my-assets').on('submit', onViewMyAssets)
   $('.content').html('')
+  $('.content').show()
 }
 
 const onViewMyAssets = function (event) {
@@ -106,10 +110,14 @@ const signOutSuccess = () => {
   $('#sign-up').show()
   $('.content').hide()
   $('#create-page-modal').hide()
+  $('#create-page-modal').off()
   $('#sign-out').hide()
   $('#view-my-assets').hide()
+  $('#view-my-assets').off()
   $('#create-new-page').hide()
+  $('#create-new-page').off()
   $('#create-new-blog').hide()
+  $('#create-new-blog').off()
   $('#all-users-sites').show()
 }
 
@@ -222,6 +230,8 @@ const viewMyPagesSuccess = (data) => {
 
 const onViewMyPage = function (event) {
   event.preventDefault()
+  $('#create-new-page').hide(400)
+  $('#create-new-blog').hide(400)
   const data = ($(this).parent().attr('data-id'))
   api.viewPage(data)
     .then(viewMyPageSuccess)
@@ -336,6 +346,9 @@ const viewPageFailure = (error) => {
 }
 const createPageSuccess = (data) => {
   $('#create-page-modal').hide(400)
+  $('#submit-create-page').off()
+  $('#create-page-modal').off()
+  // $('#create-new-page').off()
   $('.clear').val('')
   rerunAssetsHandlebars(data)
 }
@@ -348,6 +361,8 @@ const deletePageSuccess = (data) => {
   $('.clear').val('')
 }
 const rerunAssetsHandlebars = function (rerun) {
+  $('#create-new-page').show(400)
+  checkForUserBlog(event)
   const data = store.user.id
   api.viewUserPages(data)
     .then(viewMyPagesSuccess)
@@ -405,6 +420,7 @@ const viewMyBlogSuccess = (data) => {
   $('.view-blog').on('click', onViewMyBlog)
 }
 const onViewMyBlog = (event) => {
+  $('#create-new-page').hide(400)
   const data = ($(event.target).parent().attr('data-id'))
   api.viewBlog(data)
     .then(viewMyBlogPostsSuccess)

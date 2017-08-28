@@ -68,6 +68,7 @@ const onViewAllPages = function (event) {
 }
 
 const openCreatePageModal = function (event) {
+  event.preventDefault()
   $('#create-page-modal').on()
   $('#create-page-modal').show()
   $('#create-page-modal-form').show()
@@ -191,7 +192,6 @@ const addHandlers = () => {
   $('#change-password').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
   $('#view-all-pages').on('submit', onViewAllPages)
-  $('#create-page-modal').hide()
   $('#create-new-page').on('submit', onCreatePage)
   $('#create-new-blog').on('submit', onCreateBlog)
   $('#create-blog-modal').hide()
