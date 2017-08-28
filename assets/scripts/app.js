@@ -1,6 +1,6 @@
 'use strict'
 
-const host = 'http://localhost:4741'
+const host = 'https://guarded-bastion-33741.herokuapp.com/'
 
 module.exports = {
   host

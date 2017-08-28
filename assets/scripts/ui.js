@@ -9,7 +9,6 @@ const showOnePageTemplate = require('./templates/one-page.handlebars')
 const showOneBlogTemplate = require('./templates/one-blog.handlebars')
 const showMyPagesTemplate = require('./templates/owned-pages.handlebars')
 const api = require('./api')
-const getFormFields = require(`../../lib/get-form-fields`)
 
 const signUpSuccess = (data) => {
   $('.clear').val('')
@@ -17,6 +16,9 @@ const signUpSuccess = (data) => {
 }
 
 const signUpFailure = (error) => {
+  $('#failure').show()
+  $('#failure').html('Sign up failed. Please try again')
+  $('#create-post-modal').hide(400)
   return error
 }
 
@@ -36,8 +38,9 @@ const signInSuccess = (data) => {
   $('#view-my-blog').show()
   $('#all-users-sites').hide()
   $('#view-my-assets').show()
-  $('#view-my-assets').on('submit', onViewMyAssets)
   $('.content').html('')
+  $('.content').show()
+  $('#view-my-assets').on('submit', onViewMyAssets)
 }
 
 const onViewMyAssets = function (event) {
@@ -45,7 +48,6 @@ const onViewMyAssets = function (event) {
   event.preventDefault()
   console.log('this is store.user ', store.user)
   const data = store.user.id
-  // const data = $(event.target).attr('data-id')
   api.viewUserPages(data)
     .then(viewMyPagesSuccess)
     .then(() => api.viewUserBlogs(data))
@@ -87,15 +89,20 @@ const checkForUserPagesSuccess = function (data) {
   }
 }
 const signInFailure = (error) => {
+  $('#failure').show()
+  $('#failure').html('Sign in failed. Please try again')
   return error
 }
 
 const changePasswordSuccess = () => {
   $('.clear').val('')
-  console.log('change password in UI working')
+  $('#failure').show()
+  $('#failure').html('Password successfully updated!')
 }
 
 const changePasswordFailure = (error) => {
+  $('#failure').show()
+  $('#failure').html('Password not updated. Please try again')
   return error
 }
 
@@ -104,6 +111,7 @@ const signOutSuccess = () => {
   $('#change-password').hide()
   $('#sign-in').show()
   $('#sign-up').show()
+  $('.content').html('')
   $('.content').hide()
   $('#create-page-modal').hide()
   $('#sign-out').hide()
@@ -283,6 +291,7 @@ const onUpdatePage = function (pageId, pageTitle, pageContent) {
 const updatePageSuccess = function (data) {
   $('.clear').val('')
   $('#edit-page-modal').hide()
+  $('#failure').hide()
   return data
 }
 
@@ -295,6 +304,9 @@ const rerunMyPageHandlebars = (redisplay) => {
 }
 
 const updatePageFailure = function (error) {
+  $('#failure').show()
+  $('#failure').html('Page not updated. Please try again')
+  $('#edit-page-modal').hide(400)
   return error
 }
 
@@ -337,10 +349,14 @@ const viewPageFailure = (error) => {
 const createPageSuccess = (data) => {
   $('#create-page-modal').hide(400)
   $('.clear').val('')
+  $('#failure').hide()
   rerunAssetsHandlebars(data)
 }
 
 const createPageFailure = (error) => {
+  $('#failure').show()
+  $('#failure').html('Page not created. Title and Content are required. Please try again')
+  $('#create-page-modal').hide(400)
   return error
 }
 
@@ -368,22 +384,16 @@ const createBlogSuccess = (data) => {
   $('#create-blog-modal').off()
   $('#create-new-blog').hide()
   $('#view-my-assets').show()
+  $('#failure').hide()
   rerunAssetsHandlebars(data)
 }
 
 const createBlogFailure = (error) => {
+  // $('#failure').html('')
+  $('#failure').html('Blog not created. Title is required. Please try again')
+  $('#create-blog-modal').hide()
   return error
 }
-
-// const viewAllBlogsSuccess = (data) => {
-//   $('.content').show()
-//   $('.content').html('')
-//
-//   const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
-//   $('.content').append(showBlogsHtml)
-//   // $('.remove-button').on('click', onDeleteBlog)
-//   return data
-// }
 
 const viewAllBlogsFailure = (error) => {
   return error
@@ -392,11 +402,17 @@ const viewAllBlogsFailure = (error) => {
 const createPostSuccess = () => {
   $('#create-post-modal').hide(400)
   $('.clear').val('')
+  $('#failure').hide()
 }
 
-const createPostFailure = (error) => console.log(error)
+const createPostFailure = (error) => {
+  $('#failure').show()
+  $('#failure').html('Post not created. Please try again')
+  $('#create-post-modal').hide(400)
+  return error
+}
 
-const failure = () => console.log('that didnt work')
+const failure = () => {}
 
 const viewMyBlogSuccess = (data) => {
   $('.content').show()
@@ -482,10 +498,14 @@ const onUpdateBlogTitle = function (blogId, blogTitle) {
 const updateBlogTitleSuccess = (data) => {
   $('.clear').val('')
   $('#edit-blog-modal').hide(400)
+  $('#failure').hide()
   return data
 }
 
 const updateBlogTitleFailure = (error) => {
+  $('#failure').show()
+  $('#failure').html('Blog not updated. Please try again')
+  $('#edit-blog-modal').hide(400)
   return error
 }
 
@@ -600,9 +620,15 @@ const updateBlogFailure = (error) => {
 
 const updatePostSuccess = () => {
   $('#edit-post-modal').hide(400)
+  $('#failure').hide()
 }
 
-const updatePostFailure = (error) => error
+const updatePostFailure = (error) => {
+  $('#failure').show()
+  $('#failure').html('Post not updated. Please try again')
+  $('#edit-post-modal').hide(400)
+  return error
+}
 
 const deletePostSuccess = (data) => {
 }
