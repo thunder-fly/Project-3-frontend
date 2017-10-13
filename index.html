@@ -13,9 +13,32 @@
   <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
 </head>
 
-<body class="container-fluid">
-  <h1>Sserpdrow</h1>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Sserpdrow</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li id="my-pages"><a href="#">My Pages</a></li>
+        <li id="my-blog"><a href="#">My Blog</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li id="sign-up-button"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li id="sign-in-button"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+        <li id="change-password-button"><a href="#">Change Password</a></li>
+        <li id="add-page-button"><a href="#">Add Page</a></li>
+        <li id="add-blog-button"><a href="#">Add Blog</a></li>
+        <li id="sign-out-button"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="container-fluid">
+
   <h2>Welcome to Sserpdrow. Create pages and a blog for your site. </h2>
+
 <div class="container col-md-1">
 </div>
   <div class="container col-md-3">
@@ -70,13 +93,12 @@
     <p><p>
   </div>
 
-  <form id="create-new-page">
+  <!-- <form id="create-new-page">
     <fieldset>
       <h3>Click to create a new page:</h3>
-      <!-- <legend>Create Page</legend> -->
       <input type="submit" name="submit" value="Create New Page!">
     </fieldset>
-  </form>
+  </form> -->
 
   <div id='create-page-modal'>
     <form style="background-color:teal; color:black;" id="createPageForm">
@@ -129,13 +151,13 @@
     </fieldset>
   </form>
 
-  <form id="view-my-pages">
+  <!-- <form id="view-my-pages">
     <fieldset>
       <h3>View My Pages</h3>
-      <!-- <legend>View My Pages</legend> -->
-      <input type="submit" name="submit" value="View My Pages">
+      <! <legend>View My Pages</legend> -->
+      <!-- <input type="submit" name="submit" value="View My Pages">
     </fieldset>
-  </form>
+  </form> -->
 
   <div class="content container">
     <div class="row">
@@ -271,7 +293,7 @@
     </form>
     <button type="button" id='close-create-post-modal'>Cancel</button>
   </div> -->
-
+</div>
 </body>
 
 </html>

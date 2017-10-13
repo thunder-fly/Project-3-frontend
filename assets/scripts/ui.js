@@ -26,12 +26,10 @@ const signInSuccess = (data) => {
   $('.clear').val('')
   store.user = data.user
   $('#sign-in').hide()
-  $('#change-password').show()
   $('#sign-up').hide()
   $('#create-new-page').show()
-  // $('#create-new-blog').show()
   $('#create-new-post').show()
-  $('#sign-out').show()
+  // $('#sign-out').show()
   $('#update-blog').show()
   $('#update-post').show()
   $('#delete-post').show()
@@ -41,6 +39,14 @@ const signInSuccess = (data) => {
   $('.content').html('')
   $('.content').show()
   $('#view-my-assets').on('submit', onViewMyAssets)
+  $('#sign-out-button').show()
+  $('#sign-up-button').hide()
+  $('#sign-in-button').hide()
+  $('#change-password-button').show()
+  $('#add-page-button').show()
+  $('#add-blog-button').show()
+  $('#my-pages').show()
+  $('#my-blog').show()
 }
 
 const onViewMyAssets = function (event) {
@@ -67,10 +73,10 @@ const checkForUserBlogSuccess = function (data) {
   // greater than 0 means they already created a blog.
   if (data.blogs.length > 0) {
     console.log('this is user blogs length ', data.blogs.length)
-    $('#create-new-blog').hide()
+    $('#add-blog-button').hide()
     $('#view-my-assets').show()
   } else {
-    $('#create-new-blog').show()
+    $('##add-blog-button').show()
     $('#view-my-assets').hide()
   }
 }
@@ -109,8 +115,8 @@ const changePasswordFailure = (error) => {
 const signOutSuccess = () => {
   $('.clear').val('')
   $('#change-password').hide()
-  $('#sign-in').show()
-  $('#sign-up').show()
+  // $('#sign-in').show()
+  // $('#sign-up').show()
   $('.content').html('')
   $('.content').hide()
   $('#create-page-modal').hide()
@@ -119,6 +125,14 @@ const signOutSuccess = () => {
   $('#create-new-page').hide()
   $('#create-new-blog').hide()
   $('#all-users-sites').show()
+  $('#sign-up-button').show()
+  $('#sign-in-button').show()
+  $('#sign-out-button').hide()
+  $('#change-password-button').hide()
+  $('#add-page-button').hide()
+  $('#add-blog-button').hide()
+  $('#my-pages').hide()
+  $('#my-blog').hide()
 }
 
 const signOutFailure = (error) => {
@@ -383,6 +397,7 @@ const createBlogSuccess = (data) => {
   $('#create-blog-modal').hide(400)
   $('#create-blog-modal').off()
   $('#create-new-blog').hide()
+  $('#add-blog-button').hide()
   $('#view-my-assets').show()
   $('#failure').hide()
   rerunAssetsHandlebars(data)

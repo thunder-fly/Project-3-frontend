@@ -189,15 +189,15 @@ const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#change-password').on('submit', onChangePassword)
-  $('#sign-out').on('submit', onSignOut)
+  $('#sign-out-button').on('click', onSignOut)
   $('#view-all-pages').on('submit', onViewAllPages)
   $('#create-page-modal').hide()
-  $('#create-new-page').on('submit', onCreatePage)
+  $('#add-page-button').on('submit', onCreatePage)
   $('#create-new-blog').on('submit', onCreateBlog)
   $('#create-blog-modal').hide()
   // $('#view-all-blogs').on('submit', onViewAllBlogs)
   // $('#create-new-post').on('submit', onCreatePost)
-  $('#view-my-pages').on('submit', onViewMyPages)
+  $('#my-pages').on('click', onViewMyPages)
   $('#change-password').hide()
   $('#sign-out').hide()
   $('#create-new-page').hide()
@@ -222,6 +222,28 @@ const addHandlers = () => {
   $('#view-my-blog').on('submit', onViewMyBlog)
   $('#all-users-sites').on('submit', onViewAllUsers)
   $('#view-my-assets').hide()
+  $('#sign-out-button').hide()
+  $('#sign-up').hide()
+  $('#sign-in').hide()
+  $('#sign-up-button').on('click', function () {
+    $('#sign-up').show()
+    $('#sign-in').hide()
+  })
+  $('#sign-in-button').on('click', function () {
+    $('#sign-in').show()
+    $('#sign-up').hide()
+  })
+  $('#change-password-button').hide()
+  $('#add-page-button').hide()
+  $('#add-blog-button').hide()
+  $('#my-pages').hide()
+  $('#my-blog').hide()
+  $('#add-blog-button').on('click', function () {
+    $('#create-new-blog').show()
+  })
+  $('#add-page-button').on('click', function () {
+    $('#create-page-modal').show()
+  })
 }
 
 module.exports = {
