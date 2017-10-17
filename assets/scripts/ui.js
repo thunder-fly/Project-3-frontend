@@ -230,7 +230,7 @@ const viewAllPagesSuccess = (data) => {
 }
 
 const openUpdatePageModal = function (event) {
-  $('#edit-page-modal').show()
+  $('#edit-page-modal').show(400)
 }
 
 const viewMyPagesSuccess = (data) => {
@@ -280,7 +280,7 @@ const viewMyPagesFailure = (error) => {
 
 const onUpdatePage = function (pageId, pageTitle, pageContent) {
   event.preventDefault()
-  $('#edit-page-modal').show()
+  $('#edit-page-modal').show(400)
   $('#page-title-update').val(pageTitle)
   $('#page-content-update').val(pageContent)
 
@@ -487,12 +487,12 @@ const viewMyBlogPostsSuccess = (data) => {
   })
 }
 const openUpdateBlogTitleModal = (event) => {
-  $('#edit-blog-modal').show()
+  $('#edit-blog-modal').show(400)
 }
 
 const onUpdateBlogTitle = function (blogId, blogTitle) {
   console.log('onUpdateBlogTItle in ui working')
-  $('#edit-blog-modal').show()
+  $('#edit-blog-modal').show(400)
   $('#blog-title-update').val(blogTitle)
   $('#submit-blog-edit').click(function (event) {
     let values = {}
@@ -536,15 +536,15 @@ const rerunMyBlogHandlebars = (event) => {
 }
 const openCreatePostModal = function (event) {
   $('#create-post-modal').on()
-  $('#create-post-modal').show()
-  $('#create-post-modal-form').show()
+  $('#create-post-modal').show(400)
+  $('#create-post-modal-form').show(400)
   $('#submit-create-post').on()
   $('#submit-create-post').show()
   $('#close-create-post-modal').text('Cancel')
 }
 
 const onCreatePost = function (blogId, postTitle, postBody) {
-  $('#create-post-modal').show()
+  $('#create-post-modal').show(400)
   event.preventDefault()
   $('#post-title-create').val(postTitle)
   $('#post-body-create').val(postBody)
@@ -568,11 +568,11 @@ const onCreatePost = function (blogId, postTitle, postBody) {
 }
 
 const openUpdatePostModal = (event) => {
-  $('#edit-post-modal').show()
+  $('#edit-post-modal').show(400)
 }
 
 const onUpdatePost = (blogId, postId, postTitle, postBody) => {
-  $('#edit-post-modal').show()
+  $('#edit-post-modal').show(400)
   $('#update-post-title').val(postTitle)
   $('#update-post-body').val(postBody)
   $('#submit-post-edit').click(function (event) {

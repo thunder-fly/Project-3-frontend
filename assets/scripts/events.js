@@ -61,8 +61,8 @@ const onViewAllPages = function (event) {
 
 const openCreatePageModal = function (event) {
   $('#create-page-modal').on()
-  $('#create-page-modal').show()
-  $('#create-page-modal-form').show()
+  $('#create-page-modal').show(400)
+  $('#create-page-modal-form').show(400)
   $('#submit-create').on()
   $('#submit-create').show()
   $('#create-page-success').text('')
@@ -94,8 +94,8 @@ const onCreatePage = function (event) {
 
 const openCreateBlogModal = function (event) {
   $('#create-blog-modal').on()
-  $('#create-blog-modal').show()
-  $('#create-blog-modal-form').show()
+  $('#create-blog-modal').show(400)
+  $('#create-blog-modal-form').show(400)
   $('#submit-create-blog').on()
   $('#submit-create-blog').show()
   $('#create-blog-success').text('')
