@@ -9,6 +9,7 @@ const showOnePageTemplate = require('./templates/one-page.handlebars')
 const showOneBlogTemplate = require('./templates/one-blog.handlebars')
 const showMyPagesTemplate = require('./templates/owned-pages.handlebars')
 const api = require('./api')
+// const moment = require('moment')
 
 const signUpSuccess = (data) => {
   $('.clear').val('')
@@ -26,12 +27,10 @@ const signInSuccess = (data) => {
   $('.clear').val('')
   store.user = data.user
   $('#sign-in').hide()
-  $('#change-password').show()
   $('#sign-up').hide()
   $('#create-new-page').show()
-  // $('#create-new-blog').show()
   $('#create-new-post').show()
-  $('#sign-out').show()
+  // $('#sign-out').show()
   $('#update-blog').show()
   $('#update-post').show()
   $('#delete-post').show()
@@ -40,20 +39,29 @@ const signInSuccess = (data) => {
   $('#view-my-assets').show()
   $('.content').html('')
   $('.content').show()
-  $('#view-my-assets').on('submit', onViewMyAssets)
+  // $('#view-my-assets').on('submit', onViewMyAssets)
+  $('#sign-out-button').show()
+  $('#sign-up-button').hide()
+  $('#sign-in-button').hide()
+  $('#change-password-button').show()
+  $('#add-page-button').show()
+  $('#add-blog-button').show()
+  $('#my-pages').show()
+  $('#my-blog').show()
+  $('#welcome-msg').hide(400)
 }
 
-const onViewMyAssets = function (event) {
-  console.log('onViewUserAssets in events working')
-  event.preventDefault()
-  console.log('this is store.user ', store.user)
-  const data = store.user.id
-  api.viewUserPages(data)
-    .then(viewMyPagesSuccess)
-    .then(() => api.viewUserBlogs(data))
-    .then(viewMyBlogSuccess)
-    .catch(viewMyPagesFailure)
-}
+// const onViewMyAssets = function (event) {
+//   console.log('onViewUserAssets in events working')
+//   event.preventDefault()
+//   console.log('this is store.user ', store.user)
+//   const data = store.user.id
+//   api.viewUserPages(data)
+//     .then(viewMyPagesSuccess)
+//     .then(() => api.viewUserBlogs(data))
+//     .then(viewMyBlogSuccess)
+//     .catch(viewMyPagesFailure)
+// }
 
 const checkForUserBlog = function (event) {
   console.log('checkForUserBlog running')
@@ -67,10 +75,10 @@ const checkForUserBlogSuccess = function (data) {
   // greater than 0 means they already created a blog.
   if (data.blogs.length > 0) {
     console.log('this is user blogs length ', data.blogs.length)
-    $('#create-new-blog').hide()
+    $('#add-blog-button').hide()
     $('#view-my-assets').show()
   } else {
-    $('#create-new-blog').show()
+    $('##add-blog-button').show()
     $('#view-my-assets').hide()
   }
 }
@@ -109,8 +117,6 @@ const changePasswordFailure = (error) => {
 const signOutSuccess = () => {
   $('.clear').val('')
   $('#change-password').hide()
-  $('#sign-in').show()
-  $('#sign-up').show()
   $('.content').html('')
   $('.content').hide()
   $('#create-page-modal').hide()
@@ -119,6 +125,16 @@ const signOutSuccess = () => {
   $('#create-new-page').hide()
   $('#create-new-blog').hide()
   $('#all-users-sites').show()
+  $('#sign-up-button').show()
+  $('#sign-in-button').show()
+  $('#sign-out-button').hide()
+  $('#change-password-button').hide()
+  $('#change-password').hide(400)
+  $('#add-page-button').hide()
+  $('#add-blog-button').hide()
+  $('#my-pages').hide()
+  $('#my-blog').hide()
+  $('#welcome-msg').show(400)
 }
 
 const signOutFailure = (error) => {
@@ -133,6 +149,13 @@ const viewAllUsersSuccess = (data) => {
   $('.content').append(showUsersHtml)
 
   $('.user-button').on('click', onViewUserAssets)
+  $('.user-button').on('click', function () {
+    $('#welcome-msg').hide(400)
+    $('#all-users-sites').hide(400)
+    $('#sign-up').hide(400)
+    $('#sign-in').hide(400)
+    $('#change-password').hide(400)
+  })
 }
 
 const onViewUserAssets = function (event) {
@@ -150,15 +173,25 @@ const onViewUserAssets = function (event) {
 }
 
 const viewUserBlogSuccess = (data) => {
+  $('#sign-up').hide(400)
+  $('#sign-in').hide(400)
   console.log('data is', data)
   $('.content').show()
   const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
   $('.content').append(showBlogsHtml)
   // once user clicks on View Blog
   $('.view-blog').on('click', onViewBlog)
+  $('.view-blog').on('click', function () {
+    $('#sign-up').hide(400)
+    $('#sign-in').hide(400)
+    $('#change-password').hide(400)
+  })
 }
 
 const viewUserPagesSuccess = (data) => {
+  $('#sign-up').hide(400)
+  $('#sign-in').hide(400)
+  $('#change-password').hide(400)
   console.log('data is', data)
   $('.content').show()
   $('.content').html('')
@@ -166,6 +199,11 @@ const viewUserPagesSuccess = (data) => {
   $('.content').append(showPagesHtml)
   // once user clicks on View Page
   $('.view-page').on('click', onViewPage)
+  $('.view-page').on('click', function () {
+    $('#sign-up').hide(400)
+    $('#sign-in').hide(400)
+    $('#change-password').hide(400)
+  })
 }
 
 const viewUserPagesFailure = (error) => {
@@ -214,7 +252,7 @@ const viewAllPagesSuccess = (data) => {
 }
 
 const openUpdatePageModal = function (event) {
-  $('#edit-page-modal').show()
+  $('#edit-page-modal').show(400)
 }
 
 const viewMyPagesSuccess = (data) => {
@@ -243,7 +281,6 @@ const viewMyPageSuccess = (data) => {
   $('.content').append(showMyPagesHtml)
 
   $('.remove-button').on('click', onDeletePage)
-  $('.return-to-dashboard').on('click', rerunAssetsHandlebars)
   $('.edit-button').on('click', function (event) {
     const pageId = $(event.target).parent().find('#page-id').val()
     const pageTitle = $(event.target).parent().find('#page-title').text()
@@ -264,7 +301,7 @@ const viewMyPagesFailure = (error) => {
 
 const onUpdatePage = function (pageId, pageTitle, pageContent) {
   event.preventDefault()
-  $('#edit-page-modal').show()
+  $('#edit-page-modal').show(400)
   $('#page-title-update').val(pageTitle)
   $('#page-content-update').val(pageContent)
 
@@ -383,6 +420,7 @@ const createBlogSuccess = (data) => {
   $('#create-blog-modal').hide(400)
   $('#create-blog-modal').off()
   $('#create-new-blog').hide()
+  $('#add-blog-button').hide()
   $('#view-my-assets').show()
   $('#failure').hide()
   rerunAssetsHandlebars(data)
@@ -416,6 +454,7 @@ const failure = () => {}
 
 const viewMyBlogSuccess = (data) => {
   $('.content').show()
+  $('.content').html('')
   const showMyBlogHtml = showBlogsTemplate({ blogs: data.blogs })
   $('.content').append(showMyBlogHtml)
   $('.view-blog').on('click', onViewMyBlog)
@@ -461,7 +500,6 @@ const viewMyBlogPostsSuccess = (data) => {
     onUpdatePost(blogId, postId, postTitle, postBody)
   })
   $('.remove-button').on('click', onDeletePost)
-  $('.return-to-dashboard').on('click', rerunAssetsHandlebars)
   $('#close-edit-blog-modal').click(function () {
     $('#submit-blog-edit').off()
     $('#edit-blog-modal').hide(400)
@@ -469,12 +507,12 @@ const viewMyBlogPostsSuccess = (data) => {
   })
 }
 const openUpdateBlogTitleModal = (event) => {
-  $('#edit-blog-modal').show()
+  $('#edit-blog-modal').show(400)
 }
 
 const onUpdateBlogTitle = function (blogId, blogTitle) {
   console.log('onUpdateBlogTItle in ui working')
-  $('#edit-blog-modal').show()
+  $('#edit-blog-modal').show(400)
   $('#blog-title-update').val(blogTitle)
   $('#submit-blog-edit').click(function (event) {
     let values = {}
@@ -518,15 +556,15 @@ const rerunMyBlogHandlebars = (event) => {
 }
 const openCreatePostModal = function (event) {
   $('#create-post-modal').on()
-  $('#create-post-modal').show()
-  $('#create-post-modal-form').show()
+  $('#create-post-modal').show(400)
+  $('#create-post-modal-form').show(400)
   $('#submit-create-post').on()
   $('#submit-create-post').show()
   $('#close-create-post-modal').text('Cancel')
 }
 
 const onCreatePost = function (blogId, postTitle, postBody) {
-  $('#create-post-modal').show()
+  $('#create-post-modal').show(400)
   event.preventDefault()
   $('#post-title-create').val(postTitle)
   $('#post-body-create').val(postBody)
@@ -550,11 +588,11 @@ const onCreatePost = function (blogId, postTitle, postBody) {
 }
 
 const openUpdatePostModal = (event) => {
-  $('#edit-post-modal').show()
+  $('#edit-post-modal').show(400)
 }
 
 const onUpdatePost = (blogId, postId, postTitle, postBody) => {
-  $('#edit-post-modal').show()
+  $('#edit-post-modal').show(400)
   $('#update-post-title').val(postTitle)
   $('#update-post-body').val(postBody)
   $('#submit-post-edit').click(function (event) {

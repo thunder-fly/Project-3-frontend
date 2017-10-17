@@ -14,14 +14,6 @@ const onViewAllUsers = function (event) {
     .catch(ui.viewAllUsersFailure)
 }
 
-// const onViewOneUser = function (event) {
-//   console.log('onViewOneUser in events working')
-//   event.preventDefault()
-//   api.viewUser()
-//     .then(ui.viewUserSuccess)
-//     .catch(ui.viewUserFailure)
-// }
-
 const onSignUp = function (event) {
   console.log('onSignUp in events working')
   const data = getFormFields(this)
@@ -69,8 +61,8 @@ const onViewAllPages = function (event) {
 
 const openCreatePageModal = function (event) {
   $('#create-page-modal').on()
-  $('#create-page-modal').show()
-  $('#create-page-modal-form').show()
+  $('#create-page-modal').show(400)
+  $('#create-page-modal-form').show(400)
   $('#submit-create').on()
   $('#submit-create').show()
   $('#create-page-success').text('')
@@ -80,6 +72,7 @@ const openCreatePageModal = function (event) {
 const onCreatePage = function (event) {
   event.preventDefault()
   openCreatePageModal(event)
+  console.log('now in onCreatePage')
   $('#submit-create-page').click(function (event) {
     let values = {}
     event.preventDefault()
@@ -87,6 +80,7 @@ const onCreatePage = function (event) {
       values[field.name] = field.value
     })
     $('#submit-create-page').off()
+    console.log('this is values for create page', values)
     api.createPage(values)
       .then(ui.createPageSuccess)
       .catch(ui.createPageFailure)
@@ -100,8 +94,8 @@ const onCreatePage = function (event) {
 
 const openCreateBlogModal = function (event) {
   $('#create-blog-modal').on()
-  $('#create-blog-modal').show()
-  $('#create-blog-modal-form').show()
+  $('#create-blog-modal').show(400)
+  $('#create-blog-modal-form').show(400)
   $('#submit-create-blog').on()
   $('#submit-create-blog').show()
   $('#create-blog-success').text('')
@@ -134,18 +128,10 @@ const onCreateBlog = function (event) {
   })
 }
 
-// const onViewAllBlogs = function (event) {
-//   console.log('onViewAllBlogs in events working')
-//   event.preventDefault()
-//   api.viewAllBlogs()
-//     .then(ui.viewAllBlogsSuccess)
-//     .catch(ui.viewAllBlogsFailure)
-// }
-
 const onViewMyBlog = function (event) {
   console.log('onViewMyBlog in events working')
   event.preventDefault()
-  api.viewAllBlogs()
+  api.viewUserBlogs(store.user.id)
     .then(ui.viewMyBlogSuccess)
     .catch(ui.viewMyBlogFailure)
 }
@@ -162,7 +148,8 @@ const onUpdatePost = function (event) {
 const onViewMyPages = function (event) {
   console.log('onViewMyPages in events working')
   event.preventDefault()
-  api.viewAllPages()
+  console.log('store.user.id is ', store.user.id)
+  api.viewUserPages(store.user.id)
     .then(ui.viewMyPagesSuccess)
     .catch(ui.viewMyPagesFailure)
 }
@@ -189,15 +176,16 @@ const addHandlers = () => {
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#change-password').on('submit', onChangePassword)
-  $('#sign-out').on('submit', onSignOut)
+  $('#sign-out-button').on('click', onSignOut)
   $('#view-all-pages').on('submit', onViewAllPages)
   $('#create-page-modal').hide()
-  $('#create-new-page').on('submit', onCreatePage)
+  $('#add-page-button').on('submit', onCreatePage)
   $('#create-new-blog').on('submit', onCreateBlog)
   $('#create-blog-modal').hide()
-  // $('#view-all-blogs').on('submit', onViewAllBlogs)
-  // $('#create-new-post').on('submit', onCreatePost)
-  $('#view-my-pages').on('submit', onViewMyPages)
+  $('#my-pages').on('click', onViewMyPages)
+  $('#my-pages').on('click', function () {
+    $('#change-password').hide(400)
+  })
   $('#change-password').hide()
   $('#sign-out').hide()
   $('#create-new-page').hide()
@@ -207,9 +195,6 @@ const addHandlers = () => {
   $('#create-new-post').hide()
   $('#create-post-modal').hide()
   $('#view-my-pages').hide()
-  // $('#view-page').on('submit', onViewPage)
-  // $('#view-blog').on('submit', onViewBlog)
-  // $('#update-blog').on('submit', onUpdateBlog)
   $('#update-post').on('submit', onUpdatePost)
   $('#view-post').on('submit', onViewPost)
   $('#delete-post').on('submit', onDeletePost)
@@ -219,9 +204,41 @@ const addHandlers = () => {
   $('#edit-post-modal').hide()
   $('#delete-post').hide()
   $('#view-my-blog').hide()
-  $('#view-my-blog').on('submit', onViewMyBlog)
   $('#all-users-sites').on('submit', onViewAllUsers)
   $('#view-my-assets').hide()
+  $('#sign-out-button').hide()
+  $('#sign-up').hide()
+  $('#sign-in').hide()
+  $('#sign-up-button').on('click', function () {
+    $('#sign-up').show()
+    $('#sign-in').hide()
+  })
+  $('#sign-in-button').on('click', function () {
+    $('#sign-in').show()
+    $('#sign-up').hide()
+  })
+  $('#change-password-button').on('click', function () {
+    $('#change-password').show()
+  })
+  $('#change-password-button').hide()
+  $('#add-page-button').hide()
+  $('#add-blog-button').hide()
+  $('#my-pages').hide()
+  $('#my-blog').hide()
+  $('#add-blog-button').on('click', function () {
+    $('#create-new-blog').show()
+  })
+  $('#add-page-button').on('click', onCreatePage)
+  $('#my-blog').on('click', onViewMyBlog)
+  $('#my-blog').on('click', function () {
+    $('#change-password').hide(400)
+  })
+  $('#sserpdrow-home-button').on('click', onViewAllUsers)
+  $('#sserpdrow-home-button').on('click', function () {
+    $('#sign-up').hide(400)
+    $('#sign-in').hide(400)
+    $('#change-password').hide(400)
+  })
 }
 
 module.exports = {

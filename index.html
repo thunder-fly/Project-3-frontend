@@ -13,12 +13,36 @@
   <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
 </head>
 
-<body class="container-fluid">
-  <h1>Sserpdrow</h1>
-  <h2>Welcome to Sserpdrow. Create pages and a blog for your site. </h2>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a id="sserpdrow-home-button" class="navbar-brand" href="#">Sserpdrow</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li id="my-pages"><a href="#">My Pages</a></li>
+        <li id="my-blog"><a href="#">My Blog</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li id="sign-up-button"><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li id="sign-in-button"><a href="#"><span class="glyphicon glyphicon-log-in"></span> Sign In</a></li>
+        <li id="change-password-button"><a href="#">Change Password</a></li>
+        <li id="add-page-button"><a href="#">Add Page</a></li>
+        <li id="add-blog-button"><a href="#">Add Blog</a></li>
+        <li id="sign-out-button"><a href="#"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
+      </ul>
+    </div>
+  </nav>
 
+<div class="container-fluid" id="content-div">
+
+  <h2 id="welcome-msg">Welcome to Sserpdrow. Create pages and a blog for your site. </h2>
+
+<div class="container col-md-1">
+</div>
+  <div class="container col-md-3">
   <form id="sign-up">
-    <h3>Sign up:</h3>
+    <h4>Sign up:</h4>
     <fieldset>
       <!-- <legend>Sign up!</legend> -->
       <input type='text' class="clear" placeholder='email' id="sign-up-email" name='credentials[email]'>
@@ -29,19 +53,17 @@
   </form>
 
   <form id="sign-in">
-    <h3>Sign in:</h3>
+    <h4>Sign in:</h4>
     <fieldset>
-      <!-- <legend>Sign in!</legend> -->
-      <input type='text' class="clear" placeholder='email' id="sign-in-email" name='credentials[email]'>
-      <input type='password' class="clear" placeholder='password' id="sign-in-password" name='credentials[password]'>
+      <input type='text' class="clear" placeholder='email' id="sign-in-email" name='credentials[email]' value="heya@heya">
+      <input type='password' class="clear" placeholder='password' id="sign-in-password" name='credentials[password]' value="h">
       <input type="submit" name="submit" value="Sign in!">
     </fieldset>
   </form>
-
+</div>
   <form id="change-password">
-    <h3>Change password:</h3>
+    <h4>Change password:</h4>
     <fieldset>
-      <!-- <legend>Change Password!</legend> -->
       <input type='password' class="clear" placeholder='current password' id="current-password" name='passwords[old]'>
       <input type='password' class="clear" placeholder='new password' id="new-password" name='passwords[new]'>
       <input type="submit" name="submit" value="Password change!">
@@ -50,16 +72,14 @@
 
   <form id="sign-out">
     <fieldset>
-      <h3>Sign out:</h3>
-      <!-- <legend>Sign Out!</legend> -->
+      <h4>Sign out:</h4>
       <input type="submit" name="submit" value="Sign Out!">
     </fieldset>
   </form>
 
   <form id="all-users-sites">
     <fieldset>
-      <h3>all users sites</h3>
-      <!-- <legend>all users sites !</legend> -->
+      <h4>Browse Sites by Username</h4>
       <input type="submit" name="submit" value="all users!">
     </fieldset>
   </form>
@@ -68,208 +88,94 @@
     <p><p>
   </div>
 
-  <form id="create-new-page">
-    <fieldset>
-      <h3>Click to create a new page:</h3>
-      <!-- <legend>Create Page</legend> -->
-      <input type="submit" name="submit" value="Create New Page!">
-    </fieldset>
-  </form>
 
   <div id='create-page-modal'>
-    <form style="background-color:teal; color:black;" id="createPageForm">
+    <form style="color:black;" id="createPageForm">
       <fieldset id='create-page-modal-form'>
         <ul>Title: <input id='page-title-create' type='text' class='page-title clear' placeholder='title' name='page[title]' maxlength='60' size='30'></ul>
         <ul>Content: <input id='page-body-create' type='text' class='page-content clear clear' placeholder='write content here' name='page[content]' size='34'></ul>
       </fieldset>
       <h3 id='create-page-success'> </h3>
       <input id='submit-create-page' type="submit" name="submit" value="Create page!">
+      <button type="button" id='close-create-page-modal'>Cancel</button>
     </form>
-    <button type="button" id='close-create-page-modal'>Cancel</button>
+
   </div>
 
   <form id="create-new-blog">
     <fieldset>
       <h3>Click to create a new blog:</h3>
-      <!-- <legend>Create Blog</legend> -->
       <input type="submit" name="submit" value="Create New Blog!">
     </fieldset>
   </form>
 
   <div id='create-blog-modal'>
-    <form style="background-color:teal; color:black;" id="createBlogForm">
+    <form style="color:black;" id="createBlogForm">
       <fieldset id='create-blog-modal-form'>
         <ul>Title: <input id='blog-title-create' type='text' class='blog-title clear' placeholder='title' name='blog[title]' maxlength='60' size='30'></ul>
       </fieldset>
       <h3 id='create-blog-success'> </h3>
       <input id='submit-create-blog' type="submit" name="submit" value="Create blog!">
+      <button type="button" id='close-create-blog-modal'>Cancel</button>
     </form>
-    <button type="button" id='close-create-blog-modal'>Cancel</button>
   </div>
 
   <div id='create-post-modal'>
-    <form style="background-color:teal; color:black;" id="createPostForm">
+    <form style="color:black;" id="createPostForm">
       <fieldset id='create-post-modal-form'>
         <ul>Title: <input id='post-title-create' type='text' class='post-title clear' placeholder='title' name='posts[title]' maxlength='100' size='30'></ul>
         <ul>Content: <input id='post-body-create' type='text' class='post-body clear' placeholder='body' name='posts[body]' maxlength='1000' size='30'></ul>
       </fieldset>
       <h3 id='create-post-success'> </h3>
       <input id='submit-create-post' type="submit" name="submit" value="Create post!">
+      <button type="button" id='close-create-post-modal'>Cancel</button>
     </form>
-    <button type="button" id='close-create-post-modal'>Cancel</button>
   </div>
 
 
-  <form id="view-my-assets">
-    <fieldset>
-      <h3>View My Assets</h3>
-      <input type="submit" name="submit" value="View My Assets">
-    </fieldset>
-  </form>
-
-  <form id="view-my-pages">
-    <fieldset>
-      <h3>View My Pages</h3>
-      <!-- <legend>View My Pages</legend> -->
-      <input type="submit" name="submit" value="View My Pages">
-    </fieldset>
-  </form>
-
-  <div class="content container">
+  <div id="content-container" class="content container">
     <div class="row">
       <p></p>
     </div>
   </div>
-  <!-- <div id="my-pages-container" class="container">
-    <div class="row">
-      <p> </p>
-    </div>
-  </div> -->
-
-  <!-- <form id="view-page">
-    <fieldset>
-      <h3>View Page</h3>
-      <input type="submit" name="submit" value="View Page">
-      <input type='text' placeholder='page id' id="pageId" name='pageId'>
-    </fieldset> -->
-  <!-- </form> -->
-  <!-- <form id="view-blog">
-    <fieldset>
-      <h3>View Blog</h3>
-      <input type="submit" name="submit" value="View Blog">
-      <input type='text' placeholder='blog id' id="blogId" name='blogId'>
-    </fieldset>
-  </form> -->
 
 
   <div id='edit-page-modal'>
-    <form style="background-color:teal; color:black;" id="updatePageForm">
+    <form style="color:black;" id="updatePageForm">
       <fieldset id="modal-form">
         <ul>Page title: <input id='page-title-update' data-field='title' type='text' placeholder='title' name='page[title]' maxlength='60' size='30'></ul>
         <ul>Page content: <input id='page-content-update' type='text' class='page-content clear' placeholder='page content' name='page[content]' maxlength='50' size='30'></ul>
       </fieldset>
       <h3 id='edit-page-success'> </h3>
       <input id='submit-page-edit' type="submit" name="submit" value="Update page!">
+      <button type="button" id='close-edit-page-modal'>Cancel</button>
     </form>
-    <button type="button" id='close-edit-page-modal'>Cancel</button>
   </div>
 
   <div id='edit-blog-modal'>
-    <form style="background-color:teal; color:black;" id="updateBlogForm">
+    <form style="color:black;" id="updateBlogForm">
       <fieldset id="blog-modal-form">
         <ul>Blog title: <input id='blog-title-update' data-field='title' type='text' placeholder='title' name='blog[title]' maxlength='60' size='30'></ul>
       </fieldset>
       <h3 id='edit-blog-success'> </h3>
       <input id='submit-blog-edit' type="submit" name="submit" value="Update blog!">
+      <button type="button" id='close-edit-blog-modal'>Cancel</button>
     </form>
-    <button type="button" id='close-edit-blog-modal'>Cancel</button>
   </div>
 
   <div id='edit-post-modal'>
-    <form style="background-color:teal; color:black;" id="updatePostForm">
+    <form style="color:black;" id="updatePostForm">
       <fieldset id="post-modal-form">
         <ul>Post title: <input id="update-post-title" data-field='title' type='text' placeholder='title' class='clear' name='posts[title]' maxlength='60' size='30'></ul>
         <ul>Post body: <input id="update-post-body" data-field='body' type='text' placeholder='body' class='clear' name='posts[body]' size='50'></ul>
       </fieldset>
       <h3 id='edit-post-success'> </h3>
       <input id='submit-post-edit' type="submit" name="submit" value="Update post!">
+      <button type="button" id='close-edit-post-modal'>Cancel</button>
     </form>
-    <button type="button" id='close-edit-post-modal'>Cancel</button>
   </div>
 
-
-  <!-- <form id="update-blog">
-    <fieldset>
-      <h3>Update Blog</h3>
-      <input type="submit" name="submit" value="Update Blog">
-      <input type='text' placeholder='blog id' id="blogId" name='blog[id]'>
-      <input type='text' placeholder='blog title' id="blogTitle" name='blog[title]'>
-    </fieldset>
-  </form> -->
-  <!-- <textarea id ='page-body-update' class='page-content' placeholder='page content' name='page[content]' rows = "3" cols = "80"></textarea> -->
-
-  <!-- <form id="view-all-blogs">
-    <fieldset>
-      <h3>View All Blogs</h3>
-
-      <input type="submit" name="submit" value="View All Blogs">
-    </fieldset>
-  </form>
-
-  <form id="view-my-blog">
-    <fieldset>
-      <h3>View My Blog</h3>
-
-      <input type="submit" name="submit" value="View My Blog">
-    </fieldset>
-  </form>
-
-  <!<div id="my-blog-container" class="container">
-    <div class="row">
-      <p id="my-blog-container"> </p>
-    </div>
-  </div>
-
-  <div id='all-blogs-container' class="container">
-    <div class="row">
-      <p></p>
-    </div>
-  </div> -->
-
-  <!-- <form id="view-post">
-    <fieldset>
-      <h3>View One Post</h3>
-      <! <legend>View Post</legend> -->
-  <!-- <input type='text' placeholder='post id' id="postId" name='posts[id]'>
-      <input type='text' placeholder='blog id' id="blogId" name='blog[id]'>
-      <input type="submit" name="submit" value="View One Post">
-    </fieldset>
-  </form>  -->
-
-
-  <!-- <form id="delete-post">
-    <fieldset>
-      <h3>Delete One Post</h3>
-      <input type='text' placeholder='post id' id="postId" name='posts[id]'>
-      <input type='text' placeholder='blog id' id="blogId" name='blog[id]'>
-      <input type="submit" name="submit" value="Delete One Post">
-    </fieldset>
-  </form> -->
-
-  <!-- <div id='create-post-modal'>
-    <form style="background-color:teal; color:black;" id="createPostForm">
-      <fieldset id='create-post-modal-form'>
-        <ul>Blog ID: <input id='blog-id' type='text' class='blog-id' placeholder='ID' name='blogID' maxlength='60' size='30' ></ul>
-      <ul>Title: <input id='post-title-create' type='text' class='post-title' placeholder='title' name='post[title]' maxlength='50' size='30' ></ul>
-      <ul>Content: <textarea id ='post-content-create' class='post-content' placeholder='post content' name='post[content]' rows = "3" cols = "80"></textarea>
-        </ul>
-    </fieldset>
-    <h3 id='create-post-success'> </h3>
-    <input id='submit-create-post' type="submit" name="submit" value="Create post!">
-    </form>
-    <button type="button" id='close-create-post-modal'>Cancel</button>
-  </div> -->
-
+</div>
 </body>
 
 </html>
