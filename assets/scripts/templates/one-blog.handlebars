@@ -2,11 +2,11 @@
 
 <div class="col-xs-4 box">
     <div data-id="{{blog._owner}}">
-      <ul name='blog-name' class='handlebars-fields'>Blog: <span class='handlebars' id='blog-title'>{{blog.title}}</span></ul>
+      <ul name='blog-name' class='handlebars-fields'><h3><span class='handlebars' id='blog-title'>{{blog.title}}</span></h3></ul>
       <ul name='blog-content' class='handlebars-fields'>Posts: </ul>
       {{#each posts as |post|}}
-        <ul name='post-title' class='handlebars-fields'>Title:<span class='handlebars' id='post-title'>{{post.title}}</span></ul>
-        <ul name='post-body' class='handlebars-fields'>Content:<span class='handlebars' id='post-body'>{{post.body}}</span></ul>
+        <ul name='post-title' class='handlebars-fields'><h4><span class='handlebars' id='post-title'>{{post.title}}</span></h4></ul>
+        <ul name='post-body' class='handlebars-fields'><p><span class='handlebars' id='post-body'>{{post.body}}</span></p></ul>
       {{/each}}
       <button type="submit" class="back-to-user-site" name="back-to-user-site">Back to home</button>
 

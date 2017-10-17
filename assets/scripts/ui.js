@@ -9,6 +9,7 @@ const showOnePageTemplate = require('./templates/one-page.handlebars')
 const showOneBlogTemplate = require('./templates/one-blog.handlebars')
 const showMyPagesTemplate = require('./templates/owned-pages.handlebars')
 const api = require('./api')
+// const moment = require('moment')
 
 const signUpSuccess = (data) => {
   $('.clear').val('')
@@ -38,7 +39,7 @@ const signInSuccess = (data) => {
   $('#view-my-assets').show()
   $('.content').html('')
   $('.content').show()
-  $('#view-my-assets').on('submit', onViewMyAssets)
+  // $('#view-my-assets').on('submit', onViewMyAssets)
   $('#sign-out-button').show()
   $('#sign-up-button').hide()
   $('#sign-in-button').hide()
@@ -50,17 +51,17 @@ const signInSuccess = (data) => {
   $('#welcome-msg').hide(400)
 }
 
-const onViewMyAssets = function (event) {
-  console.log('onViewUserAssets in events working')
-  event.preventDefault()
-  console.log('this is store.user ', store.user)
-  const data = store.user.id
-  api.viewUserPages(data)
-    .then(viewMyPagesSuccess)
-    .then(() => api.viewUserBlogs(data))
-    .then(viewMyBlogSuccess)
-    .catch(viewMyPagesFailure)
-}
+// const onViewMyAssets = function (event) {
+//   console.log('onViewUserAssets in events working')
+//   event.preventDefault()
+//   console.log('this is store.user ', store.user)
+//   const data = store.user.id
+//   api.viewUserPages(data)
+//     .then(viewMyPagesSuccess)
+//     .then(() => api.viewUserBlogs(data))
+//     .then(viewMyBlogSuccess)
+//     .catch(viewMyPagesFailure)
+// }
 
 const checkForUserBlog = function (event) {
   console.log('checkForUserBlog running')
@@ -432,6 +433,7 @@ const failure = () => {}
 
 const viewMyBlogSuccess = (data) => {
   $('.content').show()
+  $('.content').html('')
   const showMyBlogHtml = showBlogsTemplate({ blogs: data.blogs })
   $('.content').append(showMyBlogHtml)
   $('.view-blog').on('click', onViewMyBlog)

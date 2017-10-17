@@ -13,6 +13,10 @@ body {
   background-color: grey;
 }
 
+#content-div {
+  padding-top: 5%;
+}
+
 h1, h2, form {
   padding-left: 10%;
 }
@@ -20,6 +24,18 @@ h1, h2, form {
 h2 {
   padding-top: 7%;
 }
+
+#create-page-modal form, #create-blog-modal form, #create-post-modal form, #edit-page-modal form, #edit-blog-modal form, #edit-post-modal form {
+  background-color: #b8f7fc;
+  width: 50%;
+  border-radius: 2%;
+}
+
+#create-page-modal ul, #create-blog-modal ul, #create-post-modal ul, #edit-page-modal ul, #edit-blog-modal ul, #edit-post-modal ul {
+  margin-left: -100px;
+  margin-top: 10px;;
+}
+
 // .col-md-3 {
 //   border: 2px;
 //   border-color: black;

@@ -2,15 +2,15 @@
 
 <div class="col-xs-4 box">
     <div data-id="{{blog._owner}}">
-      <ul name='blog-name' class='handlebars-fields'>Blog: <span class='handlebars' id='blog-title'>{{blog.title}}</span></ul>
+      <ul name='blog-name' class='handlebars-fields'><h3><span class='handlebars' id='blog-title'>{{blog.title}}</span></h3></ul>
       <button type="submit" class="edit-blog-title" name="edit-blog-title">Edit Blog Name</button>
       <button type="submit" class="create-blog-post" name="add-blog-post">Add a Blog Post</button>
       <input type='hidden' id="blog-id" name='blog-id' value="{{blog.id}}">
       <ul name='blog-content' class='handlebars-fields'>Posts: </ul>
       {{#each posts as |post|}}
       <div class="post-button">
-        <ul name='post-title' class='handlebars-fields'>Title:<span class='handlebars' id='post-title'>{{post.title}}</span></ul>
-        <ul name='post-body' class='handlebars-fields'>Content:<span class='handlebars' id='post-body'>{{post.body}}</span></ul>
+        <ul name='post-title' class='handlebars-fields'><h4><span class='handlebars' id='post-title'>{{post.title}}</span></h4></ul>
+        <ul name='post-body' class='handlebars-fields'><p><span class='handlebars' id='post-body'>{{post.body}}</span></p></ul>
         <input type='hidden' id="post-id" name='post-id' value="{{post.id}}">
         <button type="submit" class="remove-button" name="remove-button">Remove</button>
         <button type="submit" class="edit-post-button" name="edit-post-button">Edit</button>

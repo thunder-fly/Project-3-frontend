@@ -1,10 +1,8 @@
-<h4>User Blog</h4>
-
 {{#each blogs as |blog|}}
 
 <div class="col-xs-4 box">
     <div data-id="{{blog.id}}">
-      <ul name='blog-name' class='handlebars-fields'>Title: <span class='handlebars' id='blog-title'>{{blog.title}}</span></ul>
+      <ul name='blog-name' class='handlebars-fields'><h3><span class='handlebars' id='blog-title'>{{blog.title}}</span></h3></ul>
       {{#posts}}
       <ul name='blog-posts' class='handlebars-fields'>Posts: <span class='handlebars' id='blog-posts'>{{title}}</span></ul>
       {{/posts}}

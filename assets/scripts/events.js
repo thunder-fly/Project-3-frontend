@@ -14,14 +14,6 @@ const onViewAllUsers = function (event) {
     .catch(ui.viewAllUsersFailure)
 }
 
-// const onViewOneUser = function (event) {
-//   console.log('onViewOneUser in events working')
-//   event.preventDefault()
-//   api.viewUser()
-//     .then(ui.viewUserSuccess)
-//     .catch(ui.viewUserFailure)
-// }
-
 const onSignUp = function (event) {
   console.log('onSignUp in events working')
   const data = getFormFields(this)
@@ -136,18 +128,10 @@ const onCreateBlog = function (event) {
   })
 }
 
-// const onViewAllBlogs = function (event) {
-//   console.log('onViewAllBlogs in events working')
-//   event.preventDefault()
-//   api.viewAllBlogs()
-//     .then(ui.viewAllBlogsSuccess)
-//     .catch(ui.viewAllBlogsFailure)
-// }
-
 const onViewMyBlog = function (event) {
   console.log('onViewMyBlog in events working')
   event.preventDefault()
-  api.viewAllBlogs()
+  api.viewUserBlogs(store.user.id)
     .then(ui.viewMyBlogSuccess)
     .catch(ui.viewMyBlogFailure)
 }
@@ -222,7 +206,7 @@ const addHandlers = () => {
   $('#edit-post-modal').hide()
   $('#delete-post').hide()
   $('#view-my-blog').hide()
-  $('#view-my-blog').on('submit', onViewMyBlog)
+  // $('#view-my-blog').on('submit', onViewMyBlog)
   $('#all-users-sites').on('submit', onViewAllUsers)
   $('#view-my-assets').hide()
   $('#sign-out-button').hide()
@@ -245,6 +229,7 @@ const addHandlers = () => {
     $('#create-new-blog').show()
   })
   $('#add-page-button').on('click', onCreatePage)
+  $('#my-blog').on('click', onViewMyBlog)
 }
 
 module.exports = {
