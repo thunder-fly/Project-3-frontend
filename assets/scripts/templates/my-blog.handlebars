@@ -1,6 +1,6 @@
 {{#each blogs as |blog|}}
 
-<div id="all-blogs-container" class="col-xs-4 box">
+<div id="all-blogs-container" class="col-xs-12 box">
     <div id="all-blogs-container" data-id="{{blog.id}}">
     {{#checkUserPages blog._owner}}
       <ul name='blog-name' class='handlebars-fields'>Title: <span class='handlebars' id='blog-title'>{{blog.title}}</span></ul>

@@ -182,9 +182,10 @@ const addHandlers = () => {
   $('#add-page-button').on('submit', onCreatePage)
   $('#create-new-blog').on('submit', onCreateBlog)
   $('#create-blog-modal').hide()
-  // $('#view-all-blogs').on('submit', onViewAllBlogs)
-  // $('#create-new-post').on('submit', onCreatePost)
   $('#my-pages').on('click', onViewMyPages)
+  $('#my-pages').on('click', function () {
+    $('#change-password').hide(400)
+  })
   $('#change-password').hide()
   $('#sign-out').hide()
   $('#create-new-page').hide()
@@ -194,9 +195,6 @@ const addHandlers = () => {
   $('#create-new-post').hide()
   $('#create-post-modal').hide()
   $('#view-my-pages').hide()
-  // $('#view-page').on('submit', onViewPage)
-  // $('#view-blog').on('submit', onViewBlog)
-  // $('#update-blog').on('submit', onUpdateBlog)
   $('#update-post').on('submit', onUpdatePost)
   $('#view-post').on('submit', onViewPost)
   $('#delete-post').on('submit', onDeletePost)
@@ -206,7 +204,6 @@ const addHandlers = () => {
   $('#edit-post-modal').hide()
   $('#delete-post').hide()
   $('#view-my-blog').hide()
-  // $('#view-my-blog').on('submit', onViewMyBlog)
   $('#all-users-sites').on('submit', onViewAllUsers)
   $('#view-my-assets').hide()
   $('#sign-out-button').hide()
@@ -220,6 +217,9 @@ const addHandlers = () => {
     $('#sign-in').show()
     $('#sign-up').hide()
   })
+  $('#change-password-button').on('click', function () {
+    $('#change-password').show()
+  })
   $('#change-password-button').hide()
   $('#add-page-button').hide()
   $('#add-blog-button').hide()
@@ -230,6 +230,15 @@ const addHandlers = () => {
   })
   $('#add-page-button').on('click', onCreatePage)
   $('#my-blog').on('click', onViewMyBlog)
+  $('#my-blog').on('click', function () {
+    $('#change-password').hide(400)
+  })
+  $('#sserpdrow-home-button').on('click', onViewAllUsers)
+  $('#sserpdrow-home-button').on('click', function () {
+    $('#sign-up').hide(400)
+    $('#sign-in').hide(400)
+    $('#change-password').hide(400)
+  })
 }
 
 module.exports = {

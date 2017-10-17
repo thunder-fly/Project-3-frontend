@@ -117,8 +117,6 @@ const changePasswordFailure = (error) => {
 const signOutSuccess = () => {
   $('.clear').val('')
   $('#change-password').hide()
-  // $('#sign-in').show()
-  // $('#sign-up').show()
   $('.content').html('')
   $('.content').hide()
   $('#create-page-modal').hide()
@@ -131,10 +129,12 @@ const signOutSuccess = () => {
   $('#sign-in-button').show()
   $('#sign-out-button').hide()
   $('#change-password-button').hide()
+  $('#change-password').hide(400)
   $('#add-page-button').hide()
   $('#add-blog-button').hide()
   $('#my-pages').hide()
   $('#my-blog').hide()
+  $('#welcome-msg').show(400)
 }
 
 const signOutFailure = (error) => {
@@ -149,6 +149,13 @@ const viewAllUsersSuccess = (data) => {
   $('.content').append(showUsersHtml)
 
   $('.user-button').on('click', onViewUserAssets)
+  $('.user-button').on('click', function () {
+    $('#welcome-msg').hide(400)
+    $('#all-users-sites').hide(400)
+    $('#sign-up').hide(400)
+    $('#sign-in').hide(400)
+    $('#change-password').hide(400)
+  })
 }
 
 const onViewUserAssets = function (event) {
@@ -166,15 +173,25 @@ const onViewUserAssets = function (event) {
 }
 
 const viewUserBlogSuccess = (data) => {
+  $('#sign-up').hide(400)
+  $('#sign-in').hide(400)
   console.log('data is', data)
   $('.content').show()
   const showBlogsHtml = showBlogsTemplate({ blogs: data.blogs })
   $('.content').append(showBlogsHtml)
   // once user clicks on View Blog
   $('.view-blog').on('click', onViewBlog)
+  $('.view-blog').on('click', function () {
+    $('#sign-up').hide(400)
+    $('#sign-in').hide(400)
+    $('#change-password').hide(400)
+  })
 }
 
 const viewUserPagesSuccess = (data) => {
+  $('#sign-up').hide(400)
+  $('#sign-in').hide(400)
+  $('#change-password').hide(400)
   console.log('data is', data)
   $('.content').show()
   $('.content').html('')
@@ -182,6 +199,11 @@ const viewUserPagesSuccess = (data) => {
   $('.content').append(showPagesHtml)
   // once user clicks on View Page
   $('.view-page').on('click', onViewPage)
+  $('.view-page').on('click', function () {
+    $('#sign-up').hide(400)
+    $('#sign-in').hide(400)
+    $('#change-password').hide(400)
+  })
 }
 
 const viewUserPagesFailure = (error) => {
@@ -259,7 +281,6 @@ const viewMyPageSuccess = (data) => {
   $('.content').append(showMyPagesHtml)
 
   $('.remove-button').on('click', onDeletePage)
-  $('.return-to-dashboard').on('click', rerunAssetsHandlebars)
   $('.edit-button').on('click', function (event) {
     const pageId = $(event.target).parent().find('#page-id').val()
     const pageTitle = $(event.target).parent().find('#page-title').text()
@@ -479,7 +500,6 @@ const viewMyBlogPostsSuccess = (data) => {
     onUpdatePost(blogId, postId, postTitle, postBody)
   })
   $('.remove-button').on('click', onDeletePost)
-  $('.return-to-dashboard').on('click', rerunAssetsHandlebars)
   $('#close-edit-blog-modal').click(function () {
     $('#submit-blog-edit').off()
     $('#edit-blog-modal').hide(400)

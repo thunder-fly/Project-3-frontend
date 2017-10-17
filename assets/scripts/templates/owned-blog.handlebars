@@ -1,6 +1,6 @@
 {{#each blogs as |blog|}}
 
-<div class="col-xs-4 box">
+<div class="col-xs-12 box">
     <div data-id="{{blog._owner}}">
       <ul name='blog-name' class='handlebars-fields'><h3><span class='handlebars' id='blog-title'>{{blog.title}}</span></h3></ul>
       <button type="submit" class="edit-blog-title" name="edit-blog-title">Edit Blog Name</button>
@@ -16,7 +16,6 @@
         <button type="submit" class="edit-post-button" name="edit-post-button">Edit</button>
       </div>
       {{/each}}
-      <button type="submit" class="return-to-dashboard" name="return-to-dashboard">Return to dashboard</button>
     <!-- {{#checkUser blog._owner}}
 
       <button type="submit" class="remove-button" name="remove-button">Remove</button>

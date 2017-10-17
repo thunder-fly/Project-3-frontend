@@ -17,7 +17,7 @@
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Sserpdrow</a>
+        <a id="sserpdrow-home-button" class="navbar-brand" href="#">Sserpdrow</a>
       </div>
       <ul class="nav navbar-nav">
         <li id="my-pages"><a href="#">My Pages</a></li>
@@ -42,7 +42,7 @@
 </div>
   <div class="container col-md-3">
   <form id="sign-up">
-    <h3>Sign up:</h3>
+    <h4>Sign up:</h4>
     <fieldset>
       <!-- <legend>Sign up!</legend> -->
       <input type='text' class="clear" placeholder='email' id="sign-up-email" name='credentials[email]'>
@@ -53,9 +53,8 @@
   </form>
 
   <form id="sign-in">
-    <h3>Sign in:</h3>
+    <h4>Sign in:</h4>
     <fieldset>
-      <!-- <legend>Sign in!</legend> -->
       <input type='text' class="clear" placeholder='email' id="sign-in-email" name='credentials[email]' value="heya@heya">
       <input type='password' class="clear" placeholder='password' id="sign-in-password" name='credentials[password]' value="h">
       <input type="submit" name="submit" value="Sign in!">
@@ -63,9 +62,8 @@
   </form>
 </div>
   <form id="change-password">
-    <h3>Change password:</h3>
+    <h4>Change password:</h4>
     <fieldset>
-      <!-- <legend>Change Password!</legend> -->
       <input type='password' class="clear" placeholder='current password' id="current-password" name='passwords[old]'>
       <input type='password' class="clear" placeholder='new password' id="new-password" name='passwords[new]'>
       <input type="submit" name="submit" value="Password change!">
@@ -74,16 +72,14 @@
 
   <form id="sign-out">
     <fieldset>
-      <h3>Sign out:</h3>
-      <!-- <legend>Sign Out!</legend> -->
+      <h4>Sign out:</h4>
       <input type="submit" name="submit" value="Sign Out!">
     </fieldset>
   </form>
 
   <form id="all-users-sites">
     <fieldset>
-      <h3>all users sites</h3>
-      <!-- <legend>all users sites !</legend> -->
+      <h4>Browse Sites by Username</h4>
       <input type="submit" name="submit" value="all users!">
     </fieldset>
   </form>
@@ -137,7 +133,7 @@
   </div>
 
 
-  <div class="content container">
+  <div id="content-container" class="content container">
     <div class="row">
       <p></p>
     </div>
