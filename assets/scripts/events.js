@@ -80,6 +80,7 @@ const openCreatePageModal = function (event) {
 const onCreatePage = function (event) {
   event.preventDefault()
   openCreatePageModal(event)
+  console.log('now in onCreatePage')
   $('#submit-create-page').click(function (event) {
     let values = {}
     event.preventDefault()
@@ -87,6 +88,7 @@ const onCreatePage = function (event) {
       values[field.name] = field.value
     })
     $('#submit-create-page').off()
+    console.log('this is values for create page', values)
     api.createPage(values)
       .then(ui.createPageSuccess)
       .catch(ui.createPageFailure)
@@ -162,7 +164,8 @@ const onUpdatePost = function (event) {
 const onViewMyPages = function (event) {
   console.log('onViewMyPages in events working')
   event.preventDefault()
-  api.viewAllPages()
+  console.log('store.user.id is ', store.user.id)
+  api.viewUserPages(store.user.id)
     .then(ui.viewMyPagesSuccess)
     .catch(ui.viewMyPagesFailure)
 }
@@ -241,9 +244,7 @@ const addHandlers = () => {
   $('#add-blog-button').on('click', function () {
     $('#create-new-blog').show()
   })
-  $('#add-page-button').on('click', function () {
-    $('#create-page-modal').show()
-  })
+  $('#add-page-button').on('click', onCreatePage)
 }
 
 module.exports = {

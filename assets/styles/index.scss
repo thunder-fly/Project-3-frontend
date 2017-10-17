@@ -1,6 +1,10 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
+nav {
+  margin-bottom: 10%;
+}
+
 body {
   background-image: url('./../../sserpdrow-home.png');
   background-position: right;

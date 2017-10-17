@@ -47,6 +47,7 @@ const signInSuccess = (data) => {
   $('#add-blog-button').show()
   $('#my-pages').show()
   $('#my-blog').show()
+  $('#welcome-msg').hide(400)
 }
 
 const onViewMyAssets = function (event) {
