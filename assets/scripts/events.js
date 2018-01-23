@@ -19,7 +19,15 @@ const onSignUp = function (event) {
   const data = getFormFields(this)
   event.preventDefault()
   api.signUp(data)
-    .then(ui.signUpSuccess)
+  .done([ui.signUpSuccess,
+    function (response) {
+      api.signIn(data)
+    .then(ui.signInSuccess)
+    .then(ui.checkForUserBlog)
+    .then(ui.checkForUserPages)
+    }
+  ])
+
     .catch(ui.signUpFailure)
 }
 

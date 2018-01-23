@@ -13,6 +13,7 @@ const api = require('./api')
 
 const signUpSuccess = (data) => {
   $('.clear').val('')
+  $('#failure').text('')
   return data
 }
 
@@ -24,6 +25,7 @@ const signUpFailure = (error) => {
 }
 
 const signInSuccess = (data) => {
+  $('#failure').text('')
   $('.clear').val('')
   store.user = data.user
   $('#sign-in').hide()
